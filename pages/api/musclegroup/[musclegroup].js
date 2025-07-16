@@ -1,6 +1,6 @@
-import dbConnect from "../../../../db/connect";
-import Exercise from "../../../../db/Schema/Exercise";
-import libMusclegroups from "../../../../lib/musclegroups";
+import dbConnect from "../../../db/connect";
+import Exercise from "../../../db/Schema/Exercise";
+import libMusclegroups from "../../../lib/musclegroups";
 
 export default async function handler(req, res) {
   let query = req.query.musclegroup;
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
   if (!libMusclegroups.find((muscle) => muscle === query))
     return res.status(500).json({ error: "Muscle not found" });
- 
+
   try {
     await dbConnect();
     const exercises = await Exercise.find({

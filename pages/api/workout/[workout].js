@@ -1,6 +1,6 @@
-import dbConnect from "../../../../db/connect";
-import Exercise from "../../../../db/Schema/Exercise";
-import Workout from "../../../../db/Schema/Workout";
+import dbConnect from "../../../db/connect";
+import Exercise from "../../../db/Schema/Exercise";
+import Workout from "../../../db/Schema/Workout";
 
 export default async function handler(req, res) {
   try {
