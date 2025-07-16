@@ -1,6 +1,6 @@
-import dbConnect from "../../../db/connect";
-import Exercise from "../../../db/Schema/Exercise";
-import libMusclegroups from "../../../lib/musclegroups";
+import dbConnect from "@/db/connect";
+import Exercise from "@/db/Schema/Exercise";
+import libMusclegroups from "@/lib/musclegroups";
 
 export default async function handler(req, res) {
   let query = req.query.musclegroup;
