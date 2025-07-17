@@ -12,10 +12,8 @@ export default async function handler(req, res) {
       (exercise) => exercise.exerciseId
     );
     const exercises = await Exercise.find({ id: { $in: exerciseIds } });
-    const exerciseNames = exercises.map((exercise) => exercise.name);
 
-    const workoutName = workout.name;
-    res.status(200).json({ exerciseNames, workoutName });
+    res.status(200).json({ workout, exercises  });
     return;
   } catch (error) {
     res.status(500).json({ error: error.message });
