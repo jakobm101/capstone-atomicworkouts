@@ -10,15 +10,19 @@ export default function List({ objectList }) {
   } = useSWR(`/api/exercises/`, fetcher);
   if (isLoading) return <h2>loading</h2>;
   if (error) return <h2>error</h2>;
-
   if (!objectList) {
     return "loading";
   }
+
   return (
     <>
       {/* add logic for mapping ExerciseCards */}
       {objectList.map((workout, index) => (
-        <WorkoutCard key={index} workout={workout} exercises={exercises}/>
+        <WorkoutCard
+          key={index}
+          workout={workout}
+          exercises={exercises}
+        />
       ))}
     </>
   );
