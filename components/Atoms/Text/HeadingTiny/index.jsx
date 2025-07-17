@@ -1,7 +1,14 @@
+import styled from "styled-components";
+
 export default function HeadingTiny({ children }) {
   return (
     <>
-      <h6>{children}</h6>
+      <StyledHeadingTiny>{children}</StyledHeadingTiny>
     </>
   );
 }
+
+const StyledHeadingTiny = styled.h6`
+  position: fixed;
+  top: 40px;
+`;

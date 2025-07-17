@@ -4,10 +4,10 @@ import WorkoutsList from "@/components/Workouts/WorkoutsList";
 
 export default function HomePage() {
   return (
-    <div>
+    <main>
     <HeadingTiny>atomic workouts</HeadingTiny>
     <Heading>Workouts List</Heading>
     <WorkoutsList/>
-    </div>
+    </main>
   );
 }
