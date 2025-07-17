@@ -4,7 +4,11 @@ const { Schema } = mongoose;
 
 const ExerciseSchema = new Schema(
   {
-    id: { type: String, required: true }, // unique string ID
+    exerciseId: {
+      type: Schema.Types.ObjectId,
+      ref: "Exercise", // Enables populate() if required
+      required: true,
+    },
     name: { type: String, required: true }, // exercise name (e.g. Push-Up)
     muscleGroups: [{ type: String }], // array of targeted muscles
     imageUrl: { type: String }, // (optional) image link
