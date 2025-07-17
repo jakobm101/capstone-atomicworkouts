@@ -4,7 +4,7 @@ import Exercise from "@/db/Schema/Exercise";
 export default async function handler(req, res) {
   try {
     await dbConnect();
-    const exercises = await Exercise.findById(req.query.exercise);
+    const exercises = await Exercise.findById(req.query.id);
 
     res.status(200).json(exercises);
     return;

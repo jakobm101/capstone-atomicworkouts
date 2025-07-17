@@ -5,7 +5,7 @@ import Workout from "@/db/Schema/Workout";
 export default async function handler(req, res) {
   try {
     await dbConnect();
-    const workout = await Workout.findById(req.query.workout);
+    const workout = await Workout.findById(req.query.id);
 
     //$in -- is some Mongo Magic array mapping
     const exerciseIds = workout.exercises.map(
