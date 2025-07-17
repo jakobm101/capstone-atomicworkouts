@@ -1,7 +1,9 @@
+import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
+
 export default function HomePage() {
   return (
     <div>
-      <h1>Hello from Next.js</h1>
+    <HeadingTiny>atomic workouts</HeadingTiny>
     </div>
   );
 }
