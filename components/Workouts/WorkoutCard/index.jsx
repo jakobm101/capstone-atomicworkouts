@@ -1,4 +1,4 @@
-export default function WorkoutCard() {
+export default function WorkoutCard({workout}) {
     return (<>
     <p>Card</p>
     </>)
