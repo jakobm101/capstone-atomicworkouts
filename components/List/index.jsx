@@ -14,14 +14,22 @@ export default function List({ objectList }) {
     return "loading";
   }
 
+  const sampleWorkExIds = objectList[0].exercises.map((e) => e._id)
+  console.log(sampleWorkExIds);
+  console.log(exercises[1]._id);
+  console.log(exercises.filter(x => x._id in objectList[1].exercises.map(e => e._id)));
+  
+  
+
   return (
     <>
-      {/* add logic for mapping ExerciseCards */}
       {objectList.map((workout, index) => (
         <WorkoutCard
           key={index}
           workout={workout}
-          exercises={exercises}
+          exercises={exercises.filter(
+            (ex) => ex._id in workout.exercises.map((exer) => exer._id)
+          )}
         />
       ))}
     </>
