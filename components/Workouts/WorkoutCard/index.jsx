@@ -1,4 +1,3 @@
-import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
 import styled from "styled-components";
 
 export default function WorkoutCard({ workout, exercises }) {
