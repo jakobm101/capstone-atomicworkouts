@@ -6,7 +6,6 @@ export default function WorkoutCard({ workout, exercises }) {
   const usedMuscle = [];
   exercises.map((exercise) => usedMuscle.push(...exercise.muscleGroups));
   const uniqueMuscles = [...new Set(usedMuscle)];
-  console.log(workout.exercises[0].reps);
 
   const muscleCount = {};
   for (const muscle of usedMuscle) {
