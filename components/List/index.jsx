@@ -10,16 +10,6 @@ export default function List({ objectList }) {
   } = useSWR(`/api/exercises/`, fetcher);
   if (isLoading) return <h2>loading</h2>;
   if (error) return <h2>error</h2>;
-  if (!objectList) {
-    return "loading";
-  }
-
-  const sampleWorkExIds = objectList[0].exercises.map((e) => e._id)
-  console.log(sampleWorkExIds);
-  console.log(exercises[1]._id);
-  console.log(exercises.filter(x => x.id in objectList[1].exercises.map(e => e.ExerciseId)));
-  
-  
 
   return (
     <>
@@ -27,8 +17,10 @@ export default function List({ objectList }) {
         <WorkoutCard
           key={index}
           workout={workout}
-          exercises={exercises.filter(
-            (ex) => ex._id in workout.exercises.map(exercises.filter(x => x.id in workout.exercises.map(e => e.ExerciseId)))
+          exercises={exercises.filter((exercise) =>
+            workout.exercises
+              .map((wex) => wex.exerciseId)
+              .includes(exercise._id)
           )}
         />
       ))}
