@@ -1,6 +1,17 @@
 import styled from "styled-components";
 
 export default function WorkoutCard({ workout, exercises }) {
+  const usedMuscle = [];
+  exercises.map((x) => usedMuscle.push(...x.muscleGroups));
+
+  const muscleCount = {};
+  for (const muscle of usedMuscle) {
+    muscleCount[muscle]
+      ? (muscleCount[muscle] = muscleCount[muscle] + 1)
+      : (muscleCount[muscle] = 1);
+  }
+  console.log(muscleCount);
+
   return (
     <StyledWorkoutCard>
       <h3>{workout.name}</h3>
@@ -9,6 +20,7 @@ export default function WorkoutCard({ workout, exercises }) {
           return <li key={index}>{exercise.name}</li>;
         })}
       </StyledList>
+      <StyledList></StyledList>
     </StyledWorkoutCard>
   );
 }
