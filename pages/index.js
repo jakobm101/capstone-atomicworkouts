@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <main>
     <HeadingTiny>atomic workouts</HeadingTiny>
-    <Heading>Workouts List</Heading>
+    <Heading>Catalogue</Heading>
     <WorkoutsList/>
     </main>
   );
