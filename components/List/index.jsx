@@ -19,7 +19,7 @@ export default function List({ objectList }) {
           workout={workout}
           exercises={exercises.filter((exercise) =>
             workout.exercises
-              .map((wex) => wex.exerciseId)
+              .map((exerciseDataInWorkout) => exerciseDataInWorkout.exerciseId)
               .includes(exercise._id)
           )}
         />
