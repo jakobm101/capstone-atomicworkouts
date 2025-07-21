@@ -20,7 +20,7 @@ export default function WorkoutCard({ workout, exercises }) {
         <Heading>Exercises</Heading>
         {exercises.map((exercise, index) => {
           const exerciseDataInWorkout = workout.exercises.find(
-            workoutExercise.exerciseId === exercise._id
+            (workoutExercise) => workoutExercise.exerciseId === exercise._id
           );
           return (
             <StyledParagraph key={index}>
