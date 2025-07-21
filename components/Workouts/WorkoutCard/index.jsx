@@ -19,21 +19,14 @@ export default function WorkoutCard({ workout, exercises }) {
       <>
         <Heading>Exercises</Heading>
         {exercises.map((exercise, index) => {
+          const exerciseDataInWorkout = workout.exercises.find(
+            workoutExercise.exerciseId === exercise._id
+          );
           return (
             <StyledParagraph key={index}>
               {`${exercise.name} ---
-              reps:_ ${
-                workout.exercises.find(
-                  (exerciseDataInWorkout) =>
-                    exerciseDataInWorkout.exerciseId === exercise._id
-                ).reps
-              }
-              sets:_ ${
-                workout.exercises.find(
-                  (exerciseDataInWorkout) =>
-                    exerciseDataInWorkout.exerciseId === exercise._id
-                ).sets
-              }
+              reps:_ ${exerciseDataInWorkout.reps}
+              sets:_ ${exerciseDataInWorkout.sets}
               `}
             </StyledParagraph>
           );
