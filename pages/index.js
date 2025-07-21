@@ -1,7 +1,9 @@
-export default function HomePage() {
+import ExerciseList from "@/components/Exercises/ExerciseList";
+
+export default function HomePage({ data }) {
   return (
     <div>
-      <h1>Hello from Next.js</h1>
+      <ExerciseList data={data} />
     </div>
   );
 }
