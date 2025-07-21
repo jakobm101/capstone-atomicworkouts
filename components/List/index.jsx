@@ -13,6 +13,7 @@ export default function List({ objectList }) {
 
   return (
     <>
+      <h4>List</h4>
       {objectList.map((workout, index) => (
         <WorkoutCard
           key={index}
