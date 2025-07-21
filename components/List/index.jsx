@@ -17,7 +17,7 @@ export default function List({ objectList }) {
   const sampleWorkExIds = objectList[0].exercises.map((e) => e._id)
   console.log(sampleWorkExIds);
   console.log(exercises[1]._id);
-  console.log(exercises.filter(x => x._id in objectList[1].exercises.map(e => e._id)));
+  console.log(exercises.filter(x => x.id in objectList[1].exercises.map(e => e.ExerciseId)));
   
   
 
@@ -28,7 +28,7 @@ export default function List({ objectList }) {
           key={index}
           workout={workout}
           exercises={exercises.filter(
-            (ex) => ex._id in workout.exercises.map((exer) => exer._id)
+            (ex) => ex._id in workout.exercises.map(exercises.filter(x => x.id in workout.exercises.map(e => e.ExerciseId)))
           )}
         />
       ))}
