@@ -1,3 +1,5 @@
+import Heading from "@/components/Atoms/Text/Heading";
+import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
 import styled from "styled-components";
 
 export default function WorkoutCard({ workout, exercises }) {
@@ -15,10 +17,10 @@ export default function WorkoutCard({ workout, exercises }) {
     <StyledWorkoutCard>
       <h3>{workout.name}</h3>
       <>
-        <h4>Exercises</h4>
+        <Heading>Exercises</Heading>
         {exercises.map((exercise, index) => {
           return (
-            <p key={index}>
+            <StyledParagraph key={index}>
               {`${exercise.name} ---
               reps:_ ${
                 workout.exercises.find(
@@ -33,14 +35,14 @@ export default function WorkoutCard({ workout, exercises }) {
                 ).sets
               }
               `}
-            </p>
+            </StyledParagraph>
           );
         })}
       </>
-      <h4>Muscle Groups</h4>
+      <Heading>Muscle Groups</Heading>
       <StyledList>
         {uniqueMuscles.map((muscle, index) => {
-          return <span key={index}>{muscle}</span>;
+          return <HeadingTiny key={index}>{muscle}</HeadingTiny>;
         })}
       </StyledList>
     </StyledWorkoutCard>
@@ -59,10 +61,12 @@ const StyledList = styled.ul`
 `;
 
 const StyledWorkoutCard = styled.div`
-  height: 500px;
-
-  border: white 1px solid;
+  border: grey 1px solid;
   border-radius: 12px;
   padding: 12px;
   margin: 12px;
+`;
+
+const StyledParagraph = styled.p`
+  font-family: monospace;
 `;

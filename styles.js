@@ -21,7 +21,7 @@ main {
 margin-top: 5vh;
   color: white;
   border-radius: 20px;
-  border: white 1px solid;
+  border: grey 1px solid;
   padding: 20px;
   overflow: scroll;
 }
