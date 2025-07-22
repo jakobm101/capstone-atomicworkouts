@@ -4,6 +4,9 @@ import { spaceMono } from "@/lib/fonts";
 export default createGlobalStyle`
   :root {
     ${spaceMono.variable && `--font-space-mono: ${spaceMono.variable};`}
+    --color-orange-10: rgba(69%, 35%, 0%, 1);
+    --color-orange-9: rgba(69%, 35%, 0%, 0.9);
+    --color-orange-0: rgba(69%, 35%, 0%, 0.1);
   }
   
   *,
@@ -17,7 +20,7 @@ export default createGlobalStyle`
     font-family: var(--font-space-mono), monospace;
    font-weight: 100;
     letter-spacing: 0.7px;
-    color: rgb(69%, 35%, 0%);
+    color: var(--color-orange-10);
     text-shadow: 
     0 0 2px rgba(69%, 35%, 0%, 0.9),
     0 0 4px rgba(69%, 35%, 0%, 0.5),
@@ -40,9 +43,9 @@ main {
   height: 90vh;
   margin: auto;
   margin-top: 5vh;
-  color: white;
   border-radius: 20px;
-  border: grey 1px solid;
+  box-shadow: 0 0 1rem 1rem var(--color-orange-0), inset 0 1rem 1rem var(--color-orange-0);
+  border: var(--color-orange-10) 1px solid;
   padding: 20px;
   overflow: scroll;
 }
