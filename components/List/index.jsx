@@ -2,12 +2,11 @@ import WorkoutCard from "../Workouts/WorkoutCard";
 import useSWR from "swr";
 
 export default function List({ workouts }) {
-  const fetcher = (url) => fetch(url).then((res) => res.json());
   const {
     data: exercises,
     isLoading,
     error,
-  } = useSWR(`/api/exercises/`, fetcher);
+  } = useSWR(`/api/exercises/`);
   if (isLoading) return <h2>loading</h2>;
   if (error) return <h2>error</h2>;
 
