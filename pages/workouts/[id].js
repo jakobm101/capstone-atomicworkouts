@@ -1,3 +1,4 @@
+import ButtonClose from "@/components/Button/ButtonClose";
 import WorkoutCard from "@/components/Workouts/WorkoutCard";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -19,6 +20,7 @@ export default function WorkoutDetails() {
 
   return (
     <>
+      <ButtonClose href={`/`} />
       <WorkoutCard workout={workout} />
     </>
   );

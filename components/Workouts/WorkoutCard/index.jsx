@@ -1,5 +1,6 @@
 import Heading from "@/components/Atoms/Text/Heading";
 import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
+import Image from "next/image";
 import styled from "styled-components";
 import useSWR from "swr";
 
@@ -33,6 +34,7 @@ export default function WorkoutCard({ workout, exercises }) {
 
   return (
     <StyledWorkoutCard>
+      <Image src={`/power.svg`} width={50} height={50} alt="workout image" />
       <h3>{workout.name}</h3>
       <>
         <Heading>Exercises</Heading>
