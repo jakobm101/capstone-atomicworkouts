@@ -22,12 +22,12 @@ export default function WorkoutCard({ workout, exercises }) {
             (workoutExercise) => workoutExercise.exerciseId === exercise._id
           );
           return (
-            <StyledParagraph key={index}>
+            <p key={index}>
               {`${exercise.name} ---
               reps:_ ${exerciseDataInWorkout.reps}
               sets:_ ${exerciseDataInWorkout.sets}
               `}
-            </StyledParagraph>
+            </p>
           );
         })}
       </>
@@ -60,6 +60,3 @@ const StyledWorkoutCard = styled.div`
   margin: 12px;
 `;
 
-const StyledParagraph = styled.p`
-  font-family: monospace;
-`;
