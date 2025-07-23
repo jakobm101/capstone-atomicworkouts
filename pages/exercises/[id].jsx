@@ -19,7 +19,7 @@ export default function ExerciseDetails() {
     return `loading`;
   }
   if (error) {
-    return `error`;
+    return <p>{error.message}</p>;
   }
   return (
     <>
