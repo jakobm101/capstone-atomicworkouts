@@ -19,7 +19,7 @@ export default function ExerciseCard({ exercise }) {
           <Heading>Musclegroups</Heading>
           <StyledList>
             {exercise.muscleGroups.map((muscle) => (
-              <HeadingTiny>// {muscle}</HeadingTiny>
+              <HeadingTiny key={muscle}>// {muscle}</HeadingTiny>
             ))}
           </StyledList>
         </article>
