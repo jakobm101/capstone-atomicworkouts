@@ -22,7 +22,7 @@ export default function WorkoutCard({ workout, exercises }) {
             (workoutExercise) => workoutExercise.exerciseId === exercise._id
           );
           return (
-            <StyledParagraph key={index}>
+            <StyledParagraph key={exercise._id}>
               {`${exercise.name} ---
               reps:_ ${exerciseDataInWorkout.reps}
               sets:_ ${exerciseDataInWorkout.sets}
