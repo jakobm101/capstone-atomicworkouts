@@ -1,7 +1,12 @@
+import Form__Input from "./Form__Input";
+
 export default function Form() {
   return (
     <>
-      <h2>oh hi!</h2>
+      <h1>Workout Form</h1>
+      <form action="">
+        <Form__Input name="name">Workout Name</Form__Input>
+      </form>
     </>
   );
 }
