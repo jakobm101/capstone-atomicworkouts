@@ -1,8 +1,24 @@
 import Heading from "@/components/Atoms/Text/Heading";
 import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
 import styled from "styled-components";
+import useSWR from "swr";
 
 export default function WorkoutCard({ workout, exercises }) {
+  if (!exercises) {
+    const { data, isLoading, error } = useSWR(`/api/exercises`);
+    if (isLoading) {
+      return "Loading";
+    }
+    if (error) {
+      return "error";
+    }
+
+    exercises = data.filter((exercise) =>
+      workout.exercises
+        .map((exerciseDataInWorkout) => exerciseDataInWorkout.exerciseId)
+        .includes(exercise._id)
+    );
+  }
   const muscleCount = {};
   const uniqueMusclesSet = new Set();
 
