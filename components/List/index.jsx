@@ -13,7 +13,7 @@ export default function List({ workouts }) {
 
   return (
     <>
-      {workouts.map((workout, index) => (
+      {workouts.map((workout) => (
         <WorkoutCard
           key={workout._id}
           workout={workout}
