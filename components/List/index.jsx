@@ -1,7 +1,7 @@
 import WorkoutCard from "../Workouts/WorkoutCard";
 import useSWR from "swr";
 
-export default function List({ objectList }) {
+export default function List({ workouts }) {
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const {
     data: exercises,
