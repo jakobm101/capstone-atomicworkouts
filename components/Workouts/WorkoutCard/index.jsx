@@ -34,7 +34,7 @@ export default function WorkoutCard({ workout, exercises }) {
       <Heading>Muscle Groups</Heading>
       <StyledList>
         {uniqueMuscles.map((muscle, index) => {
-          return <HeadingTiny key={index}>{muscle}</HeadingTiny>;
+          return <HeadingTiny key={muscle}>{muscle}</HeadingTiny>;
         })}
       </StyledList>
     </StyledWorkoutCard>
