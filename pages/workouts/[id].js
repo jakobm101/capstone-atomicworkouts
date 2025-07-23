@@ -14,7 +14,7 @@ export default function WorkoutDetails() {
     return "loading";
   }
   if (error) {
-    return "error";
+    return <p>{error.message}</p>;
   }
   const workout = workoutData.workout;
 

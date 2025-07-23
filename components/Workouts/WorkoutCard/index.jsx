@@ -11,7 +11,7 @@ export default function WorkoutCard({ workout, exercises }) {
       return "Loading";
     }
     if (error) {
-      return "error";
+      return <p>{error.message}</p>;
     }
 
     exercises = data.filter((exercise) =>
