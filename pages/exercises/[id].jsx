@@ -1,10 +1,12 @@
 import Heading from "@/components/Atoms/Text/Heading";
+import { ArrowUpFromLine } from "lucide-react";
 import Image from "next/image";
 import HeadingLarge from "@/components/Atoms/Text/HeadingLarge";
 import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import ButtonClose from "@/components/Button/ButtonClose";
 
 export default function ExerciseDetails() {
   const { query } = useRouter();
@@ -20,12 +22,12 @@ export default function ExerciseDetails() {
     return `error`;
   }
   console.log(exercise);
-
   return (
     <>
       <StyledExerciseCard>
+        <ButtonClose href="/exercises" />
         <Image
-          src={exercise.imageUrl || "power.svg"}
+          src="/power.svg"
           alt="exercise image"
           width={50}
           height={50}
@@ -38,6 +40,10 @@ export default function ExerciseDetails() {
               <HeadingTiny key={muscle}>// {muscle}</HeadingTiny>
             ))}
           </StyledList>
+          <Heading>instructions</Heading>
+          {exercise.instructions.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
         </article>
       </StyledExerciseCard>
     </>
