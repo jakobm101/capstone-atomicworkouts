@@ -3,14 +3,17 @@ import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
 import styled from "styled-components";
 
 export default function WorkoutCard({ workout, exercises }) {
-  const usedMuscle = [];
-  exercises.map((exercise) => usedMuscle.push(...exercise.muscleGroups));
-  const uniqueMuscles = [...new Set(usedMuscle)];
-
   const muscleCount = {};
-  for (const muscle of usedMuscle) {
-    muscleCount[muscle] = muscleCount[muscle] ? muscleCount[muscle] + 1 : 1;
+  const uniqueMusclesSet = new Set();
+
+  for (const exercise of exercises) {
+    for (const muscle of exercise.muscleGroups) {
+      muscleCount[muscle] = (muscleCount[muscle] || 0) + 1;
+      uniqueMusclesSet.add(muscle);
+    }
   }
+
+  const uniqueMuscles = [...uniqueMusclesSet];
 
   return (
     <StyledWorkoutCard>
