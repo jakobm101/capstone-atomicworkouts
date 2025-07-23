@@ -17,7 +17,7 @@ export default function WorkoutCard({ workout, exercises }) {
       <h3>{workout.name}</h3>
       <>
         <Heading>Exercises</Heading>
-        {exercises.map((exercise, index) => {
+        {exercises.map((exercise) => {
           const exerciseDataInWorkout = workout.exercises.find(
             (workoutExercise) => workoutExercise.exerciseId === exercise._id
           );
