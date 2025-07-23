@@ -9,7 +9,12 @@ export default function App({ Component, pageProps }) {
           fetcher: async (...args) => {
             const response = await fetch(...args);
             if (!response.ok) {
-              throw new Error(`Request with ${JSON.stringify(args)} failed.`);
+              const errorData = await response.json();
+              const error = new Error(
+                errorData.error || "An unknown error occurred"
+              );
+              error.status = response.status;
+              throw error;
             }
             return await response.json();
           },
