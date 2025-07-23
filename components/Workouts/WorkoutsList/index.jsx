@@ -16,7 +16,7 @@ export default function WorkoutsList() {
   return (
     <>
       <Heading>Workouts</Heading>
-      <List objectList={workouts} />
+      <List workouts={workouts} />
     </>
   );
 }
