@@ -1,21 +1,20 @@
 import WorkoutCard from "../Workouts/WorkoutCard";
 import useSWR from "swr";
 
-export default function List({ objectList }) {
-  const fetcher = (url) => fetch(url).then((res) => res.json());
+export default function List({ workouts }) {
   const {
     data: exercises,
     isLoading,
     error,
-  } = useSWR(`/api/exercises/`, fetcher);
+  } = useSWR(`/api/exercises/`);
   if (isLoading) return <h2>loading</h2>;
   if (error) return <h2>error</h2>;
 
   return (
     <>
-      {objectList.map((workout, index) => (
+      {workouts.map((workout) => (
         <WorkoutCard
-          key={index}
+          key={workout._id}
           workout={workout}
           exercises={exercises.filter((exercise) =>
             workout.exercises
