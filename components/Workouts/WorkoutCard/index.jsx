@@ -33,7 +33,7 @@ export default function WorkoutCard({ workout, exercises }) {
       </>
       <Heading>Muscle Groups</Heading>
       <StyledList>
-        {uniqueMuscles.map((muscle, index) => {
+        {uniqueMuscles.map((muscle) => {
           return <HeadingTiny key={muscle}>{muscle}</HeadingTiny>;
         })}
       </StyledList>
