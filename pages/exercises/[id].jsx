@@ -21,7 +21,6 @@ export default function ExerciseDetails() {
   if (error) {
     return `error`;
   }
-  console.log(exercise);
   return (
     <>
       <StyledExerciseCard>
