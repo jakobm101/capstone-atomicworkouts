@@ -14,7 +14,7 @@ export default function ExerciseList() {
       <Link href="/">Workouts</Link>
       <Heading>Exercises</Heading>
       {exercises.map((exercise) => (
-        <ExerciseCard exercise={exercise} />
+        <ExerciseCard key={exercise._id} exercise={exercise} />
       ))}
     </>
   );
