@@ -25,7 +25,7 @@ export default function WorkoutCard({ workout, exercises }) {
             (workoutExercise) => workoutExercise.exerciseId === exercise._id
           );
           return (
-            <p key={index}>
+            <p key={exercise._id}>
               {`${exercise.name} ---
               reps:_ ${exerciseDataInWorkout.reps}
               sets:_ ${exerciseDataInWorkout.sets}
@@ -57,9 +57,9 @@ const StyledList = styled.ul`
 
 const StyledWorkoutCard = styled.div`
   border: var(--color-orange-9) 1px solid;
-  box-shadow: 0 0 1rem 1rem var(--color-orange-0), inset 0 1rem 1rem var(--color-orange-0);
+  box-shadow: 0 0 1rem 1rem var(--color-orange-0),
+    inset 0 1rem 1rem var(--color-orange-0);
   border-radius: 12px;
   padding: 12px;
   margin: 12px;
 `;
-
