@@ -1,13 +1,13 @@
 import Heading from "@/components/Atoms/Text/Heading";
-import WorkoutsList from "@/components/Workouts/WorkoutsList";
+import ExerciseList from "@/components/Exercises/ExerciseList";
 import styled from "styled-components";
 
-export default function HomePage() {
+export default function Exercises() {
   return (
     <main>
       <Header>atomic workouts</Header>
       <Heading>Catalogue</Heading>
-      <WorkoutsList />
+      <ExerciseList/>
     </main>
   );
 }
