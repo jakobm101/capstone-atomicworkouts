@@ -15,7 +15,7 @@ export default function List({ workouts }) {
     <>
       {objectList.map((workout, index) => (
         <WorkoutCard
-          key={index}
+          key={workout._id}
           workout={workout}
           exercises={exercises.filter((exercise) =>
             workout.exercises
