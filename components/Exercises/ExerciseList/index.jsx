@@ -11,7 +11,7 @@ export default function ExerciseList() {
     data: exercises,
     isLoading,
     error,
-  } = useSWR(`/api/exercises/`);
+  } = useSWR(`/api/exercises`);
   if (isLoading) return <h2>loading</h2>;
   if (error) return <h2>error</h2>;
   if (!exercises) return <h2>Empty database</h2>;
