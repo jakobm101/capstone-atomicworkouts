@@ -1,5 +1,6 @@
 import { Delete } from "lucide-react";
 import { useRouter } from "next/router";
+import styled from "styled-components";
 
 export default function ButtonDelete({ id }) {
   const { push, reload, pathname } = useRouter();
@@ -17,5 +18,12 @@ export default function ButtonDelete({ id }) {
     } catch (error) {}
     console.error("Connection error");
   };
-  return <Delete onClick={handleDelete} />;
+  return <StyledDelete onClick={handleDelete} />;
 }
+
+const StyledDelete = styled(Delete)`
+  cursor: pointer;
+  &:hover {
+    color: var(--color-contrast);
+  }
+`;
