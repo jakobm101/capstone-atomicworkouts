@@ -1,8 +1,8 @@
-export default function Dropdown({ options, name, children }) {
+export default function Dropdown({ options, name, children, selected }) {
   return (
     <>
       <label htmlFor={name}>{children}</label>
-      <select name={name} id={name}>
+      <select name={name} id={name} value={selected}>
         {options.map((option) => (
           <option value={option} key={option}>
             {option}
