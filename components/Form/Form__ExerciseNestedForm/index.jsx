@@ -1,4 +1,3 @@
-import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
 import styled from "styled-components";
 import Dropdown from "../Dropdown";
 import Card from "@/components/Atoms/Card";
@@ -11,6 +10,12 @@ export default function Form__ExerciseNestedForm({
   tempId,
 }) {
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
+  console.log('temp Id',tempId);
+  
+  const testDelete = (id) => {
+    console.log("test delete", id);
+    onDelete(id);
+  };
 
   if (isLoading) return "Loading exercises";
   if (error) {
@@ -18,7 +23,7 @@ export default function Form__ExerciseNestedForm({
   }
   return (
     <StyledCard>
-      <StyledX onClick={() => onDelete(tempId)} />
+      <StyledX onClick={() => testDelete(tempId)} />
       <Dropdown name={`${name}-exercise`} options={exercises} isExercises>
         Exercise
       </Dropdown>
@@ -39,9 +44,9 @@ export default function Form__ExerciseNestedForm({
 }
 
 const StyledX = styled(X)`
-position: absolute;
-top: 8px;
-right: 8px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
   cursor: pointer;
   &:hover {
     color: white;
@@ -49,7 +54,7 @@ right: 8px;
 `;
 
 const StyledCard = styled(Card)`
-position: relative;
+  position: relative;
   display: flex;
   flex-flow: column wrap;
   gap: 12px;
