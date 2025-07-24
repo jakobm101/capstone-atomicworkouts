@@ -16,7 +16,9 @@ export default function Form() {
       <h1>Workout Form</h1>
       <form action="">
         <Form__Input name="name">Workout Name</Form__Input>
-        <Form__ExerciseNestedForm />
+        {exercises.map((exercise, index) => (
+          <Form__ExerciseNestedForm exercise={exercise} name={index} />
+        ))}
         <Heading>{exercises.length}</Heading>
         <Card__AddExercise onClick={handleAddExercise} />
       </form>

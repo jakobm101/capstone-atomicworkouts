@@ -1,22 +1,31 @@
 import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
 import Dropdown from "../Dropdown";
 import Card from "@/components/Atoms/Card";
+import useSWR from "swr";
 
-export default function Form__ExerciseNestedForm() {
+export default function Form__ExerciseNestedForm({ name = "dropdown" }) {
+  const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
+  if (isLoading) return "Loading exercises";
+  if (error) {
+    return error.message;
+  }
   return (
     <Card>
       <HeadingTiny>Adding Exercise</HeadingTiny>
-      <Dropdown name="exercises1" options={[1, 2, 3]}>
+      <Dropdown
+        name={`${name}-exercise`}
+        options={exercises.map((exercise) => exercise.name)}
+      >
         Exercise
       </Dropdown>
       <Dropdown
-        name="exercise1-reps"
+        name={`${name}-reps`}
         options={[8, 10, 12, 14, 16]}
         selected="12"
       >
         Reps
       </Dropdown>
-      <Dropdown name="exercise1-sets" options={[3, 4, 5, 6]} selected="5">
+      <Dropdown name={`${name}-sets`} options={[3, 4, 5, 6]} selected="5">
         Sets
       </Dropdown>
     </Card>
