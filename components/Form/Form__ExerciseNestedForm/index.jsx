@@ -23,7 +23,7 @@ export default function Form__ExerciseNestedForm({
   }
   return (
     <StyledCard>
-      <StyledX onClick={() => testDelete(tempId)} />
+      <StyledX onClick={() => onDelete(tempId)} />
       <Dropdown name={`${name}-exercise`} options={exercises} isExercises>
         Exercise
       </Dropdown>
