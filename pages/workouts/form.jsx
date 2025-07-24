@@ -5,7 +5,7 @@ export default function FormPage() {
   return (
     <main>
       <Header>atomic workouts</Header>
-      <Form />
+      < Form />
     </main>
   );
 }

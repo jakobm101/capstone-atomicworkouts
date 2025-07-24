@@ -29,12 +29,14 @@ export default function Form() {
       name: data.name,
       exercises: exercises.map((_, index) => {
         return {
-          exerciseId: data[`${index}-exercise`],
-          reps: data[`${index}-reps`],
-          sets: data[`${index}-sets`],
+          exerciseId: data[`${index + 1}-exercise`],
+          reps: data[`${index + 1}-reps`],
+          sets: data[`${index + 1}-sets`],
         };
       }),
     };
+    console.log(workout);
+
     const response = await fetch(`/api/workouts`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
