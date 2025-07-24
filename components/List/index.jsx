@@ -10,21 +10,23 @@ export default function List({ workouts }) {
 
   return (
     <>
-      {workouts.map((workout) => (
-        <StyledLink key={workout._id} href={`/workouts/${workout._id}`}>
-          <WorkoutCard
-            key={workout._id}
-            workout={workout}
-            exercises={exercises.filter((exercise) =>
-              workout.exercises
-                .map(
-                  (exerciseDataInWorkout) => exerciseDataInWorkout.exerciseId
-                )
-                .includes(exercise._id)
-            )}
-          />
-        </StyledLink>
-      ))}
+      {workouts.map((workout) => {
+        // Exercises: handing down only the 
+        // ones from the workout's exercises list
+        const workoutExerciseIds = workout.exercises.map((e) => e.exerciseId);
+        const filteredExercises = exercises.filter((exercise) =>
+          workoutExerciseIds.includes(exercise._id)
+        );
+        return (
+          <StyledLink key={workout._id} href={`/workouts/${workout._id}`}>
+            <WorkoutCard
+              key={workout._id}
+              workout={workout}
+              exercises={filteredExercises}
+            />
+          </StyledLink>
+        );
+      })}
     </>
   );
 }
