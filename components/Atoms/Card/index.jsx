@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export default function Card({ children }) {
-  return <StyledDiv>{children}</StyledDiv>;
+export default function Card({ children, ...props }) {
+  return <StyledDiv {...props}>{children}</StyledDiv>;
 }
 
 const StyledDiv = styled.div`
@@ -11,4 +11,5 @@ const StyledDiv = styled.div`
   border-radius: 12px;
   padding: 12px;
   margin: 12px;
+  transition: all 0.2s ease;
 `;
