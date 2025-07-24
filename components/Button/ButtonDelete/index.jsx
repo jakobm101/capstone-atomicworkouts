@@ -1,6 +1,5 @@
 import { Delete } from "lucide-react";
 import { useRouter } from "next/router";
-// import { useRouter } from "next/router";
 import styled from "styled-components";
 
 export default function ButtonDelete({ id, onDelete }) {
