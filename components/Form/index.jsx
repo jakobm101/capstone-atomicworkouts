@@ -14,13 +14,10 @@ export default function Form() {
   //preparing for updating {id, rep, set}
   const [exercises, setExercises] = useState([{ tempId: 1 }, { tempId: 2 }]);
 
-  console.log(exercises);
-
   const handleAddExercise = () => {
     setExercises([...exercises, { tempId: uid() }]);
   };
   const handleRemoveExercise = (id) => {
-    console.log("handleRemoveExercise id", id);
     setExercises(exercises.filter((exercise) => exercise.tempId !== id));
   };
 
@@ -53,8 +50,10 @@ export default function Form() {
       <StyledClose href="/" />
       <h1>Workout Form</h1>
       <form onSubmit={handleSubmit}>
-        <Form__Input name="name">Workout Name</Form__Input>
-          <HeadingTiny>Exercises</HeadingTiny>
+        <Form__Input name="name" required>
+          Workout Name
+        </Form__Input>
+        <HeadingTiny>Exercises</HeadingTiny>
         <StyledCard>
           {exercises.map((exercise) => (
             <Form__ExerciseNestedForm

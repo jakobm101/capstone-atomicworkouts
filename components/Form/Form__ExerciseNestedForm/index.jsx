@@ -10,17 +10,10 @@ export default function Form__ExerciseNestedForm({
   tempId,
 }) {
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
-  console.log('temp Id',tempId);
-  
-  const testDelete = (id) => {
-    console.log("test delete", id);
-    onDelete(id);
-  };
 
   if (isLoading) return "Loading exercises";
-  if (error) {
-    return error.message;
-  }
+  if (error) return error.message;
+
   return (
     <StyledCard>
       <StyledX onClick={() => onDelete(tempId)} />
