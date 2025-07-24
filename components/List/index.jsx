@@ -3,6 +3,7 @@ import WorkoutCard from "../Workouts/WorkoutCard";
 import ButtonAdd from "../Button/ButtonAdd";
 import useSWR from "swr";
 import styled from "styled-components";
+import ButtonDelete from "../Button/ButtonDelete";
 
 export default function List({ workouts }) {
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
@@ -20,13 +21,16 @@ export default function List({ workouts }) {
           workoutExerciseIds.includes(exercise._id)
         );
         return (
-          <StyledLink key={workout._id} href={`/workouts/${workout._id}`}>
-            <WorkoutCard
-              key={workout._id}
-              workout={workout}
-              exercises={filteredExercises}
-            />
-          </StyledLink>
+          <>
+            <ButtonDelete id={workout._id} />
+            <StyledLink key={workout._id} href={`/workouts/${workout._id}`}>
+              <WorkoutCard
+                key={workout._id}
+                workout={workout}
+                exercises={filteredExercises}
+              />
+            </StyledLink>
+          </>
         );
       })}
     </>
