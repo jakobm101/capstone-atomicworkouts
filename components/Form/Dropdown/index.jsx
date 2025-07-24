@@ -14,7 +14,7 @@ export default function Dropdown({
   const handleChange = (event) => setSelected(event.target.value);
 
   return (
-    <>
+    <div>
       <label htmlFor={name}>{children}</label>
       <select name={name} id={name} value={selected} onChange={handleChange}>
         {options.map((option) => (
@@ -26,6 +26,6 @@ export default function Dropdown({
           </option>
         ))}
       </select>
-    </>
+    </div>
   );
 }

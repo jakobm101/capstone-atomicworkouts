@@ -17,29 +17,46 @@ export default function Form__ExerciseNestedForm({
     return error.message;
   }
   return (
-    <Card>
+    <StyledCard>
       <StyledX onClick={() => onDelete(tempId)} />
-      <HeadingTiny>Adding Exercise</HeadingTiny>
       <Dropdown name={`${name}-exercise`} options={exercises} isExercises>
         Exercise
       </Dropdown>
-      <Dropdown
-        name={`${name}-reps`}
-        options={[8, 10, 12, 14, 16]}
-        selected="12"
-      >
-        Reps
-      </Dropdown>
-      <Dropdown name={`${name}-sets`} options={[3, 4, 5, 6]} selected="5">
-        Sets
-      </Dropdown>
-    </Card>
+      <StyledDiv>
+        <Dropdown
+          name={`${name}-reps`}
+          options={[8, 10, 12, 14, 16]}
+          selected="12"
+        >
+          Reps
+        </Dropdown>
+        <Dropdown name={`${name}-sets`} options={[3, 4, 5, 6]} selected="5">
+          Sets
+        </Dropdown>
+      </StyledDiv>
+    </StyledCard>
   );
 }
 
 const StyledX = styled(X)`
+position: absolute;
+top: 8px;
+right: 8px;
   cursor: pointer;
   &:hover {
     color: white;
   }
+`;
+
+const StyledCard = styled(Card)`
+position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 12px;
+`;
+
+const StyledDiv = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
 `;

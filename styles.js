@@ -54,14 +54,27 @@ main {
 }
 
 
-select {
-  background-color: var(--color-background);
+button, select, input {
+  background-color: transparent; 
   color: var(--color-orange-10);
   font-family: var(--font-space-mono);
   letter-spacing: 0.07rem;
-  border-radius: 3px;
-  border: var(--color-orange-5) 0.1px solid;
   margin: 4px;
-  padding: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  border: var(--color-orange-5) 1px solid;
+      text-shadow: 
+    0 0 2px var(--color-orange-9),
+    0 0 4px var(--color-orange-5),
+    0 0 8px var(--color-orange-5),
+    0 0 16px var(--color-orange-5);
+
+  box-shadow: 0 0 .1rem .1rem var(--color-orange-0), inset 0 1rem 1rem var(--color-orange-0);
+
+}
+
+label {
+  font-size:12px;
+  text-transform:uppercase;
 }
 `;
