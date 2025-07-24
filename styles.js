@@ -3,7 +3,7 @@ import { spaceMono } from "@/lib/fonts";
 
 export default createGlobalStyle`
   :root {
-    ${spaceMono.variable && `--font-space-mono: ${spaceMono.variable};`}
+    --font-space-mono: ${spaceMono.variable};
     --color-orange-10: rgba(69%, 35%, 0%, 1);
     --color-orange-9: rgba(69%, 35%, 0%, 0.9);
     --color-orange-5: rgba(69%, 35%, 0%, 0.5);
@@ -19,8 +19,9 @@ export default createGlobalStyle`
   }
 
   body {
+    transition: 0.3s all ease-in-out;
     margin: 0;
-    font-family: var(--font-space-mono), monospace;
+    font-family: var(--font-space-mono);
    font-weight: 100;
     letter-spacing: 0.7px;
     color: var(--color-orange-10);
@@ -71,6 +72,14 @@ button, select, input {
 
   box-shadow: 0 0 .1rem .1rem var(--color-orange-0), inset 0 1rem 1rem var(--color-orange-0);
 
+}
+
+button {
+  cursor: pointer;
+  &:hover{
+    
+  box-shadow: 0 0 .2rem .2rem var(--color-orange-0), inset 0 2rem 2rem var(--color-orange-0);
+  }
 }
 
 label {
