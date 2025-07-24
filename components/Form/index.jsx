@@ -35,7 +35,6 @@ export default function Form() {
         };
       }),
     };
-    console.log(workout);
 
     const response = await fetch(`/api/workouts`, {
       method: "POST",
