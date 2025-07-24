@@ -1,17 +1,19 @@
 import { Delete } from "lucide-react";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import styled from "styled-components";
 
-export default function ButtonDelete({ id }) {
-  const { push, reload, pathname } = useRouter();
-  const handleDelete = async () => {
+export default function ButtonDelete({ id, onDelete }) {
+  const handleDelete = async (e) => {
+    // prevents that a wrapping link gets fired
+    e.stopPropagation();
+    e.preventDefault();
     try {
       const response = await fetch(`/api/workouts/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
-        await push(`/`);
-        if (pathname === `/`) reload();
+        // calls parent function that hides the card in the front end
+        if (onDelete) onDelete(e);
       } else {
         console.error("Error while deleting", await response.text());
       }
@@ -22,6 +24,9 @@ export default function ButtonDelete({ id }) {
 }
 
 const StyledDelete = styled(Delete)`
+  position: absolute;
+  top: 12px;
+  right: 12px;
   cursor: pointer;
   &:hover {
     color: var(--color-contrast);

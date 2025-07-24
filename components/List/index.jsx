@@ -21,8 +21,6 @@ export default function List({ workouts }) {
           workoutExerciseIds.includes(exercise._id)
         );
         return (
-          <>
-            <ButtonDelete id={workout._id} />
             <StyledLink key={workout._id} href={`/workouts/${workout._id}`}>
               <WorkoutCard
                 key={workout._id}
@@ -30,7 +28,6 @@ export default function List({ workouts }) {
                 exercises={filteredExercises}
               />
             </StyledLink>
-          </>
         );
       })}
     </>

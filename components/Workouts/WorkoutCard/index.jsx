@@ -1,10 +1,14 @@
+import Card from "@/components/Atoms/Card";
 import Heading from "@/components/Atoms/Text/Heading";
 import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
+import ButtonDelete from "@/components/Button/ButtonDelete";
 import Image from "next/image";
+import { useState } from "react";
 import styled from "styled-components";
 import useSWR from "swr";
 
 export default function WorkoutCard({ workout, exercises }) {
+  const [isVisible, setIsVisible] = useState(true);
   if (!exercises) {
     const { data, isLoading, error } = useSWR(`/api/exercises`);
     if (isLoading) {
@@ -30,10 +34,13 @@ export default function WorkoutCard({ workout, exercises }) {
     }
   }
 
-  const uniqueMuscles = [...uniqueMusclesSet];
+  const handleDeleteLocal = () => setIsVisible(false);
 
+  const uniqueMuscles = [...uniqueMusclesSet];
+  if (!isVisible) return <Card>Deleted</Card>;
   return (
     <StyledWorkoutCard>
+      <ButtonDelete id={workout._id} onDelete={handleDeleteLocal} />
       <Image src={`/power.svg`} width={50} height={50} alt="workout image" />
       <h3>{workout.name}</h3>
       <>
@@ -44,7 +51,8 @@ export default function WorkoutCard({ workout, exercises }) {
           );
           return (
             <p key={exercise._id}>
-              {`${exercise.name} ---
+              <StyledSpan>{`${exercise.name} ---`}</StyledSpan>
+              {`
               reps:_ ${exerciseDataInWorkout.reps}
               sets:_ ${exerciseDataInWorkout.sets}
               `}
@@ -74,10 +82,16 @@ const StyledList = styled.ul`
 `;
 
 const StyledWorkoutCard = styled.div`
+  position: relative;
   border: var(--color-orange-9) 1px solid;
   box-shadow: 0 0 1rem 1rem var(--color-orange-0),
     inset 0 1rem 1rem var(--color-orange-0);
   border-radius: 12px;
   padding: 12px;
   margin: 12px;
+`;
+
+const StyledSpan = styled.span`
+  width: 144px;
+  display: inline-block;
 `;
