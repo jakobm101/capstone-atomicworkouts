@@ -6,7 +6,10 @@ export default createGlobalStyle`
     ${spaceMono.variable && `--font-space-mono: ${spaceMono.variable};`}
     --color-orange-10: rgba(69%, 35%, 0%, 1);
     --color-orange-9: rgba(69%, 35%, 0%, 0.9);
+    --color-orange-5: rgba(69%, 35%, 0%, 0.5);
     --color-orange-0: rgba(69%, 35%, 0%, 0.1);
+    --color-background: black;
+    --color-contrast: white;
   }
   
   *,
@@ -22,11 +25,11 @@ export default createGlobalStyle`
     letter-spacing: 0.7px;
     color: var(--color-orange-10);
     text-shadow: 
-    0 0 2px rgba(69%, 35%, 0%, 0.9),
-    0 0 4px rgba(69%, 35%, 0%, 0.5),
-    0 0 8px rgba(69%, 35%, 0%, 0.5),
-    0 0 16px rgba(69%, 35%, 0%, 0.5);
-    background-color: #000;
+    0 0 2px var(--color-orange-9),
+    0 0 4px var(--color-orange-5),
+    0 0 8px var(--color-orange-5),
+    0 0 16px var(--color-orange-5);
+    background-color: var(--color-background);
     background-image: repeating-linear-gradient(
     to bottom,
     rgba(69%, 35%, 0%, 0.15), 
@@ -50,4 +53,15 @@ main {
   overflow: scroll;
 }
 
+
+select {
+  background-color: var(--color-background);
+  color: var(--color-orange-10);
+  font-family: var(--font-space-mono);
+  letter-spacing: 0.07rem;
+  border-radius: 3px;
+  border: var(--color-orange-5) 0.1px solid;
+  margin: 4px;
+  padding: 4px;
+}
 `;

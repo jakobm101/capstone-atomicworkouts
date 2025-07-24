@@ -1,17 +1,24 @@
 import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
+import styled from "styled-components";
 import Dropdown from "../Dropdown";
 import Card from "@/components/Atoms/Card";
 import useSWR from "swr";
+import { X } from "lucide-react";
 
-export default function Form__ExerciseNestedForm({ name = "dropdown"}) {
+export default function Form__ExerciseNestedForm({
+  name = "dropdown",
+  onDelete,
+  tempId,
+}) {
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
-  
+
   if (isLoading) return "Loading exercises";
   if (error) {
     return error.message;
   }
   return (
     <Card>
+      <StyledX onClick={() => onDelete(tempId)} />
       <HeadingTiny>Adding Exercise</HeadingTiny>
       <Dropdown name={`${name}-exercise`} options={exercises} isExercises>
         Exercise
@@ -29,3 +36,10 @@ export default function Form__ExerciseNestedForm({ name = "dropdown"}) {
     </Card>
   );
 }
+
+const StyledX = styled(X)`
+  cursor: pointer;
+  &:hover {
+    color: white;
+  }
+`;
