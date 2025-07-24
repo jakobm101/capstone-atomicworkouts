@@ -3,8 +3,9 @@ import Dropdown from "../Dropdown";
 import Card from "@/components/Atoms/Card";
 import useSWR from "swr";
 
-export default function Form__ExerciseNestedForm({ name = "dropdown" }) {
+export default function Form__ExerciseNestedForm({ name = "dropdown"}) {
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
+  
   if (isLoading) return "Loading exercises";
   if (error) {
     return error.message;
@@ -12,10 +13,7 @@ export default function Form__ExerciseNestedForm({ name = "dropdown" }) {
   return (
     <Card>
       <HeadingTiny>Adding Exercise</HeadingTiny>
-      <Dropdown
-        name={`${name}-exercise`}
-        options={exercises.map((exercise) => exercise.name)}
-      >
+      <Dropdown name={`${name}-exercise`} options={exercises} isExercises>
         Exercise
       </Dropdown>
       <Dropdown
