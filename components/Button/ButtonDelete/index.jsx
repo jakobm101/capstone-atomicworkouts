@@ -1,16 +1,21 @@
 import { Delete } from "lucide-react";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 
 export default function ButtonDelete({ id }) {
-  const { push, query } = useRouter();
-  const { mutate } = useSWR();
+  const { push, reload, pathname } = useRouter();
   const handleDelete = async () => {
-    const response = await fetch(`/api/workouts/${id}`, {
-      method: "DELETE",
-    });
-    if (response.ok) push(`/`);
-    console.log(query);
+    try {
+      const response = await fetch(`/api/workouts/${id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        await push(`/`);
+        if (pathname === `/`) reload();
+      } else {
+        console.error("Error while deleting", await response.text());
+      }
+    } catch (error) {}
+    console.error("Connection error");
   };
   return <Delete onClick={handleDelete} />;
 }
