@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { spaceMono } from "@/lib/fonts";
 
 export default createGlobalStyle`
   :root {
@@ -97,6 +96,11 @@ a {
   }
   &:hover {
     color: var(--color-contrast);
+        text-shadow: 
+    0 0 8px var(--color-orange-10),
+    0 0 10px var(--color-orange-9),
+    0 0 16px var(--color-orange-5),
+    0 0 32px var(--color-orange-5);
   }
   
 }
