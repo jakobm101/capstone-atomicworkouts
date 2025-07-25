@@ -11,7 +11,7 @@ export default function Dropdown({
   return (
     <div>
       <label htmlFor={name}>{children}</label>
-      <select name={name} id={name} value={selected} onChange={handleChange}>
+      <select name={name} id={name} value={selected} onChange={onChange}>
         {options.map((option) => (
           <option
             value={isExercises ? option._id : option}
