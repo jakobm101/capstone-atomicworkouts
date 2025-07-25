@@ -10,6 +10,8 @@ export default function FormExerciseNestedForm({
   onDelete,
   tempId,
 }) {
+  console.log("tempid", tempId);
+
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
   const [selectedExercise, setSelectedExercise] = useState("");
   const [selectedReps, setSelectedReps] = useState("12");

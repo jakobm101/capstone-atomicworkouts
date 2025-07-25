@@ -16,11 +16,15 @@ export default function Form({ workout = libWorkouts[0] }) {
   const { push } = useRouter();
   const [name, setName] = useState(workout ? workout.name : "");
   //preparing for updating {id, rep, set}
-  const [exercises, setExercises] = useState(workout ? workout.exercises :[{ tempId: 1 }, { tempId: 2 }]);
+  const [exercises, setExercises] = useState(
+    workout ? workout.exercises : [{ tempId: 1 }, { tempId: 2 }]
+  );
+  console.log("exer", exercises);
 
   const handleAddExercise = () => {
     setExercises([...exercises, { tempId: uid() }]);
   };
+
   const handleRemoveExercise = (id) => {
     setExercises(exercises.filter((exercise) => exercise.tempId !== id));
   };
@@ -68,9 +72,9 @@ export default function Form({ workout = libWorkouts[0] }) {
         <StyledCard>
           {exercises.map((exercise) => (
             <FormExerciseNestedForm
-              tempId={exercise.tempId}
-              name={exercise.tempId}
-              key={exercise.tempId}
+              tempId={exercise.id}
+              name={exercise.tempId ?? exercise._id}
+              key={exercise.tempId ?? exercise._id}
               onDelete={handleRemoveExercise}
             />
           ))}
