@@ -16,7 +16,7 @@ export default function Form({ workout = libWorkouts[0] }) {
   const { push } = useRouter();
   const [name, setName] = useState(workout ? workout.name : "");
   //preparing for updating {id, rep, set}
-  const [exercises, setExercises] = useState([{ tempId: 1 }, { tempId: 2 }]);
+  const [exercises, setExercises] = useState(workout ? workout.exercises :[{ tempId: 1 }, { tempId: 2 }]);
 
   const handleAddExercise = () => {
     setExercises([...exercises, { tempId: uid() }]);
