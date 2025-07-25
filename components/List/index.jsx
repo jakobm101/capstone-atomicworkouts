@@ -1,5 +1,6 @@
 import Link from "next/link";
 import WorkoutCard from "../Workouts/WorkoutCard";
+import ButtonAdd from "../Button/ButtonAdd";
 import useSWR from "swr";
 import styled from "styled-components";
 
@@ -10,8 +11,9 @@ export default function List({ workouts }) {
 
   return (
     <>
+      <ButtonAdd />
       {workouts.map((workout) => {
-        // Exercises: handing down only the 
+        // Exercises: handing down only the
         // ones from the workout's exercises list
         const workoutExerciseIds = workout.exercises.map((e) => e.exerciseId);
         const filteredExercises = exercises.filter((exercise) =>
