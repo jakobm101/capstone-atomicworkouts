@@ -4,7 +4,7 @@ import { SWRConfig } from "swr";
 
 export default function App({ Component, pageProps }) {
   return (
-    <main className={spaceMono.className}>
+    <div className={spaceMono.className}>
       <SWRConfig
         value={{
           fetcher: async (...args) => {
@@ -24,6 +24,6 @@ export default function App({ Component, pageProps }) {
         <GlobalStyle />
         <Component {...pageProps} />
       </SWRConfig>
-    </main>
+    </div>
   );
 }

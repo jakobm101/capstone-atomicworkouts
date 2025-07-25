@@ -3,7 +3,7 @@ import { spaceMono } from "@/lib/fonts";
 
 export default createGlobalStyle`
   :root {
-    --font-space-mono: ${spaceMono.variable};
+    --font-space-mono: ${spaceMono.className};
     --color-orange-10: rgba(69%, 35%, 0%, 1);
     --color-orange-9: rgba(69%, 35%, 0%, 0.9);
     --color-orange-5: rgba(69%, 35%, 0%, 0.5);
