@@ -26,23 +26,23 @@ export default createGlobalStyle`
     letter-spacing: 0.5px;
     color: var(--color-orange-10);
     text-shadow: 
-    0 0 2px var(--color-orange-9),
-    0 0 4px var(--color-orange-5),
-    0 0 8px var(--color-orange-5),
-    0 0 16px var(--color-orange-5);
+      0 0 2px var(--color-orange-9),
+      0 0 4px var(--color-orange-5),
+      0 0 8px var(--color-orange-5),
+      0 0 16px var(--color-orange-5);
     background-color: var(--color-background);
-    background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(69%, 35%, 0%, 0.15), 
-    rgba(69%, 35%, 0%, 0.05) 1px,
-    transparent 1px,
-    transparent 4px
-  );
-;
-  }
+    background-image: 
+      repeating-linear-gradient( 
+        to bottom,
+          rgba(69%,35%,0%,0.45),
+          rgba(69%,35%,0%,0.65) 0.3px,
+          transparent 0.7px,
+          transparent 2.9px );
+  
+}
 
 main::-webkit-scrollbar {
-  display: none;              /* Chrome/Safari */
+  display: none;/* Chrome/Safari */
 }
 
 main {
@@ -51,12 +51,13 @@ main {
   margin: auto;
   margin-top: 5vh;
   border-radius: 20px;
-  box-shadow: 0 0 1rem 1rem var(--color-orange-0), inset 0 1rem 1rem var(--color-orange-0);
+  box-shadow: 
+    0 0 1rem 1rem var(--color-orange-0), 
+    inset 0 1rem 1rem var(--color-orange-0);
   border: var(--color-orange-10) 1px solid;
   padding: 20px;
-  overflow: scroll;
-        overflow: auto;
-  scrollbar-width: none;      /* Firefox */
+  overflow: auto;
+  scrollbar-width: none;/* Firefox */
   -ms-overflow-style: none;
 }
 
@@ -70,21 +71,22 @@ button, select, input {
   padding: 8px;
   border-radius: 8px;
   border: var(--color-orange-5) 1px solid;
-      text-shadow: 
+  text-shadow: 
     0 0 2px var(--color-orange-9),
     0 0 4px var(--color-orange-5),
     0 0 8px var(--color-orange-5),
     0 0 16px var(--color-orange-5);
-
-  box-shadow: 0 0 .1rem .1rem var(--color-orange-0), inset 0 1rem 1rem var(--color-orange-0);
-
+  box-shadow: 
+    0 0 .1rem .1rem var(--color-orange-0), 
+    inset 0 1rem 1rem var(--color-orange-0);
 }
 
 button {
   cursor: pointer;
   &:hover{
-    
-  box-shadow: 0 0 .2rem .2rem var(--color-orange-0), inset 0 2rem 2rem var(--color-orange-0);
+  box-shadow: 
+    0 0 .2rem .2rem var(--color-orange-0), 
+    inset 0 2rem 2rem var(--color-orange-0);
   }
 }
 
@@ -92,7 +94,6 @@ label {
   font-size:12px;
   text-transform:uppercase;
 }
-
 
 a {
   color: var(--color-orange-10);
