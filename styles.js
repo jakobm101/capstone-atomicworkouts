@@ -86,4 +86,18 @@ label {
   font-size:12px;
   text-transform:uppercase;
 }
+
+
+a {
+  color: var(--color-orange-10);
+  text-underline-offset: 0.3rem;
+  text-decoration-thickness: 0.1px;
+  &:visited {
+    color: var(--color-orange-5);
+  }
+  &:hover {
+    color: var(--color-contrast);
+  }
+  
+}
 `;
