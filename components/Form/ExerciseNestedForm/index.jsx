@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { X } from "lucide-react";
 import { useState } from "react";
 
-export default function Form__ExerciseNestedForm({
+export default function FormExerciseNestedForm({
   name = "dropdown",
   onDelete,
   tempId,

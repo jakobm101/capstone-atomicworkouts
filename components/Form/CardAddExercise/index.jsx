@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Heading from "@/components/Atoms/Text/Heading";
 import { Plus } from "lucide-react";
 
-export default function Card__AddExercise({ ...props }) {
+export default function CardAddExercise({ ...props }) {
   return (
     <StyledCard {...props}>
       <Plus />

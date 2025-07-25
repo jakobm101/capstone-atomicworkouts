@@ -1,4 +1,4 @@
-export default function Form__Input({ name, children = "", type = "text", ...props }) {
+export default function FormInput({ name, children = "", type = "text", ...props }) {
   return (
     <>
       <label htmlFor={name}>{children}</label>

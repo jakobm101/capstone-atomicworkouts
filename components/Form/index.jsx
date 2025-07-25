@@ -1,6 +1,6 @@
-import Form__ExerciseNestedForm from "./ExerciseNestedForm";
-import Card__AddExercise from "./CardAddExercise";
-import Form__Input from "./Input";
+import FormExerciseNestedForm from "./ExerciseNestedForm";
+import CardAddExercise from "./CardAddExercise";
+import FormInput from "./Input";
 import { useState } from "react";
 import ButtonClose from "../Button/ButtonClose";
 import { uid } from "uid";
@@ -52,20 +52,20 @@ export default function Form() {
       <StyledClose href="/" />
       <h1>Workout Form</h1>
       <form onSubmit={handleSubmit}>
-        <Form__Input name="name" required>
+        <FormInput name="name" required>
           Workout Name
-        </Form__Input>
+        </FormInput>
         <HeadingTiny>Exercises</HeadingTiny>
         <StyledCard>
           {exercises.map((exercise) => (
-            <Form__ExerciseNestedForm
+            <FormExerciseNestedForm
               tempId={exercise.tempId}
               name={exercise.tempId}
               key={exercise.tempId}
               onDelete={handleRemoveExercise}
             />
           ))}
-          <Card__AddExercise onClick={handleAddExercise} />
+          <CardAddExercise onClick={handleAddExercise} />
         </StyledCard>
         <button type="submit">submit</button>
         <button type="reset">reset</button>
