@@ -10,7 +10,7 @@ import FormInput from "./Input";
 import FormExerciseNestedForm from "./ExerciseNestedForm";
 import CardAddExercise from "./CardAddExercise";
 
-export default function Form() {
+export default function Form({ workout }) {
   const { push } = useRouter();
   //preparing for updating {id, rep, set}
   const [exercises, setExercises] = useState([{ tempId: 1 }, { tempId: 2 }]);
@@ -26,7 +26,7 @@ export default function Form() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    const workout = {
+    const newWorkout = {
       name: data.name,
       exercises: exercises.map((_, index) => {
         return {
@@ -40,7 +40,7 @@ export default function Form() {
     const response = await fetch(`/api/workouts`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(workout),
+      body: JSON.stringify(newWorkout),
     });
     if (response.ok) {
       event.target.reset();
