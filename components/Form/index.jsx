@@ -1,6 +1,6 @@
-import Form__ExerciseNestedForm from "./Form__ExerciseNestedForm";
-import Card__AddExercise from "./Card__AddExercise";
-import Form__Input from "./Form__Input";
+import Form__ExerciseNestedForm from "./ExerciseNestedForm";
+import Card__AddExercise from "./CardAddExercise";
+import Form__Input from "./Input";
 import { useState } from "react";
 import ButtonClose from "../Button/ButtonClose";
 import useSWR from "swr";
