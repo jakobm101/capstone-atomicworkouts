@@ -4,7 +4,8 @@ export default function Dropdown({
   options,
   name,
   children,
-  selected: selectedDefault,
+  selected,
+  onChange
 }) {
 
   return (
