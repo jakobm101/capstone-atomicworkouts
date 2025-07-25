@@ -1,22 +1,15 @@
-import { useState } from "react";
-
 export default function Dropdown({
   isExercises,
   options,
   name,
   children,
-  selected: selectedDefault,
+  selected,
+  onChange,
 }) {
-  // dropdowns are weird
-  // so this extra code is needed
-  // for using default selection
-  const [selected, setSelected] = useState(selectedDefault);
-  const handleChange = (event) => setSelected(event.target.value);
-
   return (
     <div>
       <label htmlFor={name}>{children}</label>
-      <select name={name} id={name} value={selected} onChange={handleChange}>
+      <select name={name} id={name} value={selected} onChange={onChange}>
         {options.map((option) => (
           <option
             value={isExercises ? option._id : option}

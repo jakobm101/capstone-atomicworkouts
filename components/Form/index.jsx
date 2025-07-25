@@ -1,16 +1,16 @@
-import Form__ExerciseNestedForm from "./Form__ExerciseNestedForm";
-import Card__AddExercise from "./Card__AddExercise";
-import Form__Input from "./Form__Input";
+import Form__ExerciseNestedForm from "./ExerciseNestedForm";
+import Card__AddExercise from "./CardAddExercise";
+import Form__Input from "./Input";
 import { useState } from "react";
 import ButtonClose from "../Button/ButtonClose";
-import useSWR from "swr";
 import { uid } from "uid";
 import styled from "styled-components";
 import Card from "../Atoms/Card";
 import HeadingTiny from "../Atoms/Text/HeadingTiny";
+import { useRouter } from "next/router";
 
 export default function Form() {
-  const { mutate } = useSWR(`/api/workouts`);
+  const { push } = useRouter();
   //preparing for updating {id, rep, set}
   const [exercises, setExercises] = useState([{ tempId: 1 }, { tempId: 2 }]);
 
@@ -41,9 +41,10 @@ export default function Form() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(workout),
     });
-    if (response.ok) mutate();
-
-    event.target.reset();
+    if (response.ok) {
+      event.target.reset();
+      push(`/`);
+    }
   };
 
   return (
