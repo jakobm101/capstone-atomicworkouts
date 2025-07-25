@@ -1,13 +1,14 @@
-import FormExerciseNestedForm from "./ExerciseNestedForm";
-import CardAddExercise from "./CardAddExercise";
-import FormInput from "./Input";
 import { useState } from "react";
-import ButtonClose from "../Button/ButtonClose";
 import { uid } from "uid";
+import { useRouter } from "next/router";
 import styled from "styled-components";
+
 import Card from "../Atoms/Card";
 import HeadingTiny from "../Atoms/Text/HeadingTiny";
-import { useRouter } from "next/router";
+import ButtonClose from "../Button/ButtonClose";
+import FormInput from "./Input";
+import FormExerciseNestedForm from "./ExerciseNestedForm";
+import CardAddExercise from "./CardAddExercise";
 
 export default function Form() {
   const { push } = useRouter();
