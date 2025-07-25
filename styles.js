@@ -7,6 +7,7 @@ export default createGlobalStyle`
     --color-orange-9: rgba(69%, 35%, 0%, 0.9);
     --color-orange-5: rgba(69%, 35%, 0%, 0.5);
     --color-orange-0: rgba(69%, 35%, 0%, 0.1);
+    --rgb-orange: 69%, 35%, 0%;
     --color-background: black;
     --color-contrast: white;
   }
@@ -34,8 +35,8 @@ export default createGlobalStyle`
     background-image: 
       repeating-linear-gradient( 
         to bottom,
-          rgba(69%,35%,0%,0.45),
-          rgba(69%,35%,0%,0.65) 0.3px,
+          rgba(var(--rgb-orange),0.45) 0.0px,
+          rgba(var(--rgb-orange),0.65) 0.3px,
           transparent 0.7px,
           transparent 2.9px );
   
