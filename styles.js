@@ -18,9 +18,7 @@ export default createGlobalStyle`
   }
 
   body {
-      overflow: auto;
-  scrollbar-width: none;      /* Firefox */
-  -ms-overflow-style: none; 
+ 
     transition: 0.3s all ease-in-out;
     margin: 0;
     font-family: var(--font-space-mono);
@@ -43,7 +41,7 @@ export default createGlobalStyle`
 ;
   }
 
-body::-webkit-scrollbar {
+main::-webkit-scrollbar {
   display: none;              /* Chrome/Safari */
 }
 
@@ -57,6 +55,9 @@ main {
   border: var(--color-orange-10) 1px solid;
   padding: 20px;
   overflow: scroll;
+        overflow: auto;
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;
 }
 
 
