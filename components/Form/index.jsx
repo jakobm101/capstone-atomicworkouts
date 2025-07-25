@@ -10,8 +10,11 @@ import FormInput from "./Input";
 import FormExerciseNestedForm from "./ExerciseNestedForm";
 import CardAddExercise from "./CardAddExercise";
 
-export default function Form({ workout }) {
+import libWorkouts from "@/lib/workouts";
+
+export default function Form({ workout = libWorkouts[0] }) {
   const { push } = useRouter();
+  const [name, setName] = useState(workout ? workout.name : "");
   //preparing for updating {id, rep, set}
   const [exercises, setExercises] = useState([{ tempId: 1 }, { tempId: 2 }]);
 
@@ -21,6 +24,8 @@ export default function Form({ workout }) {
   const handleRemoveExercise = (id) => {
     setExercises(exercises.filter((exercise) => exercise.tempId !== id));
   };
+
+  const handleNameInput = (e) => setName(e.target.value);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -53,7 +58,7 @@ export default function Form({ workout }) {
       <StyledClose href="/" />
       <h1>Workout Form</h1>
       <form onSubmit={handleSubmit}>
-        <FormInput name="name" required>
+        <FormInput name="name" required value={name} onChange={handleNameInput}>
           Workout Name
         </FormInput>
         <HeadingTiny>Exercises</HeadingTiny>
