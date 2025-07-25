@@ -7,11 +7,6 @@ export default function Dropdown({
   children,
   selected: selectedDefault,
 }) {
-  // dropdowns are weird
-  // so this extra code is needed
-  // for using default selection
-  const [selected, setSelected] = useState(selectedDefault);
-  const handleChange = (event) => setSelected(event.target.value);
 
   return (
     <div>
