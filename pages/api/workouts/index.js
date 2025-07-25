@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
       await dbConnect();
-      const workouts = await Workout.find().sort({ createdAt: -1 });;
+      const workouts = await Workout.find().sort({ createdAt: -1 });
       res.status(200).json(workouts);
       return;
     } catch (error) {
@@ -23,6 +23,8 @@ export default async function handler(req, res) {
       res.status(200).json({ message: "posting" });
       return;
     } catch (error) {
+      console.log("error posting", error.message);
+
       res.status(500).json({ error: error.message });
       return;
     }

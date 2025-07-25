@@ -3,6 +3,7 @@ import Dropdown from "../Dropdown";
 import Card from "@/components/Atoms/Card";
 import useSWR from "swr";
 import { X } from "lucide-react";
+import { useState } from "react";
 
 export default function Form__ExerciseNestedForm({
   name = "dropdown",
@@ -10,25 +11,41 @@ export default function Form__ExerciseNestedForm({
   tempId,
 }) {
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
-
+  const [selectedExercise, setSelectedExercise] = useState("");
+  const [selectedReps, setSelectedReps] = useState("12");
+  const [selectedSets, setSelectedSets] = useState("5");
   if (isLoading) return "Loading exercises";
   if (error) return error.message;
 
   return (
     <StyledCard>
       <StyledX onClick={() => onDelete(tempId)} />
-      <Dropdown name={`${name}-exercise`} options={exercises} isExercises>
+      {/* <Dropdown name={`${name}-exercise`} options={exercises} isExercises> */}
+      <Dropdown
+        name={`${name}-exercise`}
+        options={exercises}
+        isExercises
+        selected={selectedExercise}
+        onChange={(e) => setSelectedExercise(e.target.value)}
+      >
         Exercise
       </Dropdown>
       <StyledDiv>
         <Dropdown
           name={`${name}-reps`}
           options={[8, 10, 12, 14, 16]}
-          selected="12"
+          selected={selectedReps}
+          onChange={(e) => setSelectedReps(e.target.value)}
         >
           Reps
         </Dropdown>
-        <Dropdown name={`${name}-sets`} options={[3, 4, 5, 6]} selected="5">
+        {/* <Dropdown name={`${name}-sets`} options={[3, 4, 5, 6]} selected="5"> */}
+        <Dropdown
+          name={`${name}-sets`}
+          options={[3, 4, 5, 6]}
+          selected={selectedSets}
+          onChange={(e) => setSelectedSets(e.target.value)}
+        >
           Sets
         </Dropdown>
       </StyledDiv>

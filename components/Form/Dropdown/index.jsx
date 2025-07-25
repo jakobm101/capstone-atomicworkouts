@@ -1,13 +1,11 @@
-
 export default function Dropdown({
   isExercises,
   options,
   name,
   children,
   selected,
-  onChange
+  onChange,
 }) {
-
   return (
     <div>
       <label htmlFor={name}>{children}</label>

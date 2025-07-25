@@ -41,9 +41,10 @@ export default function Form() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(workout),
     });
-
-    event.target.reset();
-    push(`/`);
+    if (response.ok) {
+      event.target.reset();
+      push(`/`);
+    }
   };
 
   return (
