@@ -14,7 +14,9 @@ export default function FormExerciseNestedForm({
   const [selectedExercise, setSelectedExercise] = useState("");
   const [selectedReps, setSelectedReps] = useState("12");
   const [selectedSets, setSelectedSets] = useState("5");
-  if (isLoading) return "Loading exercises";
+  if (isLoading) {
+    return <StyledCard>Loading Exercise</StyledCard>;
+  }
   if (error) return error.message;
 
   return (
