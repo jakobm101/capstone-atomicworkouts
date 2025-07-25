@@ -43,6 +43,9 @@ export default createGlobalStyle`
 ;
   }
 
+body::-webkit-scrollbar {
+  display: none;              /* Chrome/Safari */
+}
 
 main {
   width: 400px;
