@@ -25,8 +25,6 @@ export default function Form({ workout = libWorkouts[0] }) {
     setExercises(exercises.filter((exercise) => exercise.tempId !== id));
   };
 
-  const handleNameInput = (e) => setName(e.target.value);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -58,7 +56,12 @@ export default function Form({ workout = libWorkouts[0] }) {
       <StyledClose href="/" />
       <h1>Workout Form</h1>
       <form onSubmit={handleSubmit}>
-        <FormInput name="name" required value={name} onChange={handleNameInput}>
+        <FormInput
+          name="name"
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        >
           Workout Name
         </FormInput>
         <HeadingTiny>Exercises</HeadingTiny>
