@@ -2,7 +2,7 @@
 
 # Planning
 / *excalidraw*
-
+/public/scripts
 # dependencies
 node_modules
 /.pnp
