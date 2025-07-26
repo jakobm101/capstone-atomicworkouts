@@ -10,16 +10,16 @@ import FormInput from "./Input";
 import FormExerciseNestedForm from "./ExerciseNestedForm";
 import CardAddExercise from "./CardAddExercise";
 
-import libWorkouts from "@/lib/workouts";
+// offline work fallbacks
+import dbclone from "@/lib/dbclone";
 
-export default function Form({ workout = libWorkouts[0] }) {
+export default function Form({ workout = dbclone.workouts[0] }) {
   const { push } = useRouter();
   const [name, setName] = useState(workout ? workout.name : "");
   //preparing for updating {id, rep, set}
   const [exercises, setExercises] = useState(
     workout ? workout.exercises : [{ tempId: 1 }, { tempId: 2 }]
   );
-  console.log("exer", exercises);
 
   const handleAddExercise = () => {
     setExercises([...exercises, { tempId: uid() }]);
@@ -70,11 +70,11 @@ export default function Form({ workout = libWorkouts[0] }) {
         </FormInput>
         <HeadingTiny>Exercises</HeadingTiny>
         <StyledCard>
-          {exercises.map((exercise) => (
+          {exercises.map((exercise, index) => (
             <FormExerciseNestedForm
-              tempId={exercise.id}
-              name={exercise.tempId ?? exercise._id}
-              key={exercise.tempId ?? exercise._id}
+              tempId={exercise.exerciseId}
+              name={exercise.tempId}
+              key={index}
               onDelete={handleRemoveExercise}
             />
           ))}

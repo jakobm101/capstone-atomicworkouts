@@ -3,23 +3,29 @@ import Dropdown from "../Dropdown";
 import Card from "@/components/Atoms/Card";
 import useSWR from "swr";
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function FormExerciseNestedForm({
   name = "dropdown",
   onDelete,
   tempId,
 }) {
-  console.log("tempid", tempId);
-
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
-  const [selectedExercise, setSelectedExercise] = useState("");
+
+  const [selectedExercise, setSelectedExercise] = useState("Crunch");
   const [selectedReps, setSelectedReps] = useState("12");
   const [selectedSets, setSelectedSets] = useState("5");
+  useEffect(() => {
+    if (!isLoading && !error) {
+      setSelectedExercise(exercises?.find((x) => x._id === tempId));
+    }
+  }, [exercises]);
   if (isLoading) {
     return <StyledCard>Loading Exercise</StyledCard>;
   }
   if (error) return error.message;
+  console.log("exercises", exercises[0].name);
+  console.log("selected", selectedExercise._id);
 
   return (
     <StyledCard>
