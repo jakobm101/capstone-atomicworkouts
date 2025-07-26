@@ -12,30 +12,36 @@ export default function FormExerciseNestedForm({
 }) {
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
 
-  const [selectedExercise, setSelectedExercise] = useState("Crunch");
+  const [selectedExercise, setSelectedExercise] = useState({
+    name: "Crunch",
+    _id: "temp",
+  });
   const [selectedReps, setSelectedReps] = useState("12");
   const [selectedSets, setSelectedSets] = useState("5");
   useEffect(() => {
     if (!isLoading && !error) {
       setSelectedExercise(exercises?.find((x) => x._id === tempId));
+      
     }
   }, [exercises]);
   if (isLoading) {
     return <StyledCard>Loading Exercise</StyledCard>;
   }
   if (error) return error.message;
-  console.log("exercises", exercises[0].name);
-  console.log("selected", selectedExercise._id);
+  console.log("temptId", tempId);
+
+  console.log("selected", selectedExercise, selectedExercise.name);
+  console.log();
+  
 
   return (
     <StyledCard>
       <StyledX onClick={() => onDelete(tempId)} />
-      {/* <Dropdown name={`${name}-exercise`} options={exercises} isExercises> */}
       <Dropdown
         name={`${name}-exercise`}
         options={exercises}
         isExercises
-        selected={selectedExercise}
+        selected={selectedExercise.name}
         onChange={(e) => setSelectedExercise(e.target.value)}
       >
         Exercise

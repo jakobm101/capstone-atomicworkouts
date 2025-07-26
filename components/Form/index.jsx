@@ -44,6 +44,8 @@ export default function Form({ workout = dbclone.workouts[0] }) {
       }),
     };
 
+    console.log(newWorkout);
+    
     const response = await fetch(`/api/workouts`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
