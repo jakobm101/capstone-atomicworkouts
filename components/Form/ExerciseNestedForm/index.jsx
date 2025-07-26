@@ -10,6 +10,7 @@ export default function FormExerciseNestedForm({
   onDelete,
   tempId,
 }) {
+  //tempId is workout.exercises[x].exerciseId
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
 
   const [selectedExercise, setSelectedExercise] = useState({
@@ -21,7 +22,7 @@ export default function FormExerciseNestedForm({
   useEffect(() => {
     if (!isLoading && !error) {
       setSelectedExercise(exercises?.find((x) => x._id === tempId));
-      
+      console.log("//////useEffect in Nested");
     }
   }, [exercises]);
   if (isLoading) {
@@ -31,8 +32,6 @@ export default function FormExerciseNestedForm({
   console.log("temptId", tempId);
 
   console.log("selected", selectedExercise, selectedExercise.name);
-  console.log();
-  
 
   return (
     <StyledCard>
@@ -41,7 +40,7 @@ export default function FormExerciseNestedForm({
         name={`${name}-exercise`}
         options={exercises}
         isExercises
-        selected={selectedExercise.name}
+        selected={selectedExercise}
         onChange={(e) => setSelectedExercise(e.target.value)}
       >
         Exercise

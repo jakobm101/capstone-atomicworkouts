@@ -16,7 +16,6 @@ import dbclone from "@/lib/dbclone";
 export default function Form({ workout = dbclone.workouts[0] }) {
   const { push } = useRouter();
   const [name, setName] = useState(workout ? workout.name : "");
-  //preparing for updating {id, rep, set}
   const [exercises, setExercises] = useState(
     workout ? workout.exercises : [{ tempId: 1 }, { tempId: 2 }]
   );
