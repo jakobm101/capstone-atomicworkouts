@@ -22,7 +22,7 @@ export default function ButtonDelete({ id, onDelete }) {
     } catch (error) {}
     console.error("Connection error");
   };
-  return <StyledDelete onClick={handleDelete} />;
+  return <StyledDelete onClick={handleDelete} aria-label="‹× delete" />;
 }
 
 const StyledDelete = styled(Delete)`

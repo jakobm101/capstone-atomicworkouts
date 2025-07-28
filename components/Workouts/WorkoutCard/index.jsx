@@ -50,13 +50,13 @@ export default function WorkoutCard({ workout, exercises }) {
             (workoutExercise) => workoutExercise.exerciseId === exercise._id
           );
           return (
-            <p key={exercise._id}>
-              <StyledSpan>{`${exercise.name} ---`}</StyledSpan>
+            <StyledP key={exercise._id}>
+              <StyledSpan>{`${exercise.name} `}</StyledSpan>
               {`
-              reps:_ ${exerciseDataInWorkout.reps}
-              sets:_ ${exerciseDataInWorkout.sets}
+              :: reps:_ ${exerciseDataInWorkout.reps}
+              :: sets:_ ${exerciseDataInWorkout.sets}
               `}
-            </p>
+            </StyledP>
           );
         })}
       </>
@@ -92,6 +92,10 @@ const StyledWorkoutCard = styled.div`
 `;
 
 const StyledSpan = styled.span`
-  width: 144px;
+  width: 116px;
   display: inline-block;
+`;
+
+const StyledP = styled.p`
+  font-size: 10px;
 `;

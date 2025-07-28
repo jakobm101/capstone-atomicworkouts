@@ -1,9 +1,10 @@
 import GlobalStyle from "../styles";
+import { spaceMono } from "@/lib/fonts";
 import { SWRConfig } from "swr";
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
+    <div className={spaceMono.className}>
       <SWRConfig
         value={{
           fetcher: async (...args) => {
@@ -23,6 +24,6 @@ export default function App({ Component, pageProps }) {
         <GlobalStyle />
         <Component {...pageProps} />
       </SWRConfig>
-    </>
+    </div>
   );
 }
