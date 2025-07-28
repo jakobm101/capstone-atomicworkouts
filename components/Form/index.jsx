@@ -69,8 +69,6 @@ export default function Form({ workout }) {
       });
     }
     if (response.ok) {
-      setExercises({});
-      event.target.reset();
       push(`/`);
     }
   };
