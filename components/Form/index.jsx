@@ -74,11 +74,12 @@ export default function Form({ workout = dbclone.workouts[0] }) {
         </FormInput>
         <HeadingTiny>Exercises</HeadingTiny>
         <StyledCard>
-          {exercises.map((exercise) => (
+          {exercises.map((exercise, index) => (
             <FormExerciseNestedForm
-              tempId={exercise.exerciseId}
-              name={exercise.tempId}
-              key={exercise.tempId}
+              dbExercise={exercise}
+              tempId={index}
+              name={index}
+              key={index}
               onDelete={handleRemoveExercise}
             />
           ))}
