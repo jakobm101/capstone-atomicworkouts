@@ -48,6 +48,7 @@ main::-webkit-scrollbar {
 }
 
 main {
+  position: relative;
   width: 400px;
   height: 90vh;
   margin: auto;

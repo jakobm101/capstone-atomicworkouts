@@ -19,9 +19,9 @@ export default function WorkoutDetails() {
   const workout = workoutData.workout;
 
   return (
-    <>
+    <main>
       <ButtonClose href={`/`} />
       <WorkoutCard workout={workout} />
-    </>
+    </main>
   );
 }
