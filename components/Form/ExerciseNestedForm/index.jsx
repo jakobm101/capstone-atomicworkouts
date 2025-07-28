@@ -12,6 +12,8 @@ export default function FormExerciseNestedForm({
   onDelete,
   tempId,
 }) {
+  // ∆ offline mode
+  // const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
   const cloneExercises = dbclone.exercises;
   const exercises = cloneExercises;
 
@@ -27,13 +29,15 @@ export default function FormExerciseNestedForm({
   );
 
   useEffect(() => {
+    // ∆ offline mode
     if (/*!isLoading && !error*/ true) {
       setSelectedExercise(currentExercise);
       setSelectedReps(dbExercise.reps);
       setSelectedSets(dbExercise.sets);
     }
   }, [exercises]);
-  /*
+
+  /*  ∆ offline mode
   if (isLoading) {
     return <StyledCard>Loading Exercise</StyledCard>;
   }
