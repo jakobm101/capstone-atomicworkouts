@@ -22,7 +22,17 @@ export default function Form({ workout = dbclone.workouts[0] }) {
   console.log("exercises", exercises);
 
   const handleAddExercise = () => {
-    setExercises([...exercises, { tempId: uid() }]);
+    console.log("✨", dbclone.exercises[0]);
+
+    setExercises([
+      ...exercises,
+      {
+        exerciseId: "6877cdddc31ed272ee80b836",
+        _id: "6877cdddc31ed272ee80b836",
+        reps: "8",
+        sets: "3",
+      },
+    ]);
   };
 
   const handleRemoveExercise = (id) => {
@@ -39,9 +49,9 @@ export default function Form({ workout = dbclone.workouts[0] }) {
       name: data.name,
       exercises: exercises.map((_, index) => {
         return {
-          exerciseId: data[`${index + 1}-exercise`],
-          reps: data[`${index + 1}-reps`],
-          sets: data[`${index + 1}-sets`],
+          exerciseId: data[`${index}-exercise`],
+          reps: data[`${index}-reps`],
+          sets: data[`${index}-sets`],
         };
       }),
     };

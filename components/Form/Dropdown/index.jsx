@@ -6,12 +6,17 @@ export default function Dropdown({
   selected,
   onChange,
 }) {
-  console.log("dropdwon selected", selected); 
+  // console.log("dropdown selected", selected);
 
   return (
     <div>
       <label htmlFor={name}>{children}</label>
-      <select name={name} id={name} value={isExercises ? selected._id : selected} onChange={onChange}>
+      <select
+        name={name}
+        id={name}
+        value={isExercises ? selected._id : selected}
+        onChange={onChange}
+      >
         {options.map((option) => (
           <option
             value={isExercises ? option._id : option}
