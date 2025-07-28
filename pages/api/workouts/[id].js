@@ -8,13 +8,10 @@ export default async function handler(req, res) {
     try {
       await dbConnect();
       const workout = await Workout.findById(req.query.id);
-
-      //$in -- is some Mongo Magic array mapping
       const exerciseIds = workout.exercises.map(
         (exercise) => exercise.exerciseId
       );
       const exercises = await Exercise.find({ id: { $in: exerciseIds } });
-
       res.status(200).json({ workout, exercises });
       return;
     } catch (error) {
@@ -33,4 +30,26 @@ export default async function handler(req, res) {
       return;
     }
   }
+  ////////////////////// UPDATE
+  // ∆ PUT maybe?
+  if (req.method === "PUT") {
+    // Test this with internet ∆∆∆
+    console.log("PUT method body", req.body);
+
+    try {
+      await dbConnect();
+      await Workout.findByIdAndUpdate(req.body);
+      res.status(200).json({
+        message: `created workout ${req.body.name}`,
+        workout: req.body,
+      });
+      return;
+    } catch (error) {
+      // ∆ check if 500 is adequate
+      res.status(500).json({ error: error.message, body: req.body });
+      return;
+    }
+  }
+  res.status(404).json({ message: "Method not supported" });
+  return;
 }

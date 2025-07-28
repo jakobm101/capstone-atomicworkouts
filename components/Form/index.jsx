@@ -19,10 +19,10 @@ export default function Form({ workout = dbclone.workouts[0] }) {
   const [exercises, setExercises] = useState(
     workout ? workout.exercises : [{ tempId: 1 }, { tempId: 2 }]
   );
-  console.log("exercises", exercises);
+  // console.log("exercises", exercises);
 
   const handleAddExercise = () => {
-    console.log("✨", dbclone.exercises[0]);
+    // console.log("✨", dbclone.exercises[0]);
 
     setExercises([
       ...exercises,
@@ -46,6 +46,7 @@ export default function Form({ workout = dbclone.workouts[0] }) {
     console.log("data", data);
 
     const newWorkout = {
+      _id: workout._id || null,
       name: data.name,
       exercises: exercises.map((_, index) => {
         return {
@@ -58,11 +59,22 @@ export default function Form({ workout = dbclone.workouts[0] }) {
 
     console.log("submit", newWorkout);
 
-    const response = await fetch(`/api/workouts`, {
-      method: "POST",
+    const responseContent = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newWorkout),
-    });
+    };
+    let response;
+    if (workout) {
+      response = await fetch(`/api/workouts/${workout._id}`, {
+        method: "PUT",
+        ...responseContent,
+      });
+    } else {
+      response = await fetch(`/api/workouts`, {
+        method: "POST",
+        ...responseContent,
+      });
+    }
     if (response.ok) {
       event.target.reset();
       push(`/`);
