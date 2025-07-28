@@ -8,17 +8,14 @@ import ButtonClose from "../Button/ButtonClose";
 import FormInput from "./Input";
 import FormExerciseNestedForm from "./ExerciseNestedForm";
 import CardAddExercise from "./CardAddExercise";
-
-// offline work fallbacks
-import dbclone from "@/lib/dbclone";
+import { defaultExercise } from "@/lib/dbclone";
 import HeadingLarge from "../Atoms/Text/HeadingLarge";
 
 export default function Form({ workout }) {
-  workout = dbclone.workouts[0]; // ∆ offline modus
   const { push } = useRouter();
   const [name, setName] = useState(workout ? workout.name : "");
   const [exercises, setExercises] = useState(
-    workout ? workout.exercises : [dbclone.workouts[0].exercises[0]]
+    workout ? workout.exercises : [defaultExercise]
   );
 
   const handleAddExercise = () => {

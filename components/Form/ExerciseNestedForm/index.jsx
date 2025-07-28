@@ -4,7 +4,6 @@ import Card from "@/components/Atoms/Card";
 import useSWR from "swr";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
-import dbclone from "@/lib/dbclone";
 
 export default function FormExerciseNestedForm({
   dbExercise,
@@ -12,11 +11,8 @@ export default function FormExerciseNestedForm({
   onDelete,
   tempId,
 }) {
-  // ∆ offline mode
-  // const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
-  const cloneExercises = dbclone.exercises;
-  const exercises = cloneExercises;
-
+  const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
+  
   const [selectedExercise, setSelectedExercise] = useState({
     name: "Crunch",
     _id: "temp",
@@ -30,19 +26,18 @@ export default function FormExerciseNestedForm({
 
   useEffect(() => {
     // ∆ offline mode
-    if (/*!isLoading && !error*/ true) {
+    if (!isLoading && !error) {
       setSelectedExercise(currentExercise);
       setSelectedReps(dbExercise.reps);
       setSelectedSets(dbExercise.sets);
     }
   }, [exercises]);
 
-  /*  ∆ offline mode
+  /*  ∆ offline mode */
   if (isLoading) {
     return <StyledCard>Loading Exercise</StyledCard>;
   }
   if (error) return error.message;
-*/
 
   return (
     <StyledCard>

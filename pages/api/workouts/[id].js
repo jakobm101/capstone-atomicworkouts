@@ -31,21 +31,18 @@ export default async function handler(req, res) {
     }
   }
   ////////////////////// UPDATE
-  // ∆ PUT maybe?
   if (req.method === "PUT") {
-    // Test this with internet ∆∆∆
     console.log("PUT method body", req.body);
 
     try {
       await dbConnect();
-      await Workout.findByIdAndUpdate(req.body);
+      await Workout.findByIdAndUpdate(req.query.id, req.body);
       res.status(200).json({
         message: `created workout ${req.body.name}`,
         workout: req.body,
       });
       return;
     } catch (error) {
-      // ∆ check if 500 is adequate
       res.status(500).json({ error: error.message, body: req.body });
       return;
     }
