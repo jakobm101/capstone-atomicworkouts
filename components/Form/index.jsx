@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { uid } from "uid";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -12,18 +11,17 @@ import CardAddExercise from "./CardAddExercise";
 
 // offline work fallbacks
 import dbclone from "@/lib/dbclone";
+import HeadingLarge from "../Atoms/Text/HeadingLarge";
 
-export default function Form({ workout = dbclone.workouts[0] }) {
+export default function Form({ workout }) {
+  workout = dbclone.workouts[0]; // ∆ offline modus
   const { push } = useRouter();
   const [name, setName] = useState(workout ? workout.name : "");
   const [exercises, setExercises] = useState(
-    workout ? workout.exercises : [{ tempId: 1 }, { tempId: 2 }]
+    workout ? workout.exercises : [dbclone.workouts[0].exercises[0]]
   );
-  // console.log("exercises", exercises);
 
   const handleAddExercise = () => {
-    // console.log("✨", dbclone.exercises[0]);
-
     setExercises([
       ...exercises,
       {
@@ -46,7 +44,6 @@ export default function Form({ workout = dbclone.workouts[0] }) {
     console.log("data", data);
 
     const newWorkout = {
-      _id: workout._id || null,
       name: data.name,
       exercises: exercises.map((_, index) => {
         return {
@@ -56,8 +53,7 @@ export default function Form({ workout = dbclone.workouts[0] }) {
         };
       }),
     };
-
-    console.log("submit", newWorkout);
+    workout && (newWorkout["_id"] = workout._id);
 
     const responseContent = {
       headers: { "Content-Type": "application/json" },
@@ -84,7 +80,10 @@ export default function Form({ workout = dbclone.workouts[0] }) {
   return (
     <StyledDiv>
       <StyledClose href="/" />
-      <h1>Workout Form</h1>
+      <HeadingLarge>
+        {workout ? `Updating Workout` : `Creating new workout`}
+      </HeadingLarge>
+      {workout && <HeadingTiny>Current Name: {workout.name}</HeadingTiny>}
       <form onSubmit={handleSubmit}>
         <FormInput
           name="name"
@@ -92,7 +91,7 @@ export default function Form({ workout = dbclone.workouts[0] }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
         >
-          Workout Name
+          {workout && "New "}Workout Name
         </FormInput>
         <HeadingTiny>Exercises</HeadingTiny>
         <StyledCard>
