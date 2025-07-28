@@ -13,7 +13,7 @@ export default function Dropdown({
       <select
         name={name}
         id={name}
-        value={isExercises ? selected._id : selected}
+        value={isExercises ? selected?._id : selected}
         onChange={onChange}
       >
         {options.map((option) => (

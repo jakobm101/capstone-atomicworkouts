@@ -70,10 +70,12 @@ export default function Form({ workout }) {
       });
     }
     if (response.ok) {
+      setExercises({});
       event.target.reset();
       push(`/`);
     }
   };
+  console.log("FORM ex", exercises);
 
   return (
     <StyledDiv>
@@ -105,7 +107,9 @@ export default function Form({ workout }) {
           <CardAddExercise onClick={handleAddExercise} />
         </StyledCard>
         <button type="submit">submit</button>
-        <button type="reset">reset</button>
+        <button type="reset" onClick={() => setExercises([])}>
+          reset
+        </button>
       </form>
     </StyledDiv>
   );

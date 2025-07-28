@@ -12,11 +12,8 @@ export default function FormExerciseNestedForm({
   tempId,
 }) {
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
-  
-  const [selectedExercise, setSelectedExercise] = useState({
-    name: "Crunch",
-    _id: "temp",
-  });
+
+  const [selectedExercise, setSelectedExercise] = useState();
   const [selectedReps, setSelectedReps] = useState("12");
   const [selectedSets, setSelectedSets] = useState("5");
 
@@ -25,7 +22,6 @@ export default function FormExerciseNestedForm({
   );
 
   useEffect(() => {
-    // ∆ offline mode
     if (!isLoading && !error) {
       setSelectedExercise(currentExercise);
       setSelectedReps(dbExercise.reps);
@@ -33,7 +29,6 @@ export default function FormExerciseNestedForm({
     }
   }, [exercises]);
 
-  /*  ∆ offline mode */
   if (isLoading) {
     return <StyledCard>Loading Exercise</StyledCard>;
   }
