@@ -32,6 +32,8 @@ export default function Form({ workout = dbclone.workouts[0] }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    console.log('data', data);
+    
     const newWorkout = {
       name: data.name,
       exercises: exercises.map((_, index) => {
@@ -43,7 +45,7 @@ export default function Form({ workout = dbclone.workouts[0] }) {
       }),
     };
 
-    console.log(newWorkout);
+    console.log('submit',newWorkout);
     
     const response = await fetch(`/api/workouts`, {
       method: "POST",

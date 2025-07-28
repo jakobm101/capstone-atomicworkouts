@@ -29,9 +29,7 @@ export default function FormExerciseNestedForm({
     return <StyledCard>Loading Exercise</StyledCard>;
   }
   if (error) return error.message;
-  console.log("temptId", tempId);
 
-  console.log("selected", selectedExercise, selectedExercise.name);
 
   return (
     <StyledCard>
@@ -54,7 +52,6 @@ export default function FormExerciseNestedForm({
         >
           Reps
         </Dropdown>
-        {/* <Dropdown name={`${name}-sets`} options={[3, 4, 5, 6]} selected="5"> */}
         <Dropdown
           name={`${name}-sets`}
           options={[3, 4, 5, 6]}
