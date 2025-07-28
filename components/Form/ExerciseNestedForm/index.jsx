@@ -13,13 +13,6 @@ export default function FormExerciseNestedForm({
   tempId,
 }) {
   const cloneExercises = dbclone.exercises;
-  // console.log("clone exercises", cloneExercises);
-  // console.log("nest dbExercise id", dbExercise.exerciseId);
-
-  // console.log(`nest props:: name ${name}, tempId ${tempId}`);
-  // console.log("nest dbExercise", dbExercise);
-
-  // const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
   const exercises = cloneExercises;
 
   const [selectedExercise, setSelectedExercise] = useState({
@@ -32,14 +25,12 @@ export default function FormExerciseNestedForm({
   const currentExercise = exercises?.find(
     (x) => x._id === dbExercise.exerciseId
   );
-  // console.log("⭐️ current exercise", currentExercise);
 
   useEffect(() => {
     if (/*!isLoading && !error*/ true) {
       setSelectedExercise(currentExercise);
       setSelectedReps(dbExercise.reps);
       setSelectedSets(dbExercise.sets);
-      // console.log("////// useEffect in Nested");
     }
   }, [exercises]);
   /*
@@ -48,10 +39,6 @@ export default function FormExerciseNestedForm({
   }
   if (error) return error.message;
 */
-  // console.log("exercise in nested", dbExercise);
-  // console.log("selected exercise", selectedExercise);
-
-  // console.log("selected reps and sets", selectedReps, selectedSets);
 
   return (
     <StyledCard>

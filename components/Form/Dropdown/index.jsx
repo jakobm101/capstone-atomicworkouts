@@ -6,7 +6,6 @@ export default function Dropdown({
   selected,
   onChange,
 }) {
-  // console.log("dropdown selected", selected);
 
   return (
     <div>

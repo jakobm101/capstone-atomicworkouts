@@ -53,6 +53,7 @@ export default function Form({ workout }) {
         };
       }),
     };
+    // maybe obsolete as the id is called via route
     workout && (newWorkout["_id"] = workout._id);
 
     const responseContent = {
