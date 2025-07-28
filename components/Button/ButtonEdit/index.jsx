@@ -15,7 +15,7 @@ export default function ButtonEdit({ id }) {
 
 const StyledEdit = styled(Wrench)`
   position: absolute;
-  top: 32px;
+  top: 42px;
   right: 12px;
   cursor: pointer;
   &:hover {

@@ -2,6 +2,7 @@ import Card from "@/components/Atoms/Card";
 import Heading from "@/components/Atoms/Text/Heading";
 import HeadingTiny from "@/components/Atoms/Text/HeadingTiny";
 import ButtonDelete from "@/components/Button/ButtonDelete";
+import ButtonEdit from "@/components/Button/ButtonEdit";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
@@ -41,6 +42,7 @@ export default function WorkoutCard({ workout, exercises }) {
   return (
     <StyledWorkoutCard>
       <ButtonDelete id={workout._id} onDelete={handleDeleteLocal} />
+      <ButtonEdit id={workout._id} />
       <Image src={`/power.svg`} width={50} height={50} alt="workout image" />
       <h3>{workout.name}</h3>
       <>
