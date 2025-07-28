@@ -32,7 +32,6 @@ export default async function handler(req, res) {
   }
   ////////////////////// UPDATE
   if (req.method === "PUT") {
-    console.log("PUT method body", req.body);
 
     try {
       await dbConnect();

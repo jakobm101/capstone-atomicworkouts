@@ -38,7 +38,6 @@ export default function Form({ workout }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log("data", data);
 
     const newWorkout = {
       name: data.name,
@@ -75,7 +74,6 @@ export default function Form({ workout }) {
       push(`/`);
     }
   };
-  console.log("FORM ex", exercises);
 
   return (
     <StyledDiv>

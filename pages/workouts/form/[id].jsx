@@ -22,7 +22,6 @@ export default function FormPageUpdate() {
       </main>
     );
   }
-  console.log("WWWWorkout", workout.workout);
   return (
     <main>
       <Header>atomic workouts</Header>
