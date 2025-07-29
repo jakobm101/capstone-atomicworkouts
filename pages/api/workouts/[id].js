@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       await dbConnect();
       const workout = await Workout.findById(req.query.id);
       const exerciseIds = workout.exercises.map(
-        (exercise) => exercise.exerciseId
+        (exercise) => exercise._id
       );
       const exercises = await Exercise.find({ id: { $in: exerciseIds } });
       res.status(200).json({ workout, exercises });

@@ -21,7 +21,7 @@ export default function WorkoutCard({ workout, exercises }) {
 
     exercises = data.filter((exercise) =>
       workout.exercises
-        .map((exerciseDataInWorkout) => exerciseDataInWorkout.exerciseId)
+        .map((exerciseDataInWorkout) => exerciseDataInWorkout._id)
         .includes(exercise._id)
     );
   }
@@ -49,7 +49,7 @@ export default function WorkoutCard({ workout, exercises }) {
         <Heading>Exercises</Heading>
         {exercises.map((exercise) => {
           const exerciseDataInWorkout = workout.exercises.find(
-            (workoutExercise) => workoutExercise.exerciseId === exercise._id
+            (workoutExercise) => workoutExercise._id === exercise._id
           );
           return (
             <StyledP key={exercise._id}>

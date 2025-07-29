@@ -16,7 +16,7 @@ export default function List({ workouts }) {
       {workouts.map((workout) => {
         // Exercises: handing down only the
         // ones from the workout's exercises list
-        const workoutExerciseIds = workout.exercises.map((e) => e.exerciseId);
+        const workoutExerciseIds = workout.exercises.map((e) => e._id);
         const filteredExercises = exercises.filter((exercise) =>
           workoutExerciseIds.includes(exercise._id)
         );

@@ -18,7 +18,7 @@ export default function FormExerciseNestedForm({
   const [selectedSets, setSelectedSets] = useState("5");
 
   const currentExercise = exercises?.find(
-    (x) => x._id === dbExercise.exerciseId
+    (x) => x._id === dbExercise._id
   );
 
   useEffect(() => {
