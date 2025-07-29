@@ -32,8 +32,9 @@ export default async function handler(req, res) {
   }
   ////////////////////// UPDATE
   if (req.method === "PUT") {
-
     try {
+      console.log("req.body", req.body);
+
       await dbConnect();
       await Workout.findByIdAndUpdate(req.query.id, req.body);
       res.status(200).json({

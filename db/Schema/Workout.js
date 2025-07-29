@@ -6,7 +6,7 @@ const WorkoutSchema = new Schema({
   name: { type: String, required: true },
   exercises: [
     {
-     exerciseId: {
+    _id: {
     type: Schema.Types.ObjectId,
     ref: "Exercise", // Enables populate() if required
     required: true,

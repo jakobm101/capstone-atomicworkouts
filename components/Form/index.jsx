@@ -8,7 +8,6 @@ import ButtonClose from "../Button/ButtonClose";
 import FormInput from "./Input";
 import FormExerciseNestedForm from "./ExerciseNestedForm";
 import CardAddExercise from "./CardAddExercise";
-import { defaultExercise } from "@/lib/dbclone";
 import HeadingLarge from "../Atoms/Text/HeadingLarge";
 
 export default function Form({ workout }) {
@@ -22,7 +21,6 @@ export default function Form({ workout }) {
     setExercises([
       ...exercises,
       {
-        exerciseId: "6877cdddc31ed272ee80b836",
         _id: "6877cdddc31ed272ee80b836",
         reps: "8",
         sets: "3",
@@ -38,18 +36,20 @@ export default function Form({ workout }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    console.log("data", data);
 
     const newWorkout = {
       name: data.name,
       exercises: exercises.map((_, index) => {
         return {
-          exerciseId: data[`${index}-exercise`],
+          _id: data[`${index}-exercise`],
           reps: data[`${index}-reps`],
           sets: data[`${index}-sets`],
         };
       }),
     };
     workout && (newWorkout["_id"] = workout._id);
+    console.log("newWorkout", newWorkout);
 
     const responseContent = {
       headers: { "Content-Type": "application/json" },
