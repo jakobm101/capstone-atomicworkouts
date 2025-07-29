@@ -8,7 +8,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import useSWR from "swr";
 
-export default function WorkoutCard({ workout, exercises }) {
+export default function WorkoutCard({ workout, exercises  }) {
+  console.log("workout card workout", workout.exercises[0]);
+  
   const [isVisible, setIsVisible] = useState(true);
   if (!exercises) {
     const { data, isLoading, error } = useSWR(`/api/exercises`);
@@ -25,6 +27,8 @@ export default function WorkoutCard({ workout, exercises }) {
         .includes(exercise._id)
     );
   }
+  console.log('workout card exercises', exercises[0]);
+  
   const muscleCount = {};
   const uniqueMusclesSet = new Set();
 
@@ -42,8 +46,8 @@ export default function WorkoutCard({ workout, exercises }) {
   return (
     <StyledWorkoutCard>
       <ButtonDelete id={workout._id} onDelete={handleDeleteLocal} />
-      <ButtonEdit id={workout._id} />
-      <Image src={`/power.svg`} width={50} height={50} alt="workout image" />
+      <ButtonEdit id={workout._id}  />
+      {/* <Image src={`/power.svg`} width={50} height={50} alt="workout image" /> */}
       <h3>{workout.name}</h3>
       <>
         <Heading>Exercises</Heading>

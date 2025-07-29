@@ -2,15 +2,16 @@ import styled from "styled-components";
 import Dropdown from "../Dropdown";
 import Card from "@/components/Atoms/Card";
 import useSWR from "swr";
-import { X } from "lucide-react";
+import { Delete } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function FormExerciseNestedForm({
   dbExercise,
   name = "dropdown",
   onDelete,
-  tempId,
+ 
 }) {
+  
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
 
   const [selectedExercise, setSelectedExercise] = useState();
@@ -36,7 +37,7 @@ export default function FormExerciseNestedForm({
 
   return (
     <StyledCard>
-      <StyledX onClick={() => onDelete(tempId)} />
+      <StyledDelete onClick={() => onDelete(dbExercise._id)} />
       <Dropdown
         name={`${name}-exercise`}
         options={exercises}
@@ -68,7 +69,7 @@ export default function FormExerciseNestedForm({
   );
 }
 
-const StyledX = styled(X)`
+const StyledDelete = styled(Delete)`
   position: absolute;
   top: 8px;
   right: 8px;

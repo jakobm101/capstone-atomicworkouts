@@ -1,4 +1,21 @@
-import { useState } from "react";
+// BUG when editing multiple times in a row the same exercise
+// ideas:
+/**
+ * - useState
+ *      tried to change but didn't help  
+ * - useEffect
+ *      tried that but didn't help
+ * - useSWR
+ *      tried mutate but no success
+ *      i feel like i could miss something about this
+ * - mongoose
+ *      no idea
+ * - Mongo
+ *      gets updated cleanly so seems fine
+ * - 
+ * ///// hydration
+ */
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -9,19 +26,40 @@ import FormInput from "./Input";
 import FormExerciseNestedForm from "./ExerciseNestedForm";
 import CardAddExercise from "./CardAddExercise";
 import HeadingLarge from "../Atoms/Text/HeadingLarge";
+import { mutate } from "swr";
 
 export default function Form({ workout }) {
   const { push } = useRouter();
   const [name, setName] = useState(workout ? workout.name : "");
   const [exercises, setExercises] = useState(
-    workout ? workout.exercises : [defaultExercise]
+    workout
+      ? workout.exercises
+      : [
+          {
+            _id: {
+              $oid: "6877cdddc31ed272ee80b837",
+            },
+            sets: 3,
+            reps: 8,
+          },
+        ]
   );
+  
+  // useEffect doesn't solve the bug of non updating exercises on repeated edits
+  // but i keep it in as evidence
+  workout ??= { name, exercises };
+  useEffect(() => {
+    setExercises(workout.exercises);
+    setName(workout.name);
+  }, [workout, exercises]);
+  console.log("form update initial exercises", exercises[0]);
 
   const handleAddExercise = () => {
     setExercises([
       ...exercises,
       {
-        _id: "6877cdddc31ed272ee80b836",
+        exerciseId: "6877cdddc31ed272ee80b836",
+        _id: "1",
         reps: "8",
         sets: "3",
       },
@@ -29,7 +67,9 @@ export default function Form({ workout }) {
   };
 
   const handleRemoveExercise = (id) => {
-    setExercises(exercises.filter((exercise) => exercise.tempId !== id));
+    console.log("handleRemoveExercise id, exercises[0]", id, exercises[0]);
+
+    setExercises(exercises.filter((exercise) => exercise._id !== id));
   };
 
   const handleSubmit = async (event) => {
@@ -49,7 +89,7 @@ export default function Form({ workout }) {
       }),
     };
     workout && (newWorkout["_id"] = workout._id);
-    console.log("newWorkout", newWorkout);
+    console.log("newWorkout", newWorkout.exercises[0]);
 
     const responseContent = {
       headers: { "Content-Type": "application/json" },
@@ -68,9 +108,16 @@ export default function Form({ workout }) {
       });
     }
     if (response.ok) {
+      //these do not solve the bug but them i keep too as evidence
+      setName(newWorkout.name);
+      setExercises(newWorkout.exercises);
+      mutate(`api/workouts/${workout._id}`);
+
       push(`/`);
     }
   };
+
+  console.log("Form exercises", exercises[0]);
 
   return (
     <StyledDiv>
@@ -92,10 +139,9 @@ export default function Form({ workout }) {
         <StyledCard>
           {exercises.map((exercise, index) => (
             <FormExerciseNestedForm
-              dbExercise={exercise}
-              tempId={index}
-              name={index}
               key={index}
+              name={index}
+              dbExercise={exercise}
               onDelete={handleRemoveExercise}
             />
           ))}

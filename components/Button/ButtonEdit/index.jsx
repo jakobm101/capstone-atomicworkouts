@@ -1,6 +1,7 @@
 import { Wrench } from "lucide-react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { mutate } from "swr";
 
 export default function ButtonEdit({ id }) {
   const { push } = useRouter();
@@ -8,6 +9,7 @@ export default function ButtonEdit({ id }) {
     // prevents that a wrapping link gets fired
     e.stopPropagation();
     e.preventDefault();
+    mutate(`/api/workouts/${id}`);
     push(`/workouts/form/${id}`);
   };
   return <StyledEdit onClick={handleEdit} aria-label="Edit workout" />;
