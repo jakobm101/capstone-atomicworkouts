@@ -1,19 +1,47 @@
 import useSWR from "swr";
 import SimpleWorkoutDisplay from "../Form2/SimpleWorkoutDisplay";
+import { useState } from "react";
 
 /////////////////////////////////
 export default function Form() {
   // SWR Boilerplate -- loading all data
   const { data, isLoading, error } = useSWR("/api");
+  const [workoutPreview, setWorkoutPreview] = useState({
+    name: "Enter Name",
+    exercises: [],
+  });
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading data.</p>;
 
-
-
+  // Form Functions
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const dataSubmitted = Object.fromEntries(formData);
+    const workoutFormatted = {
+      name: dataSubmitted.workoutName,
+      exercises: [{ exerciseId: dataSubmitted.exercise1 }],
+    };
+    console.log("submitting", workoutFormatted);
+    setWorkoutPreview(workoutFormatted);
+  };
   ///////////////////////////////// JSX
   return (
     <>
-      <SimpleWorkoutDisplay data={data} />
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="workoutName">name of workout</label>
+        <input type="text" name="workoutName" id="workoutName" />
+        <label htmlFor="exercise1">Exercise 1</label>
+        <select name="exercise1" id="exercise1">
+          {data.exercises.map((exercise) => (
+            <option value={exercise._id} key={exercise._id}>
+              {exercise.name}
+            </option>
+          ))}
+        </select>
+        <button type="submit">submit</button>
+      </form>
+      <SimpleWorkoutDisplay data={data} workoutToDisplay={workoutPreview} />
     </>
   );
 }

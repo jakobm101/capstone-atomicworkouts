@@ -1,7 +1,8 @@
-export default function SimpleWorkoutDisplay({ data }) {
-  const workoutDisplayed = data.workouts.find(
+export default function SimpleWorkoutDisplay({ data, workoutToDisplay }) {
+  let workoutDisplayed = data.workouts.find(
     (workout) => workout._id === "68834cb36f8968f2fa09c973"
   );
+  if (workoutToDisplay) workoutDisplayed = workoutToDisplay;
   /////////////////////////////////
   return (
     <>
