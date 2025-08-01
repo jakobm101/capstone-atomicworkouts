@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import SimpleWorkoutDisplay from "../Form2/SimpleWorkoutDisplay";
+import WorkoutCard2 from "../Form2/WorkoutCard2";
 import { useState } from "react";
 
 /////////////////////////////////
@@ -29,6 +29,7 @@ export default function Form() {
   return (
     <>
       <form onSubmit={handleSubmit}>
+    
         <label htmlFor="workoutName">name of workout</label>
         <input type="text" name="workoutName" id="workoutName" />
         <label htmlFor="exercise1">Exercise 1</label>
@@ -41,7 +42,7 @@ export default function Form() {
         </select>
         <button type="submit">submit</button>
       </form>
-      <SimpleWorkoutDisplay data={data} workoutToDisplay={workoutPreview} />
+      <WorkoutCard2 data={data} workoutToDisplay={workoutPreview} />
     </>
   );
 }
