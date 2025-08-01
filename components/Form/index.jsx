@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import WorkoutCard2 from "../Form2/WorkoutCard2";
 import { useState } from "react";
+import FormInput from "./Input";
 
 /////////////////////////////////
 export default function Form() {
@@ -29,10 +30,9 @@ export default function Form() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-    
-        <label htmlFor="workoutName">name of workout</label>
-        <input type="text" name="workoutName" id="workoutName" />
+        <FormInput name="workoutName">name of workout</FormInput>
         <label htmlFor="exercise1">Exercise 1</label>
+  
         <select name="exercise1" id="exercise1">
           {data.exercises.map((exercise) => (
             <option value={exercise._id} key={exercise._id}>
