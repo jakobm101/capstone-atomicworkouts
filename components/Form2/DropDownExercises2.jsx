@@ -1,5 +1,4 @@
 export default function DropDownExercises2({ children, data, name }) {
-  console.log("DD#E2", data);
 
   return (
     <div>

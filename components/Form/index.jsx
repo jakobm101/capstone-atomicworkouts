@@ -1,3 +1,10 @@
+/***
+ * 
+ * TASKS: 
+ * - list of exercises that does not crash
+ * - loading through an array of empty objects is a bit weird
+ * - submitting works with dynamic amount of exercises
+ */
 import useSWR from "swr";
 import WorkoutCard2 from "../Form2/WorkoutCard2";
 import { useState } from "react";
@@ -25,12 +32,13 @@ export default function Form() {
     const dataSubmitted = Object.fromEntries(formData);
     console.log("DATA SUBMITTED", dataSubmitted);
     console.log("SUBMIT EXs count", dataSubmitted[`exercise${1}`]);
+    
 
     const workoutFormatted = {
       name: dataSubmitted.workoutName,
       exercises: [
-        { exerciseId: dataSubmitted.exercise1 },
-        { exerciseId: dataSubmitted.exercise2 },
+        { exerciseId: dataSubmitted[`exercise-${0}`] },
+        { exerciseId: dataSubmitted[`exercise-${1}`] },
       ],
     };
     console.log("submitting", workoutFormatted);
@@ -42,12 +50,22 @@ export default function Form() {
     <>
       <form onSubmit={handleSubmit}>
         <FormInput name="workoutName">name of workout</FormInput>
-        <DropDownExercises2 data={data} name="exercise1">
-          Exercise 1
+        <DropDownExercises2 data={data} name="exercise-sample">
+          Exercise Sample
         </DropDownExercises2>
+        {formExercises.map((_, index) => (
+          <DropDownExercises2
+            key={index}
+            data={data}
+            name={`exercise-${index}`}
+          >
+            Exercise {index}
+          </DropDownExercises2>
+        ))}
 
         <button type="submit">submit</button>
       </form>
+      {/* PREVIEW */}
       <WorkoutCard2 data={data} workoutToDisplay={workoutPreview} />
     </>
   );
