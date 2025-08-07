@@ -2,14 +2,15 @@
  *
  * TASKS:
  * - list of exercises that does not crash
- * - loading through an array of empty objects is a bit weird
  * - submitting works with dynamic amount of exercises
+ * - delete exercise by formId
  */
 import useSWR from "swr";
 import WorkoutCard2 from "../Form2/WorkoutCard2";
 import { useState } from "react";
 import FormInput from "./Input";
 import DropDownExercises2 from "../Form2/DropDownExercises2";
+import { uid } from "uid";
 
 /////////////////////////////////
 export default function Form() {
@@ -19,9 +20,22 @@ export default function Form() {
     name: "Enter Name",
     exercises: [],
   });
+
   // setting up an array of exercises which will be handed to the preview and submission
   // atm with two empty objects
-  const [formExercises, setFormExercises] = useState([{}, {}]);
+  const [formExercises, setFormExercises] = useState([
+    { formId: 0 },
+    { formId: 1 },
+  ]);
+  const addExercise = () =>
+    setFormExercises([...formExercises, { formId: uid() }]);
+  const deleteExercise = (id) => {
+    console.log("delete", id);
+
+    setFormExercises(
+      formExercises.filter((exercise) => exercise.formId !== id)
+    );
+  };
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading data.</p>;
 
@@ -30,17 +44,11 @@ export default function Form() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const dataSubmitted = Object.fromEntries(formData);
-    /*
-    const newExercises = [
-      { exerciseId: dataSubmitted[`exercise-${0}`] },
-      { exerciseId: dataSubmitted[`exercise-${1}`] },
-    ];
-    */
-    const newExercises = formExercises.map((_, index) => {
-      return { exerciseId: dataSubmitted[`exercise-${index}`] };
-    });
+    console.log("SUBMISSION", dataSubmitted);
 
-    console.log("WWW", newExercises);
+    const newExercises = formExercises.map((formExercise, index) => {
+      return { exerciseId: dataSubmitted[formExercise.formId] };
+    });
 
     const workoutFormatted = {
       name: dataSubmitted.workoutName,
@@ -54,15 +62,21 @@ export default function Form() {
     <>
       <form onSubmit={handleSubmit}>
         <FormInput name="workoutName">name of workout</FormInput>
-        {formExercises.map((_, index) => (
-          <DropDownExercises2
-            key={index}
-            data={data}
-            name={`exercise-${index}`}
-          >
-            Exercise {index}
-          </DropDownExercises2>
+        {formExercises.map((formExercise, index) => (
+          <>
+            <DropDownExercises2
+              key={formExercise.formId}
+              data={data}
+              name={formExercise.formId}
+            >
+              Exercise {formExercise.formId}
+            </DropDownExercises2>
+            <button onClick={() => deleteExercise(formExercise.formId)}>
+              delete
+            </button>
+          </>
         ))}
+        <button onClick={addExercise}>add exercise</button>
 
         <button type="submit">submit</button>
       </form>
