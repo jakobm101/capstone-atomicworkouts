@@ -3,7 +3,7 @@
  * TASKS:
  * - list of exercises that does not crash
  * - submitting works with dynamic amount of exercises
- * - delete exercise by formId
+ * - deleting resets the exercise selections
  */
 import useSWR from "swr";
 import WorkoutCard2 from "../Form2/WorkoutCard2";
@@ -46,7 +46,7 @@ export default function Form() {
     const dataSubmitted = Object.fromEntries(formData);
     console.log("SUBMISSION", dataSubmitted);
 
-    const newExercises = formExercises.map((formExercise, index) => {
+    const newExercises = formExercises.map((formExercise) => {
       return { exerciseId: dataSubmitted[formExercise.formId] };
     });
 
@@ -62,7 +62,7 @@ export default function Form() {
     <>
       <form onSubmit={handleSubmit}>
         <FormInput name="workoutName">name of workout</FormInput>
-        {formExercises.map((formExercise, index) => (
+        {formExercises.map((formExercise) => (
           <>
             <DropDownExercises2
               key={formExercise.formId}
