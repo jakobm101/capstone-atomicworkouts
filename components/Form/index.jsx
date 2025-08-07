@@ -1,6 +1,6 @@
 /***
- * 
- * TASKS: 
+ *
+ * TASKS:
  * - list of exercises that does not crash
  * - loading through an array of empty objects is a bit weird
  * - submitting works with dynamic amount of exercises
@@ -31,15 +31,15 @@ export default function Form() {
     const formData = new FormData(e.target);
     const dataSubmitted = Object.fromEntries(formData);
     console.log("DATA SUBMITTED", dataSubmitted);
-    console.log("SUBMIT EXs count", dataSubmitted[`exercise${1}`]);
-    
+    console.log("SUBMIT EXs count", dataSubmitted[`exercise-${1}`]);
+    const newExercises = [
+      dataSubmitted[`exercise-${0}`],
+      dataSubmitted[`exercise-${1}`],
+    ];
 
     const workoutFormatted = {
       name: dataSubmitted.workoutName,
-      exercises: [
-        { exerciseId: dataSubmitted[`exercise-${0}`] },
-        { exerciseId: dataSubmitted[`exercise-${1}`] },
-      ],
+      exercises: newExercises,
     };
     console.log("submitting", workoutFormatted);
     setWorkoutPreview(workoutFormatted);
@@ -50,9 +50,6 @@ export default function Form() {
     <>
       <form onSubmit={handleSubmit}>
         <FormInput name="workoutName">name of workout</FormInput>
-        <DropDownExercises2 data={data} name="exercise-sample">
-          Exercise Sample
-        </DropDownExercises2>
         {formExercises.map((_, index) => (
           <DropDownExercises2
             key={index}
@@ -66,7 +63,7 @@ export default function Form() {
         <button type="submit">submit</button>
       </form>
       {/* PREVIEW */}
-      <WorkoutCard2 data={data} workoutToDisplay={workoutPreview} />
+      <WorkoutCard2 data={data} workout={workoutPreview} />
     </>
   );
 }
