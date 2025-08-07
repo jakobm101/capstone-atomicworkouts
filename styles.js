@@ -3,11 +3,19 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
   :root {
     --font-space-mono: 'Space Mono', 'Space Mono Fallback';
-    --color-orange-10: rgba(69%, 35%, 0%, 1);
+
+    /* darker orange
+    --color-orange-10: rgba(69%, 35%, 0%, 1); 
     --color-orange-9: rgba(69%, 35%, 0%, 0.9);
     --color-orange-5: rgba(69%, 35%, 0%, 0.5);
     --color-orange-0: rgba(69%, 35%, 0%, 0.1);
     --rgb-orange: 69%, 35%, 0%;
+    */
+    --rgb-orange: 89%, 70%, 30%;
+    --color-orange-10: rgba(89%, 50% ,30%, 1);
+    --color-orange-9: rgba(89%, 50% ,30%, 0.9);
+    --color-orange-5: rgba(69%, 30% ,30%, 0.5);
+    --color-orange-0: rgba(69%, 30% ,0%, 0.1);
     --color-background: black;
     --color-contrast: white;
   }
@@ -107,7 +115,6 @@ a {
   text-underline-offset: 0.3rem;
   text-decoration-thickness: 0.1px;
   &:visited {
-    color: var(--color-orange-5);
   }
   &:hover {
     color: var(--color-contrast);
