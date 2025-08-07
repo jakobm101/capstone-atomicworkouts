@@ -2,9 +2,10 @@
  *
  * TASKS:
  * - list of exercises that does not crash
- * - submitting works with dynamic amount of exercises
- * - deleting resets the exercise selections
+Done * - submitting works with dynamic amount of exercises
+DONE * - deleting resets the exercise selections
  */
+
 import useSWR from "swr";
 import WorkoutCard2 from "../Form2/WorkoutCard2";
 import { useState } from "react";
@@ -16,17 +17,22 @@ import { uid } from "uid";
 export default function Form() {
   // SWR Boilerplate -- loading all data
   const { data, isLoading, error } = useSWR("/api");
+
+  // For Preview Generation
   const [workoutPreview, setWorkoutPreview] = useState({
     name: "Enter Name",
     exercises: [],
   });
 
+  // EXERCISE HANDLING
   // setting up an array of exercises which will be handed to the preview and submission
   // atm with two empty objects
+
   const [formExercises, setFormExercises] = useState([
-    { formId: 0, selection: "6877cdddc31ed272ee80b840" },
-    { formId: 1, selection: " 6877cdddc31ed272ee80b837" },
+    { formId: 2, selection: "6877cdddc31ed272ee80b840" },
+    { formId: 3, selection: "6877cdddc31ed272ee80b837" },
   ]);
+
   const addExercise = () =>
     setFormExercises([...formExercises, { formId: uid() }]);
   const handleChangeExercise = (e, id) => {
@@ -36,18 +42,17 @@ export default function Form() {
     );
     newEx[`selection`] = e.target.value;
     setFormExercises([...oldExes, newEx]);
-    console.log("NEW ARRAR", formExercises);
   };
-  const deleteExercise = (id) => {
-    console.log("delete", id);
-
+  const deleteExercise = (id) =>
     setFormExercises(
       formExercises.filter((exercise) => exercise.formId !== id)
     );
-  };
+
+  // SWR SAFEGUARDS
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading data.</p>;
 
+  // SUBMIT
   // Form Functions
   const handleSubmit = (e) => {
     e.preventDefault();
