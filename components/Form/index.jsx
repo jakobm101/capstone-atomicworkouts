@@ -30,18 +30,15 @@ export default function Form() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const dataSubmitted = Object.fromEntries(formData);
-    console.log("DATA SUBMITTED", dataSubmitted);
-    console.log("SUBMIT EXs count", dataSubmitted[`exercise-${1}`]);
     const newExercises = [
-      dataSubmitted[`exercise-${0}`],
-      dataSubmitted[`exercise-${1}`],
+      { exerciseId: dataSubmitted[`exercise-${0}`] },
+      { exerciseId: dataSubmitted[`exercise-${1}`] },
     ];
 
     const workoutFormatted = {
       name: dataSubmitted.workoutName,
       exercises: newExercises,
     };
-    console.log("submitting", workoutFormatted);
     setWorkoutPreview(workoutFormatted);
   };
 

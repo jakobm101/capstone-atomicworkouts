@@ -4,10 +4,6 @@ export default function WorkoutCard2({
     (workout) => workout._id === "68834cb36f8968f2fa09c973"
   ),
 }) {
-  
-  console.log("workout card", workout);
-
-  /////////////////////////////////
   return (
     <>
       <h2>{workout.name}</h2>
