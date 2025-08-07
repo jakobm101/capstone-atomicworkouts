@@ -4,7 +4,9 @@
  * - list of exercises that does not crash
 Done * - submitting works with dynamic amount of exercises
 DONE * - deleting resets the exercise selections
-new bug: changing selection makes exercises swap places
+Done * - new bug: changing selection makes exercises swap places
+
+- Submitting adds new workout to database
  */
 
 import useSWR from "swr";
@@ -47,7 +49,7 @@ export default function Form() {
     });
     setFormExercises([...newExes]);
   };
-  
+
   const deleteExercise = (id) =>
     setFormExercises(
       formExercises.filter((exercise) => exercise.formId !== id)
