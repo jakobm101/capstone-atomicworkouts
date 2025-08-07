@@ -24,11 +24,20 @@ export default function Form() {
   // setting up an array of exercises which will be handed to the preview and submission
   // atm with two empty objects
   const [formExercises, setFormExercises] = useState([
-    { formId: 0 },
-    { formId: 1 },
+    { formId: 0, selection: "6877cdddc31ed272ee80b840" },
+    { formId: 1, selection: " 6877cdddc31ed272ee80b837" },
   ]);
   const addExercise = () =>
     setFormExercises([...formExercises, { formId: uid() }]);
+  const handleChangeExercise = (e, id) => {
+    const oldExes = formExercises.filter((formEx) => formEx.formId !== id);
+    const newEx = formExercises.find(
+      (formExercise) => formExercise.formId === id
+    );
+    newEx[`selection`] = e.target.value;
+    setFormExercises([...oldExes, newEx]);
+    console.log("NEW ARRAR", formExercises);
+  };
   const deleteExercise = (id) => {
     console.log("delete", id);
 
@@ -44,10 +53,11 @@ export default function Form() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const dataSubmitted = Object.fromEntries(formData);
-    console.log("SUBMISSION", dataSubmitted);
 
     const newExercises = formExercises.map((formExercise) => {
-      return { exerciseId: dataSubmitted[formExercise.formId] };
+      return {
+        exerciseId: dataSubmitted[formExercise.formId],
+      };
     });
 
     const workoutFormatted = {
@@ -60,6 +70,7 @@ export default function Form() {
   ///////////////////////////////// JSX
   return (
     <>
+      <h2>Create Workout</h2>
       <form onSubmit={handleSubmit}>
         <FormInput name="workoutName">name of workout</FormInput>
         {formExercises.map((formExercise) => (
@@ -68,6 +79,8 @@ export default function Form() {
               key={formExercise.formId}
               data={data}
               name={formExercise.formId}
+              selection={formExercise.selection}
+              onChange={handleChangeExercise}
             >
               Exercise {formExercise.formId}
             </DropDownExercises2>
@@ -76,11 +89,14 @@ export default function Form() {
             </button>
           </>
         ))}
-        <button onClick={addExercise}>add exercise</button>
+        <hr />
+        <div>
+          <button onClick={addExercise}>add exercise</button>
 
-        <button type="submit">submit</button>
+          <button type="submit">submit</button>
+        </div>
       </form>
-      {/* PREVIEW */}
+      <h2>Preview</h2>
       <WorkoutCard2 data={data} workout={workoutPreview} />
     </>
   );
