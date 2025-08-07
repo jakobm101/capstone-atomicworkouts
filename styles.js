@@ -44,8 +44,8 @@ export default createGlobalStyle`
     background-image: 
       repeating-linear-gradient( 
         to bottom,
-          rgba(var(--rgb-orange),0.45) 0.0px,
-          rgba(var(--rgb-orange),0.65) 0.3px,
+          rgba(var(--rgb-orange),0.15) 0.0px,
+          rgba(var(--rgb-orange),0.25) 0.3px,
           transparent 0.7px,
           transparent 2.9px );
   
