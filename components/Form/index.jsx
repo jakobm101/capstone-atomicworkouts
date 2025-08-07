@@ -4,6 +4,7 @@
  * - list of exercises that does not crash
 Done * - submitting works with dynamic amount of exercises
 DONE * - deleting resets the exercise selections
+new bug: changing selection makes exercises swap places
  */
 
 import useSWR from "swr";
@@ -35,14 +36,18 @@ export default function Form() {
 
   const addExercise = () =>
     setFormExercises([...formExercises, { formId: uid() }]);
+  
   const handleChangeExercise = (e, id) => {
-    const oldExes = formExercises.filter((formEx) => formEx.formId !== id);
     const newEx = formExercises.find(
       (formExercise) => formExercise.formId === id
     );
     newEx[`selection`] = e.target.value;
-    setFormExercises([...oldExes, newEx]);
+    const newExes = formExercises.map((formEx) => {
+      return formEx.formId === id ? newEx : formEx;
+    });
+    setFormExercises([...newExes]);
   };
+  
   const deleteExercise = (id) =>
     setFormExercises(
       formExercises.filter((exercise) => exercise.formId !== id)
