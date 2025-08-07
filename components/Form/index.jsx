@@ -30,10 +30,17 @@ export default function Form() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const dataSubmitted = Object.fromEntries(formData);
+    /*
     const newExercises = [
       { exerciseId: dataSubmitted[`exercise-${0}`] },
       { exerciseId: dataSubmitted[`exercise-${1}`] },
     ];
+    */
+    const newExercises = formExercises.map((_, index) => {
+      return { exerciseId: dataSubmitted[`exercise-${index}`] };
+    });
+
+    console.log("WWW", newExercises);
 
     const workoutFormatted = {
       name: dataSubmitted.workoutName,
