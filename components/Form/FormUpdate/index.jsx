@@ -20,14 +20,14 @@ all SWR in this top level
  */
 
 import useSWR from "swr";
-import WorkoutCard2 from "../Form2/WorkoutCard2";
-import { useState } from "react";
-import FormInput from "./Input";
-import DropDownExercises2 from "../Form2/DropDownExercises2";
+import WorkoutCard2 from "../../Form2/WorkoutCard2";
+import { useEffect, useState } from "react";
+import FormInput from ".././Input";
+import DropDownExercises2 from "../../Form2/DropDownExercises2";
 import { uid } from "uid";
 
 /////////////////////////////////
-export default function FormCreate() {
+export default function FormUpdate({ workoutId }) {
   // SWR Boilerplate -- loading all data
   const { data: cluster, isLoading, error } = useSWR("/api");
 
@@ -45,6 +45,16 @@ export default function FormCreate() {
     { formId: 2, selection: "6877cdddc31ed272ee80b840" },
     { formId: 3, selection: "6877cdddc31ed272ee80b837" },
   ]);
+
+  useEffect(() => {
+    if (cluster) {
+      const loadingWorkout = cluster.workouts.find(
+        (workout) => workout._id === workoutId
+      );
+      setWorkoutPreview(loadingWorkout);
+      setFormExercises(loadingWorkout.exercises);
+    }
+  }, [workoutId]);
 
   const addExercise = () =>
     setFormExercises([...formExercises, { formId: uid() }]);
@@ -88,7 +98,6 @@ export default function FormCreate() {
     };
 
     // api call
-    console.log("CREATE");
 
     const response = await fetch("/api/workouts", {
       method: "POST",
@@ -108,7 +117,9 @@ export default function FormCreate() {
     <>
       <h2>Create Workout</h2>
       <form onSubmit={handleSubmit}>
-        <FormInput name="workoutName">name of workout</FormInput>
+        <FormInput name="workoutName" value={workoutPreview.name}>
+          name of workout
+        </FormInput>
         {formExercises.map((formExercise) => (
           <>
             <DropDownExercises2

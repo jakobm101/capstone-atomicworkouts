@@ -1,32 +1,16 @@
 import Card from "@/components/Atoms/Card";
-import Form from "@/components/Form";
+import FormUpdate from "@/components/Form/FormUpdate";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import useSWR from "swr";
 
 export default function FormPageUpdate() {
   const { query } = useRouter();
+  if (!query.id) return <Card>Loading</Card>;
 
-  const {
-    data: workout,
-    isLoading,
-    error,
-  } = useSWR(`/api/workouts/${query.id}`);
-  if (isLoading || error) {
-    return (
-      <main>
-        <Card>
-          {isLoading && "Loading"}
-          {error && "ERROR >> Call to database failed"}
-        </Card>
-      </main>
-    );
-  }
-  console.log("WWWWorkout", workout.workout);
   return (
     <main>
       <Header>atomic workouts</Header>
-      <Form workout={workout.workout} />
+      <FormUpdate workoutId={query.id} />
     </main>
   );
 }
