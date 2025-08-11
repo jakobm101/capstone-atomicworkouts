@@ -16,6 +16,8 @@ export default async function handler(req, res) {
   }
   ///////////////////////////////// CREATE
   if (req.method === "POST") {
+    console.log("⏵⏵⏵req.body", req.body);
+
     try {
       dbConnect();
       await Workout.create(req.body);

@@ -86,6 +86,18 @@ export default function Form() {
       name: dataSubmitted.workoutName,
       exercises: newExercises,
     };
+
+    // api call
+    const response = fetch("/api/workouts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(workoutFormatted),
+    });
+    if (!response.status === "ok") {
+      console.log("API response not ok", response.status);
+    }
+
+    // optimistic update
     setWorkoutPreview(workoutFormatted);
   };
 
