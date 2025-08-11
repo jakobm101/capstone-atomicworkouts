@@ -2,11 +2,21 @@
  *
  * TASKS:
  * - list of exercises that does not crash
-Done * - submitting works with dynamic amount of exercises
+DONE * - submitting works with dynamic amount of exercises
 DONE * - deleting resets the exercise selections
-Done * - new bug: changing selection makes exercises swap places
-
+DONE * - new bug: changing selection makes exercises swap places
+- rename 'data' to less generic name like at least 'database' or 'cluster'
+- test updating clusters with api
+- 
 - Submitting adds new workout to database
+
+Prop and SWR plan:
+all SWR in this top level
+- move swr from workoutCard to here -> WorkoutCard2 works
+- move swr from dropdown to here -> DropDown2 basic features work
+
+-
+
  */
 
 import useSWR from "swr";
@@ -38,7 +48,7 @@ export default function Form() {
 
   const addExercise = () =>
     setFormExercises([...formExercises, { formId: uid() }]);
-  
+
   const handleChangeExercise = (e, id) => {
     const newEx = formExercises.find(
       (formExercise) => formExercise.formId === id
