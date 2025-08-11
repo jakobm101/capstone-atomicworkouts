@@ -27,9 +27,9 @@ import DropDownExercises2 from "../Form2/DropDownExercises2";
 import { uid } from "uid";
 
 /////////////////////////////////
-export default function Form() {
+export default function FormCreate() {
   // SWR Boilerplate -- loading all data
-  const { data, isLoading, error } = useSWR("/api");
+  const { data: cluster, isLoading, error } = useSWR("/api");
 
   // For Preview Generation
   const [workoutPreview, setWorkoutPreview] = useState({
@@ -71,7 +71,7 @@ export default function Form() {
 
   // SUBMIT
   // Form Functions
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const dataSubmitted = Object.fromEntries(formData);
@@ -88,7 +88,9 @@ export default function Form() {
     };
 
     // api call
-    const response = fetch("/api/workouts", {
+    console.log("CREATE");
+
+    const response = await fetch("/api/workouts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(workoutFormatted),
@@ -111,7 +113,7 @@ export default function Form() {
           <>
             <DropDownExercises2
               key={formExercise.formId}
-              data={data}
+              data={cluster}
               name={formExercise.formId}
               selection={formExercise.selection}
               onChange={handleChangeExercise}
@@ -131,7 +133,7 @@ export default function Form() {
         </div>
       </form>
       <h2>Preview</h2>
-      <WorkoutCard2 data={data} workout={workoutPreview} />
+      <WorkoutCard2 data={cluster} workout={workoutPreview} />
     </>
   );
 }

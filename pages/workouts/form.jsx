@@ -1,11 +1,11 @@
-import Form from "@/components/Form";
+import FormCreate from "@/components/Form";
 import styled from "styled-components";
 
 export default function FormPage() {
   return (
     <main>
       <Header>atomic workouts</Header>
-      < Form />
+      < FormCreate />
     </main>
   );
 }
