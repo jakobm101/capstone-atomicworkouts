@@ -17,7 +17,6 @@ export default function WorkoutsPage() {
     </main>;
   }
 
-
   return (
     <main>
       <h2>Workouts</h2>
