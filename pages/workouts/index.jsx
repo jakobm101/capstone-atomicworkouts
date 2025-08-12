@@ -3,7 +3,6 @@ import useSWR from "swr";
 
 export default function WorkoutsPage() {
   const { data: workouts, isLoading, error } = useSWR(`/api/workouts`);
-  console.log(workouts);
 
   if (isLoading) {
     return (
