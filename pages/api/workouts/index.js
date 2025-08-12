@@ -1,12 +1,16 @@
 import dbConnect from "@/db/connect";
 import Workout from "@/db/Schema/Workout";
+// necessary import for populate:
+import Exercise from "@/db/Schema/Exercise";
 
 export default async function handler(req, res) {
+
   ///////////////////////////////// GET
   if (req.method === "GET") {
     try {
       await dbConnect();
-      const workouts = await Workout.find().sort({ createdAt: -1 });
+      const workouts = await Workout.find().populate("exercises.exercise");
+
       res.status(200).json(workouts);
       return;
     } catch (error) {
@@ -17,7 +21,7 @@ export default async function handler(req, res) {
   ///////////////////////////////// CREATE
   if (req.method === "POST") {
     try {
-      dbConnect();
+      await dbConnect();
       await Workout.create(req.body);
       res.status(200).json({ message: "posting" });
       return;

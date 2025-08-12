@@ -2,7 +2,7 @@ import Link from "next/link";
 import useSWR from "swr";
 
 export default function WorkoutsPage() {
-  const { data: workouts, isLoading, error } = useSWR(`/api/workouts/populate`);
+  const { data: workouts, isLoading, error } = useSWR(`/api/workouts`);
 
   if (isLoading) {
     return (
@@ -12,9 +12,11 @@ export default function WorkoutsPage() {
     );
   }
   if (error) {
-    <main>
-      <h2>error</h2>
-    </main>;
+    return (
+      <main>
+        <h2>error</h2>
+      </main>
+    );
   }
 
   return (
@@ -30,16 +32,14 @@ export default function WorkoutsPage() {
             <h4>Exercises</h4>
             <ul>
               {workout.exercises.map((exerciseInWorkout) => {
-                const exerciseDetails = exerciseInWorkout.exerciseId;
+                const exerciseDetails = exerciseInWorkout.exercise;
 
                 exerciseDetails.muscleGroups.map((muscleGroup) =>
                   muscleGroupsInWorkout.add(muscleGroup)
                 );
 
                 return (
-                  <li key={exerciseDetails._id}>
-                    {exerciseDetails.name}
-                  </li>
+                  <li key={exerciseDetails._id}>{exerciseDetails.name}</li>
                 );
               })}
             </ul>
