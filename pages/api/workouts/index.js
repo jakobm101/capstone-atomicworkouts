@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
       await dbConnect();
-      const workouts = await Workout.find().sort({ createdAt: -1 });
+      const workouts = await Workout.find().populate("exercises.exerciseId");
       res.status(200).json(workouts);
       return;
     } catch (error) {
