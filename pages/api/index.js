@@ -7,6 +7,7 @@ export default async function handler(_, res) {
   await dbConnect();
   const exercises = await Exercise.find();
   const workouts = await Workout.find();
+  
   res.status(200).json({ exercises, workouts });
   return;
 }
