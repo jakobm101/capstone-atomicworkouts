@@ -52,7 +52,14 @@ export default function FormUpdate({ workoutId }) {
         (workout) => workout._id === workoutId
       );
       setWorkoutPreview(loadingWorkout);
-      setFormExercises(loadingWorkout.exercises);
+
+      setFormExercises(
+        loadingWorkout.exercises.map((exercise) => {
+          return { formId: uid(), selection: exercise.exerciseId };
+        })
+      );
+      console.log('use effect form exercises', formExercises);
+      
     }
   }, [workoutId]);
 
@@ -115,7 +122,7 @@ export default function FormUpdate({ workoutId }) {
   ///////////////////////////////// JSX
   return (
     <>
-      <h2>Create Workout</h2>
+      <h2>Update Workout</h2>
       <form onSubmit={handleSubmit}>
         <FormInput name="workoutName" value={workoutPreview.name}>
           name of workout
