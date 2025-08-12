@@ -2,7 +2,7 @@ import Link from "next/link";
 import useSWR from "swr";
 
 export default function WorkoutsPage() {
-  const { data: workouts, isLoading, error } = useSWR(`/api/workouts/populate`);
+  const { data: workouts, isLoading, error } = useSWR(`/api/workouts`);
 
   if (isLoading) {
     return (
@@ -37,9 +37,7 @@ export default function WorkoutsPage() {
                 );
 
                 return (
-                  <li key={exerciseDetails._id}>
-                    {exerciseDetails.name}
-                  </li>
+                  <li key={exerciseDetails._id}>{exerciseDetails.name}</li>
                 );
               })}
             </ul>
