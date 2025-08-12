@@ -25,6 +25,7 @@ export default function WorkoutsPage() {
   return (
     <main>
       <h2>Workouts</h2>
+      // mapping level 1 -- the workouts
       {workouts.map((workout) => {
         const muscleGroupsInWorkout = new Set();
 
@@ -34,15 +35,17 @@ export default function WorkoutsPage() {
 
             <h4>Exercises</h4>
             <ul>
+              // mapping level 2 -- exercise from workouts loads details form
+              the collection 'exercises'
               {workout.exercises.map((exerciseInWorkout) => {
                 const exerciseInCollection = exercisesCollection.find(
                   (exercise) => exercise._id === exerciseInWorkout.exerciseId
                 );
+                // mapping level 3 -- musclegroups get accounted for in workout mapping(level 1)
                 exerciseInCollection.muscleGroups.map((muscleGroup) =>
                   muscleGroupsInWorkout.add(muscleGroup)
                 );
 
-                console.log(muscleGroupsInWorkout);
                 return (
                   <li key={exerciseInWorkout._id}>
                     {exerciseInCollection.name}
