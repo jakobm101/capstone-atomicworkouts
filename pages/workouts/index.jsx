@@ -30,13 +30,15 @@ export default function WorkoutsPage() {
             <h4>Exercises</h4>
             <ul>
               {workout.exercises.map((exerciseInWorkout) => {
-                exerciseInWorkout.exerciseId.muscleGroups.map((muscleGroup) =>
+                const exerciseDetails = exerciseInWorkout.exerciseId;
+
+                exerciseDetails.muscleGroups.map((muscleGroup) =>
                   muscleGroupsInWorkout.add(muscleGroup)
                 );
 
                 return (
-                  <li key={exerciseInWorkout.exerciseId._id}>
-                    {exerciseInWorkout.exerciseId.name}
+                  <li key={exerciseDetails._id}>
+                    {exerciseDetails.name}
                   </li>
                 );
               })}
