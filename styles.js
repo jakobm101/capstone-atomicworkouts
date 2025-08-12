@@ -105,6 +105,7 @@ a {
   color: var(--color-orange-10);
   text-underline-offset: 0.3rem;
   text-decoration-thickness: 0.1px;
+  padding: 0 5px 0 0;
   &:visited {
     color: var(--color-orange-5);
   }
