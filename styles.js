@@ -3,11 +3,11 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
   :root {
     --font-space-mono: 'Space Mono', 'Space Mono Fallback';
-    --color-orange-10: rgba(69%, 35%, 0%, 1);
-    --color-orange-9: rgba(69%, 35%, 0%, 0.9);
-    --color-orange-5: rgba(69%, 35%, 0%, 0.5);
-    --color-orange-0: rgba(69%, 35%, 0%, 0.1);
-    --rgb-orange: 69%, 35%, 0%;
+    --color-orange-10: rgba(99%, 55%, 25%, 1);
+    --color-orange-9: rgba(99%, 55%, 25%, 0.9);
+    --color-orange-5: rgba(99%, 55%, 25%, 0.5);
+    --color-orange-0: rgba(99%, 55%, 25%, 0.1);
+    --rgb-orange: 99%, 55%, 25%;
     --color-background: black;
     --color-contrast: white;
   }
