@@ -8,14 +8,10 @@ export default function WorkoutCreate() {
       {
         _id: "68839ef223b65538b78a9d82",
         exercise: "6877cdddc31ed272ee80b837",
-        sets: 4,
-        reps: 12,
       },
       {
         _id: "68839ef223b65538b78a9d83",
         exercise: "6877cdddc31ed272ee80b83a",
-        sets: 4,
-        reps: 12,
       },
     ],
   });
@@ -31,8 +27,16 @@ export default function WorkoutCreate() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    console.log("Submitting", data);
-    setWorkoutSubmitted({ ...workoutPreview, ...data });
+    console.log("submitting", data);
+    const newExercisesList = workoutPreview.exercises.map((_, index) => {
+      return { exercise: data[`exercise-${index}`] };
+    });
+
+    setWorkoutSubmitted({
+      ...workoutPreview,
+      ...data,
+      exercises: newExercisesList,
+    });
   };
 
   // JSX Main
@@ -46,15 +50,18 @@ export default function WorkoutCreate() {
           name="workoutName"
           placeholder="enter workout name"
         />
-        {workoutPreview.exercises.map((exercise, index) => {
-          const { _id, id, name, muscleGroups, instructions } = exercises.find(
-            (exerciseInCollection) =>
-              exerciseInCollection._id === exercise.exercise
-          );
-
+        {workoutPreview.exercises.map((_, index) => {
           return (
             <div key={index}>
-              <h2>{name}</h2>
+              <select name={`exercise-${index}`}>
+                {exercises.map(({ _id, name: exerciseName }) => {
+                  return (
+                    <option value={_id} key={_id}>
+                      {exerciseName}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
           );
         })}
