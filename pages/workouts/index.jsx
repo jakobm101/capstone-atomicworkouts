@@ -50,7 +50,6 @@ export default function WorkoutsPage() {
         );
       })}
       <Link href={`/`}>home</Link>
-      <Link href={`/workouts/create`}>add new workout</Link>
     </main>
   );
 }
