@@ -35,9 +35,7 @@ export default function WorkoutsPage() {
                 exercise.muscleGroups.map((muscleGroup) =>
                   muscleGroupsInWorkout.add(muscleGroup)
                 );
-                return (
-                  <li key={exercise._id}>{exercise.name}</li>
-                );
+                return <li key={exercise._id}>{exercise.name}</li>;
               })}
             </ul>
 
