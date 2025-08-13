@@ -1,22 +1,31 @@
 import { useState } from "react";
+import useSWR from "swr";
 
 export default function WorkoutCreate() {
   const [workoutPreview, setWorkoutPreview] = useState({
     workoutName: "Preview Workout",
     exercises: [
       {
-        exercise: "19",
+        _id: "68839ef223b65538b78a9d82",
+        exerciseId: "6877cdddc31ed272ee80b837",
         sets: 4,
         reps: 12,
       },
       {
-        exercise: "17",
+        _id: "68839ef223b65538b78a9d83",
+        exerciseId: "6877cdddc31ed272ee80b83a",
         sets: 4,
-        reps: 10,
+        reps: 12,
       },
     ],
   });
+  // useSWR Handling
+  const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
+  if (isLoading || error) {
+    return <main>{error ? "error" : "loading"}</main>;
+  }
 
+  // Submit Handling
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -25,6 +34,7 @@ export default function WorkoutCreate() {
     setWorkoutPreview({ ...workoutPreview, ...data });
   };
 
+  // JSX Main
   return (
     <main>
       <h1>Creating Workout</h1>
@@ -35,6 +45,19 @@ export default function WorkoutCreate() {
           name="workoutName"
           placeholder="enter workout name"
         />
+        {workoutPreview.exercises.map((exercise, index) => {
+          const exerciseDetails = exercises.find(
+            (exerciseInCollection) => exerciseInCollection._id === exercise._id
+          );
+          console.log(exercises[0]);
+          console.log("ex id", exercise);
+
+          return (
+            <div key={index}>
+              <h2>{exercise._id}</h2>
+            </div>
+          );
+        })}
         <div>
           <p>————————</p>
           <button type="submit">submit</button>
