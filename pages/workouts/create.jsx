@@ -2,7 +2,7 @@ import { useState } from "react";
 import useSWR from "swr";
 
 export default function WorkoutCreate() {
-  const [workoutDefault, setWorkoutPreview] = useState({
+  const [workoutPreview, setWorkoutPreview] = useState({
     workoutName: "Preview Workout",
     exercises: [
       {
@@ -16,7 +16,7 @@ export default function WorkoutCreate() {
     ],
   });
 
-  const [workoutSubmitted, setWorkoutSubmitted] = useState(workoutDefault);
+  const [workoutSubmitted, setWorkoutSubmitted] = useState(workoutPreview);
 
   // useSWR Handling
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
@@ -24,12 +24,12 @@ export default function WorkoutCreate() {
     return <main>{error ? "error" : "loading"}</main>;
   }
 
-  // Submit Handling
+  //// Submit Handling
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    const newExercisesList = workoutDefault.exercises.map((_, index) => {
+    const newExercisesList = workoutPreview.exercises.map((_, index) => {
       return { exercise: data[`exercise-${index}`] };
     });
 
@@ -38,7 +38,7 @@ export default function WorkoutCreate() {
       exercises: newExercisesList,
     };
 
-// updating
+    // updating
     setWorkoutSubmitted(workoutInSubmit);
 
     // Posting to database
@@ -49,10 +49,23 @@ export default function WorkoutCreate() {
       },
       body: JSON.stringify(workoutInSubmit),
     });
-
-    setWorkoutPreview({ ...workoutDefault, ok: response.ok });
+    e.target.reset();
+    setWorkoutPreview({ ...workoutPreview, ok: response.ok });
   };
 
+  const handleSelect = (id, selectedExercise) => {
+    console.log("handle select id", id);
+    let newExercises = workoutPreview.exercises.map((exercise) =>
+      exercise._id === id
+        ? { ...exercise, exercise: selectedExercise }
+        : exercise
+    );
+
+    setWorkoutPreview({
+      ...workoutPreview,
+      exercises: newExercises,
+    });
+  };
   // JSX Main
   return (
     <main>
@@ -64,10 +77,16 @@ export default function WorkoutCreate() {
           name="workoutName"
           placeholder="enter workout name"
         />
-        {workoutDefault.exercises.map((_, index) => {
+        {workoutPreview.exercises.map((exerciseInWorkout, index) => {
           return (
             <div key={index}>
-              <select name={`exercise-${index}`}>
+              <select
+                name={`exercise-${index}`}
+                value={exerciseInWorkout.exercise}
+                onChange={(event) =>
+                  handleSelect(exerciseInWorkout._id, event.target.value)
+                }
+              >
                 {exercises.map(({ _id, name: exerciseName }) => {
                   return (
                     <option value={_id} key={_id}>
@@ -82,15 +101,16 @@ export default function WorkoutCreate() {
         <div>
           <p>————————</p>
           <button type="submit">submit</button>
+          <button type="reset">reset</button>
         </div>
       </form>
 
       <p>————————————————————————————————</p>
       <h2>Preview</h2>
-
+      {workoutPreview?.ok ? "database accepted submit" : "--"}
       <h3>{workoutSubmitted.workoutName}</h3>
       {workoutSubmitted.exercises.map((exercise, index) => {
-        const { _id, id, name } = exercises.find(
+        const { name } = exercises.find(
           (exerciseInCollection) =>
             exerciseInCollection._id === exercise.exercise
         );
