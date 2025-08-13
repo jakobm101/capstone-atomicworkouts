@@ -6,13 +6,13 @@ const WorkoutSchema = new Schema({
   name: { type: String, required: true },
   exercises: [
     {
-     exerciseId: {
-    type: Schema.Types.ObjectId,
-    ref: "Exercise", // Enables populate() if required
-    required: true,
-  },
-      sets: Number,
-      reps: Number,
+      exercise: {
+        type: Schema.Types.ObjectId,
+        ref: "Exercise", // Enables populate() if required
+        required: true,
+      },
+      sets: { type: Number, min: 1, default: 3 },
+      reps: { type: Number, min: 1, default: 10 },
     },
   ],
 });
