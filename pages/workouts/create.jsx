@@ -1,12 +1,13 @@
 import { useState } from "react";
 import useSWR from "swr";
+import { uid } from "uid";
 
 export default function WorkoutCreate() {
   const [workoutPreview, setWorkoutPreview] = useState({
     workoutName: "Preview Workout",
     exercises: [
       {
-        _id: "68839ef223b65538b78a9d82",
+        _id: uid(),
         exercise: "6877cdddc31ed272ee80b837",
       },
       {
@@ -54,7 +55,6 @@ export default function WorkoutCreate() {
   };
 
   const handleSelect = (id, selectedExercise) => {
-    console.log("handle select id", id);
     let newExercises = workoutPreview.exercises.map((exercise) =>
       exercise._id === id
         ? { ...exercise, exercise: selectedExercise }
@@ -66,6 +66,22 @@ export default function WorkoutCreate() {
       exercises: newExercises,
     });
   };
+
+  const handleDeleteExercise = ({ _id }) => {
+    const newExercises = workoutPreview.exercises.filter(
+      (exercise) => exercise._id !== _id
+    );
+    setWorkoutPreview({ ...workoutPreview, exercises: newExercises });
+  };
+
+  const handleAddExercise = () => {
+    const newExercises = [
+      ...workoutPreview.exercises,
+      { _id: uid(), exercise: "6877cdddc31ed272ee80b837" },
+    ];
+    setWorkoutPreview({ ...workoutPreview, exercises: newExercises });
+  };
+
   // JSX Main
   return (
     <main>
@@ -95,9 +111,13 @@ export default function WorkoutCreate() {
                   );
                 })}
               </select>
+              <button onClick={() => handleDeleteExercise(exerciseInWorkout)}>
+                delete
+              </button>
             </div>
           );
         })}
+        <button onClick={handleAddExercise}>add exercise</button>
         <div>
           <p>————————</p>
           <button type="submit">submit</button>
