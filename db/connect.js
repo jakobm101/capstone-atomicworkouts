@@ -5,8 +5,9 @@ import mongoose from "mongoose";
 
 mongoose.set("debug", true); // █ zeigt alle Mongo-Queries in der Konsole
 
-// const MONGODB_URI = process.env.MONGODB_URI;
-const MONGODB_URI = process.env.MONGODB_ATOMICWORKOUTS;
+let MONGODB_URI = process.env.MONGODB_ATOMICWORKOUTS;
+// offline database for offline development˚˚˚
+// MONGODB_URI = "mongodb://127.0.0.1:27017/2";
 
 if (!MONGODB_URI) {
   throw new Error(
