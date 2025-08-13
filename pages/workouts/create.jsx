@@ -15,7 +15,9 @@ export default function WorkoutCreate() {
       },
     ],
   });
+
   const [workoutSubmitted, setWorkoutSubmitted] = useState(workoutPreview);
+
   // useSWR Handling
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
   if (isLoading || error) {
@@ -27,16 +29,26 @@ export default function WorkoutCreate() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    console.log("submitting", data);
     const newExercisesList = workoutPreview.exercises.map((_, index) => {
       return { exercise: data[`exercise-${index}`] };
     });
 
-    setWorkoutSubmitted({
-      ...workoutPreview,
-      ...data,
+    const workoutInSubmit = {
+      name: data.workoutName,
       exercises: newExercisesList,
+    };
+
+    setWorkoutSubmitted(workoutInSubmit);
+
+    const response = await fetch(`/api/workouts`, {
+      method: `POST`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(workoutInSubmit),
     });
+
+    setWorkoutPreview({ ...workoutPreview, ok: response.ok });
   };
 
   // JSX Main
@@ -73,9 +85,10 @@ export default function WorkoutCreate() {
 
       <p>————————————————————————————————</p>
       <h2>Preview</h2>
+
       <h3>{workoutSubmitted.workoutName}</h3>
       {workoutSubmitted.exercises.map((exercise, index) => {
-        const { _id, id, name, muscleGroups, instructions } = exercises.find(
+        const { _id, id, name } = exercises.find(
           (exerciseInCollection) =>
             exerciseInCollection._id === exercise.exercise
         );
