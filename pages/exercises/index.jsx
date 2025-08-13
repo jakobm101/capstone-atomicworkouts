@@ -26,7 +26,7 @@ export default function ExercisesPage() {
             <li key={exercise._id}>
               <h3>{exercise.name}</h3>
               {exercise.muscleGroups.map((muscle) => {
-                return <span>{`_${muscle} `}</span>;
+                return <span key={muscle}>{`_${muscle} `}</span>;
               })}
             </li>
           );
