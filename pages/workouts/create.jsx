@@ -2,7 +2,7 @@ import { useState } from "react";
 import useSWR from "swr";
 
 export default function WorkoutCreate() {
-  const [workoutPreview, setWorkoutPreview] = useState({
+  const [workoutDefault, setWorkoutPreview] = useState({
     workoutName: "Preview Workout",
     exercises: [
       {
@@ -16,7 +16,7 @@ export default function WorkoutCreate() {
     ],
   });
 
-  const [workoutSubmitted, setWorkoutSubmitted] = useState(workoutPreview);
+  const [workoutSubmitted, setWorkoutSubmitted] = useState(workoutDefault);
 
   // useSWR Handling
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
@@ -29,7 +29,7 @@ export default function WorkoutCreate() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    const newExercisesList = workoutPreview.exercises.map((_, index) => {
+    const newExercisesList = workoutDefault.exercises.map((_, index) => {
       return { exercise: data[`exercise-${index}`] };
     });
 
@@ -38,8 +38,10 @@ export default function WorkoutCreate() {
       exercises: newExercisesList,
     };
 
+// updating
     setWorkoutSubmitted(workoutInSubmit);
 
+    // Posting to database
     const response = await fetch(`/api/workouts`, {
       method: `POST`,
       headers: {
@@ -48,7 +50,7 @@ export default function WorkoutCreate() {
       body: JSON.stringify(workoutInSubmit),
     });
 
-    setWorkoutPreview({ ...workoutPreview, ok: response.ok });
+    setWorkoutPreview({ ...workoutDefault, ok: response.ok });
   };
 
   // JSX Main
@@ -62,7 +64,7 @@ export default function WorkoutCreate() {
           name="workoutName"
           placeholder="enter workout name"
         />
-        {workoutPreview.exercises.map((_, index) => {
+        {workoutDefault.exercises.map((_, index) => {
           return (
             <div key={index}>
               <select name={`exercise-${index}`}>
