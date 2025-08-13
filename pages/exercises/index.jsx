@@ -23,7 +23,7 @@ export default function ExercisesPage() {
       <ul>
         {exercises.map((exercise) => {
           return (
-            <li>
+            <li key={exercise._id}>
               <h3>{exercise.name}</h3>
               {exercise.muscleGroups.map((muscle) => {
                 return <span>{`_${muscle} `}</span>;
