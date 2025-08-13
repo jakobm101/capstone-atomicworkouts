@@ -5,6 +5,7 @@ export default function HomePage() {
     <main>
       <h2>Atomic Workouts</h2>
       <Link href={"/workouts"}>Workouts</Link>
+      <Link href={"/exercises"}>Exercises</Link>
     </main>
   );
 }
