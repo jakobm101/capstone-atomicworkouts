@@ -11,8 +11,7 @@ export default async function handler(req, res) {
       await dbConnect();
       const workouts = await Workout.find().populate("exercises.exercise");
 
-      res.status(200).json(workouts);
-      return;
+      return res.status(200).json(workouts);
     } catch (error) {
       res.status(500).json({ error: error.message });
       return;
@@ -23,8 +22,7 @@ export default async function handler(req, res) {
     try {
       await dbConnect();
       await Workout.create(req.body);
-      res.status(200).json({ message: "posting" });
-      return;
+      return res.status(200).json({ message: "posting" });
     } catch (error) {
       console.log("error posting", error.message);
 
