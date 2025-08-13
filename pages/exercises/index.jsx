@@ -28,6 +28,7 @@ export default function ExercisesPage() {
               {exercise.muscleGroups.map((muscle) => {
                 return <span>{`_${muscle} `}</span>;
               })}
+              <Link href={`/exercises/${exercise._id}`}>details</Link>
             </li>
           );
         })}
