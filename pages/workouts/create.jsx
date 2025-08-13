@@ -3,7 +3,18 @@ import { useState } from "react";
 export default function WorkoutCreate() {
   const [workoutPreview, setWorkoutPreview] = useState({
     workoutName: "Preview Workout",
-    exercises: [{}, {}],
+    exercises: [
+      {
+        exercise: "19",
+        sets: 4,
+        reps: 12,
+      },
+      {
+        exercise: "17",
+        sets: 4,
+        reps: 10,
+      },
+    ],
   });
 
   const handleSubmit = async (e) => {
@@ -13,8 +24,6 @@ export default function WorkoutCreate() {
     console.log("Submitting", data);
     setWorkoutPreview({ ...workoutPreview, ...data });
   };
-
-  console.log("workout preview", workoutPreview);
 
   return (
     <main>
@@ -35,6 +44,13 @@ export default function WorkoutCreate() {
       <p>————————————————————————————————</p>
       <h2>Preview</h2>
       <h3>{workoutPreview.workoutName}</h3>
+      {workoutPreview.exercises.map((exercise, index) => {
+        return (
+          <div key={index}>
+            <p>exercise</p>
+          </div>
+        );
+      })}
     </main>
   );
 }
