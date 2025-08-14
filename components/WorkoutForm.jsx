@@ -6,26 +6,12 @@ import { uid } from "uid";
  * 
  * Do this:
 
-Make components/WorkoutForm.jsx.
-Move all the form stuff in there:
-- HTML Form (inputs, selects, buttons)
 - State (workoutPreview, isSubmitting)
-- Functions (handleAddExercise, handleDeleteExercise, etc.)
 - BUT NO database calls inside of WorkoutForm.jsx
 - Make it flexible with props:
 
-
-
-// New workout in your `create.js`
-<WorkoutForm onSubmit={handleCreateWorkout} />
-
-// Edit workout in your `edit/[id].js` (later!)
-<WorkoutForm initialData={existingWorkout} onSubmit={updateWorkout} />
 In your WorkoutForm.jsx just call the onSubmit prop with the prepared data await onSubmit(workoutInSubmit);
 
-In the create page, replace all the messy form code with:
-
-<WorkoutForm onSubmit={handleCreateWorkout} />
 In the create page's handleCreateWorkout function that's where all the database logic goes:
 
   const handleCreateWorkout = async (workoutData) => {
@@ -48,9 +34,10 @@ In the create page's handleCreateWorkout function that's where all the database 
 
 export default function WorkoutForm({
   isSubmitting,
+  setIsSubmitting,
   onSubmit,
   workoutPreview,
-  setWorkoutPreview
+  setWorkoutPreview,
 }) {
   // useSWR Handling
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
@@ -62,7 +49,19 @@ export default function WorkoutForm({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
-    onSubmit(e);
+
+    setIsSubmitting(true);
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    const newExercisesList = workoutPreview.exercises.map((_, index) => {
+      return { exercise: data[`exercise-${index}`] };
+    });
+
+    const workoutInSubmit = {
+      name: data.workoutName,
+      exercises: newExercisesList,
+    };
+    onSubmit(workoutInSubmit);
   };
 
   const handleSelect = (id, selectedExercise) => {

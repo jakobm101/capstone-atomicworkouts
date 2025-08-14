@@ -12,38 +12,19 @@ export default function WorkoutCreate() {
     exercises: [{ _id: uid(), exercise: "" }],
   });
 
-  const handleCreateWorkout = async (e) => {
+  const handleCreateWorkout = async (workoutData) => {
     try {
-      setIsSubmitting(true);
-      const formData = new FormData(e.currentTarget);
-      const data = Object.fromEntries(formData.entries());
-      const newExercisesList = workoutPreview.exercises.map((_, index) => {
-        return { exercise: data[`exercise-${index}`] };
+      const response = await fetch("/api/workouts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(workoutData),
       });
 
-      const workoutInSubmit = {
-        name: data.workoutName,
-        exercises: newExercisesList,
-      };
+      if (!response.ok) throw new Error("Failed to create");
 
-      // Posting to database
-      const response = await fetch(`/api/workouts`, {
-        method: `POST`,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(workoutInSubmit),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to create workout");
-      }
       router.push("/workouts");
     } catch (error) {
-      console.error("Error creating workout:", error);
-      alert("Failed to create workout: " + error.message);
-    } finally {
-      setIsSubmitting(false);
+      alert("Error: " + error.message);
     }
   };
 
@@ -54,6 +35,7 @@ export default function WorkoutCreate() {
       <WorkoutForm
         onSubmit={handleCreateWorkout}
         isSubmitting={isSubmitting}
+        setIsSubmitting={setIsSubmitting}
         workoutPreview={workoutPreview}
         setWorkoutPreview={setWorkoutPreview}
       />
