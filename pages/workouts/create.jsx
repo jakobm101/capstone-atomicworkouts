@@ -128,7 +128,7 @@ export default function WorkoutCreate() {
             </div>
           );
         })}
-        <button onClick={handleAddExercise}>add exercise</button>
+        <button type="button" onClick={handleAddExercise}>add exercise</button>
         <div>
           <p>————————</p>
           <button type="submit">submit</button>
