@@ -78,7 +78,7 @@ export default function WorkoutCreate() {
   const handleAddExercise = () => {
     const newExercises = [
       ...workoutPreview.exercises,
-      { _id: uid(), exercise: "6877cdddc31ed272ee80b837" },
+      { _id: uid(), exercise: "" },
     ];
     setWorkoutPreview({ ...workoutPreview, exercises: newExercises });
   };
