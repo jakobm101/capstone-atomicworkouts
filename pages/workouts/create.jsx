@@ -8,7 +8,7 @@ export default function WorkoutCreate() {
     exercises: [{ _id: uid(), exercise: "" }],
   });
 
-  const [workoutSubmitted, setWorkoutSubmitted] = useState(workoutPreview);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // useSWR Handling
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
