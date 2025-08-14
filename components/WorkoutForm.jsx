@@ -11,8 +11,12 @@ export default function WorkoutForm({ onSubmit }) {
 
   // useSWR Handling
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
-  if (isLoading || error) {
-    return <main>{error ? "error" : "loading"}</main>;
+
+  if (isLoading) {
+    return <div>Loading exercises...</div>;
+  }
+  if (error) {
+    return <div>Error loading exercises: {error.message}</div>;
   }
 
   const handleSubmit = async (e) => {
