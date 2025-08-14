@@ -1,5 +1,4 @@
 import WorkoutForm from "@/components/WorkoutForm";
-import { Link } from "lucide-react";
 import { useRouter } from "next/router";
 
 export default function WorkoutCreate() {
