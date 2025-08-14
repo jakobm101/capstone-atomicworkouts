@@ -2,14 +2,19 @@ import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
 
-export default function WorkoutForm({
-  onSubmit,
-}) {
+export default function WorkoutForm({ onSubmit }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [workoutPreview, setWorkoutPreview] = useState({
     workoutName: "New Workout",
     exercises: [{ _id: uid(), exercise: "" }],
   });
+
+  // useSWR Handling
+  const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
+  if (isLoading || error) {
+    return <main>{error ? "error" : "loading"}</main>;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
