@@ -17,10 +17,6 @@ export default function WorkoutUpdatePage() {
   }
 
   const handleEdit = async (workoutInSubmit) => {
-    console.log(`current`, workout);
-
-    console.log(`changing`, workoutInSubmit);
-
     const response = await fetch(apiUrl, {
       method: "PUT",
       headers: {
