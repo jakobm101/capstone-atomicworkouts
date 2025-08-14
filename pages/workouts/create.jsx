@@ -19,30 +19,40 @@ export default function WorkoutCreate() {
   //// Submit Handling
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    const newExercisesList = workoutPreview.exercises.map((_, index) => {
-      return { exercise: data[`exercise-${index}`] };
-    });
+  if (isSubmitting) return;
 
-    const workoutInSubmit = {
-      name: data.workoutName,
-      exercises: newExercisesList,
-    };
+    try {
+      setIsSubmitting(true);
+      const formData = new FormData(e.currentTarget);
+      const data = Object.fromEntries(formData.entries());
+      const newExercisesList = workoutPreview.exercises.map((_, index) => {
+        return { exercise: data[`exercise-${index}`] };
+      });
 
-    // updating
-    setWorkoutSubmitted(workoutInSubmit);
+      const workoutInSubmit = {
+        name: data.workoutName,
+        exercises: newExercisesList,
+      };
 
-    // Posting to database
-    const response = await fetch(`/api/workouts`, {
-      method: `POST`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(workoutInSubmit),
-    });
-    e.target.reset();
-    setWorkoutPreview({ ...workoutPreview, ok: response.ok });
+      // Posting to database
+      const response = await fetch(`/api/workouts`, {
+        method: `POST`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(workoutInSubmit),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create workout");
+      }
+      router.push("/workouts");
+    } catch (error) {
+      console.error("Error creating workout:", error);
+      alert("Failed to create workout: " + error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSelect = (id, selectedExercise) => {
