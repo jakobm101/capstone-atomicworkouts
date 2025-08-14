@@ -43,7 +43,7 @@ export default function WorkoutDetailsPage() {
           return (
             <li key={exercises.name}>
               <StyledSpan>{exercise.name} </StyledSpan>
-              || Reps: {reps} - Sets: {sets}
+              _Reps: {reps} - Sets: {sets}
             </li>
           );
         })}
@@ -71,5 +71,5 @@ export default function WorkoutDetailsPage() {
 
 const StyledSpan = styled.span`
   display: inline-block;
-  width: 120px;
+  width: 160px;
 `;
