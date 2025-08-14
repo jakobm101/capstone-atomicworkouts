@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import useSWR from "swr";
-
+import { collectMuscleGroups } from "@/lib/utils";
 export default function WorkoutDetailsPage() {
   const router = useRouter();
   const id = router.query.id;
