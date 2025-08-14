@@ -16,7 +16,7 @@ export default function WorkoutUpdatePage() {
     return <main>error</main>;
   }
 
-  const handleEdit = async (workoutInSubmit) => {
+  const handleUpdate = async (workoutInSubmit) => {
     const response = await fetch(apiUrl, {
       method: "PUT",
       headers: {
@@ -26,13 +26,14 @@ export default function WorkoutUpdatePage() {
     });
     if (response.ok) {
       mutate();
+      router.push(`/workouts`);
     }
   };
 
   return (
     <main>
-      <h1>Edit Workout</h1>
-      <WorkoutForm onSubmit={handleEdit} workoutProp={workout} />
+      <h1>Update Workout</h1>
+      <WorkoutForm onSubmit={handleUpdate} workoutProp={workout} />
       <Link href={`/`}>home</Link>
     </main>
   );
