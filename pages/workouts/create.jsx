@@ -1,16 +1,8 @@
 import WorkoutForm from "@/components/WorkoutForm";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { uid } from "uid";
 
 export default function WorkoutCreate() {
   const router = useRouter();
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [workoutPreview, setWorkoutPreview] = useState({
-    workoutName: "New Workout",
-    exercises: [{ _id: uid(), exercise: "" }],
-  });
 
   const handleCreateWorkout = async (workoutData) => {
     try {
@@ -32,13 +24,7 @@ export default function WorkoutCreate() {
   return (
     <main>
       <h1>Creating Workout</h1>
-      <WorkoutForm
-        onSubmit={handleCreateWorkout}
-        isSubmitting={isSubmitting}
-        setIsSubmitting={setIsSubmitting}
-        workoutPreview={workoutPreview}
-        setWorkoutPreview={setWorkoutPreview}
-      />
+      <WorkoutForm onSubmit={handleCreateWorkout} />
     </main>
   );
 }
