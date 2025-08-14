@@ -4,7 +4,6 @@ import Workout from "@/db/Schema/Workout";
 import Exercise from "@/db/Schema/Exercise";
 
 export default async function handler(req, res) {
-  ///// GET
   if (req.method === "GET") {
     try {
       await dbConnect();
@@ -24,6 +23,21 @@ export default async function handler(req, res) {
       await dbConnect();
       await Workout.findByIdAndDelete(req.query.id);
       res.status(200).json({ message: "deleted" });
+      return;
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+      return;
+    }
+  }
+  if (req.method === "PUT") {
+    console.log("👉PUTTING");
+
+    try {
+      await dbConnect();
+      await Workout.findByIdAndUpdate(req.query.id, req.body);
+      res.status(200).json({
+        status: `⭐️ Workout ${req.query.id} updated: ${req.body}`,
+      });
       return;
     } catch (error) {
       res.status(500).json({ error: error.message });

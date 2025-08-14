@@ -5,7 +5,9 @@ import useSWR from "swr";
 export default function WorkoutUpdatePage() {
   const router = useRouter();
   const id = router.query.id;
-  const { data: workout, isLoading, error } = useSWR(`/api/workouts/${id}`);
+  const apiUrl = `/api/workouts/${id}`;
+
+  const { data: workout, isLoading, error, mutate } = useSWR(apiUrl);
   if (isLoading) {
     return <main>loading</main>;
   }
@@ -13,14 +15,27 @@ export default function WorkoutUpdatePage() {
     return <main>error</main>;
   }
 
-  const handleChange = async () => {
-    console.log(`changing`);
+  const handleEdit = async (workoutInSubmit) => {
+    console.log(`current`, workout);
+
+    console.log(`changing`, workoutInSubmit);
+
+    const response = await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(workoutInSubmit),
+    });
+    if (response.ok) {
+      mutate();
+    }
   };
 
   return (
     <main>
       <h1>Edit Workout</h1>
-      <WorkoutForm onSubmit={handleChange} workoutProp={workout} />
+      <WorkoutForm onSubmit={handleEdit} workoutProp={workout} />
     </main>
   );
 }

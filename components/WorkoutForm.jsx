@@ -3,8 +3,6 @@ import useSWR from "swr";
 import { uid } from "uid";
 
 export default function WorkoutForm({ onSubmit, workoutProp }) {
-  console.log(`Form Prop exercises`, workoutProp);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [workoutPreview, setWorkoutPreview] = useState({
     workoutName: workoutProp?.name ?? "New Workout",
@@ -85,8 +83,6 @@ export default function WorkoutForm({ onSubmit, workoutProp }) {
 
       {/* EXERCISES */}
       {workoutPreview.exercises.map((exerciseInWorkout, index) => {
-        console.log(`mapping`, exerciseInWorkout);
-
         return (
           <div key={index}>
             <select
