@@ -131,7 +131,9 @@ export default function WorkoutCreate() {
         <button type="button" onClick={handleAddExercise}>add exercise</button>
         <div>
           <p>————————</p>
-          <button type="submit">submit</button>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Creating..." : "Submit"}
+          </button>
           <button type="reset">reset</button>
         </div>
       </form>
