@@ -25,8 +25,7 @@ export default function WorkoutDetailsPage() {
       <h3>{name}</h3>
       <h4>Exercises</h4>
       <ul>
-        {exercises.map((exerciseInWorkout) => {
-          const { reps, sets, exercise } = exerciseInWorkout;
+        {exercises.map(({ reps, sets, exercise }) => {
           exercise.muscleGroups.map((muscleGroup) =>
             muscleGroupsInWorkout.add(muscleGroup)
           );
