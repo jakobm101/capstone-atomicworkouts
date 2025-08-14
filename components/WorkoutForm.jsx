@@ -37,10 +37,10 @@ export default function WorkoutForm({ onSubmit, workoutProp }) {
     onSubmit(workoutInSubmit);
   };
 
-  const handleSelect = (id, selectedExercise) => {
+  const handleSelect = (id, selectedExerciseId) => {
     let newExercises = workoutPreview.exercises.map((exercise) =>
       exercise._id === id
-        ? { ...exercise, exercise: selectedExercise }
+        ? { ...exercise, exercise: selectedExerciseId }
         : exercise
     );
 
@@ -89,7 +89,7 @@ export default function WorkoutForm({ onSubmit, workoutProp }) {
           <div key={index}>
             <select
               name={`exercise-${index}`}
-              value={exerciseInWorkout.exercise._id}
+              value={exerciseInWorkout.exercise}
               onChange={(event) =>
                 handleSelect(exerciseInWorkout._id, event.target.value)
               }
