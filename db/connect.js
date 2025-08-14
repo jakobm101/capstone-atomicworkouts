@@ -7,7 +7,7 @@ mongoose.set("debug", true); // █ zeigt alle Mongo-Queries in der Konsole
 
 let MONGODB_URI = process.env.MONGODB_ATOMICWORKOUTS;
 // offline database for offline development˚˚˚
-MONGODB_URI = "mongodb://127.0.0.1:27017/3";
+// MONGODB_URI = "mongodb://127.0.0.1:27017/3";
 
 if (!MONGODB_URI) {
   throw new Error(

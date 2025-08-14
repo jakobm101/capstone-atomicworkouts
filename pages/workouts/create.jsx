@@ -1,6 +1,9 @@
+import { WifiPen } from "lucide-react";
+import { handleClientScriptLoad } from "next/script";
 import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
+import WorkoutsPage from ".";
 
 export default function WorkoutCreate() {
   const [workoutPreview, setWorkoutPreview] = useState({
@@ -82,6 +85,10 @@ export default function WorkoutCreate() {
     setWorkoutPreview({ ...workoutPreview, exercises: newExercises });
   };
 
+  const handleNameChange = (event) => {
+    setWorkoutPreview({ ...workoutPreview, workoutName: event.target.value });
+  };
+
   // JSX Main
   return (
     <main>
@@ -92,6 +99,8 @@ export default function WorkoutCreate() {
           type="text"
           name="workoutName"
           placeholder="enter workout name"
+          value={workoutPreview.workoutName}
+          onChange={(event) => handleNameChange(event)}
         />
         {workoutPreview.exercises.map((exerciseInWorkout, index) => {
           return (
