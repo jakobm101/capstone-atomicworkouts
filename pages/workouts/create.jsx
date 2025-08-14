@@ -1,7 +1,6 @@
 import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
-import WorkoutsPage from ".";
 
 export default function WorkoutCreate() {
   const [workoutPreview, setWorkoutPreview] = useState({
