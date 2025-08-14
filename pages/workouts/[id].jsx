@@ -17,7 +17,7 @@ export default function WorkoutDetailsPage() {
     return <main>loading workout</main>;
   }
   const { name, exercises } = workout;
-  const muscleGroupsInWorkout = new Set();
+  const muscleGroupsInWorkout = collectMuscleGroups(exercises);
 
   return (
     <main>
