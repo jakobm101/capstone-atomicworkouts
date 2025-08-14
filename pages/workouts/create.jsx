@@ -138,22 +138,6 @@ export default function WorkoutCreate() {
         </div>
       </form>
 
-      <p>————————————————————————————————</p>
-      <h2>Preview</h2>
-      {workoutPreview?.ok ? "database accepted submit" : "--"}
-      <h3>{workoutSubmitted.name}</h3>
-      {workoutSubmitted.exercises.map((exercise, index) => {
-        const { name } = exercises.find(
-          (exerciseInCollection) =>
-            exerciseInCollection._id === exercise.exercise
-        );
-
-        return (
-          <div key={index}>
-            <h2>{name}</h2>
-          </div>
-        );
-      })}
     </main>
   );
 }
