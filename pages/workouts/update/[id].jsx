@@ -1,4 +1,5 @@
 import WorkoutForm from "@/components/WorkoutForm";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
@@ -36,6 +37,7 @@ export default function WorkoutUpdatePage() {
     <main>
       <h1>Edit Workout</h1>
       <WorkoutForm onSubmit={handleEdit} workoutProp={workout} />
+      <Link href={`/`}>home</Link>
     </main>
   );
 }
