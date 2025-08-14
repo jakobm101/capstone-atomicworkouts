@@ -45,6 +45,7 @@ export default function WorkoutsPage() {
                 <li key={muscleGroup}>{muscleGroup}</li>
               ))}
             </ul>
+            <Link href={`/workouts/${workout._id}`}>Details</Link>
             <p>—————————————————————————</p>
           </div>
         );
