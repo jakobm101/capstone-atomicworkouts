@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import styled from "styled-components";
 import useSWR from "swr";
 
 export default function WorkoutDetailsPage() {
@@ -31,7 +32,8 @@ export default function WorkoutDetailsPage() {
           );
           return (
             <li key={exercises.name}>
-              {exercise.name} || Reps: {reps} - Sets: {sets}
+              <StyledSpan>{exercise.name} </StyledSpan>
+              || Reps: {reps} - Sets: {sets}
             </li>
           );
         })}
@@ -45,3 +47,8 @@ export default function WorkoutDetailsPage() {
     </main>
   );
 }
+
+const StyledSpan = styled.span`
+  display: inline-block;
+  width: 110px;
+`;
