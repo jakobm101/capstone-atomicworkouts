@@ -26,9 +26,6 @@ export default function WorkoutDetailsPage() {
       <h4>Exercises</h4>
       <ul>
         {exercises.map(({ reps, sets, exercise }) => {
-          exercise.muscleGroups.map((muscleGroup) =>
-            muscleGroupsInWorkout.add(muscleGroup)
-          );
           return (
             <li key={exercises.name}>
               <StyledSpan>{exercise.name} </StyledSpan>
