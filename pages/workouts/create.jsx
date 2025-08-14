@@ -89,6 +89,7 @@ export default function WorkoutCreate() {
     setWorkoutPreview({ ...workoutPreview, workoutName: event.target.value });
   };
 
+
   // JSX Main
   return (
     <main>
@@ -137,7 +138,7 @@ export default function WorkoutCreate() {
       <p>————————————————————————————————</p>
       <h2>Preview</h2>
       {workoutPreview?.ok ? "database accepted submit" : "--"}
-      <h3>{workoutSubmitted.workoutName}</h3>
+      <h3>{workoutSubmitted.name}</h3>
       {workoutSubmitted.exercises.map((exercise, index) => {
         const { name } = exercises.find(
           (exerciseInCollection) =>
