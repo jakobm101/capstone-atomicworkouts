@@ -123,4 +123,11 @@ a {
 input::placeholder {
 color: var(--color-orange-5)
 }
+
+ul {
+  list-style: none;
+  margin-block-start: 0;
+  padding-inline-start: 0;
+
+}
 `;

@@ -4,8 +4,6 @@ import useSWR from "swr";
 export default function WorkoutDetailsPage() {
   const router = useRouter();
   const id = router.query.id;
-  if (!id) return <main>loading</main>;
-  console.log(`id`, id);
 
   const { data: workout, isLoading, error } = useSWR(`/api/workouts/${id}`);
   if (isLoading) {
@@ -14,14 +12,36 @@ export default function WorkoutDetailsPage() {
   if (error) {
     <main>error</main>;
   }
-
-  console.log(`workout`, workout);
+  if (!workout) {
+    return <main>loading workout</main>;
+  }
+  const { name, exercises } = workout;
+  const muscleGroupsInWorkout = new Set();
 
   return (
     <main>
       <h2>Workout Details</h2>
-      <h3>name</h3>
-      {}
+      <h3>{name}</h3>
+      <h4>Exercises</h4>
+      <ul>
+        {exercises.map((exerciseInWorkout) => {
+          const { reps, sets, exercise } = exerciseInWorkout;
+          exercise.muscleGroups.map((muscleGroup) =>
+            muscleGroupsInWorkout.add(muscleGroup)
+          );
+          return (
+            <li key={exercises.name}>
+              {exercise.name} || Reps: {reps} - Sets: {sets}
+            </li>
+          );
+        })}
+      </ul>
+      <h4>Muscle Groups</h4>
+      <ul>
+        {[...muscleGroupsInWorkout].map((muscle) => {
+          return <li key={muscle}>{muscle}</li>;
+        })}
+      </ul>
     </main>
   );
 }
