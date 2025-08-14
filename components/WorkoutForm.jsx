@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
 
@@ -49,11 +48,9 @@ In the create page's handleCreateWorkout function that's where all the database 
 
 export default function WorkoutForm({
   isSubmitting,
-  setIsSubmitting,
   onSubmit,
   workoutPreview,
-  setWorkoutPreview,
-  ...props
+  setWorkoutPreview
 }) {
   // useSWR Handling
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);

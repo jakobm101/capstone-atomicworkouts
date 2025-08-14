@@ -54,7 +54,6 @@ export default function WorkoutCreate() {
       <WorkoutForm
         onSubmit={handleCreateWorkout}
         isSubmitting={isSubmitting}
-        setIsSubmitting={setIsSubmitting}
         workoutPreview={workoutPreview}
         setWorkoutPreview={setWorkoutPreview}
       />
