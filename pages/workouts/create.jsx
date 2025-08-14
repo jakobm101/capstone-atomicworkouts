@@ -4,17 +4,8 @@ import { uid } from "uid";
 
 export default function WorkoutCreate() {
   const [workoutPreview, setWorkoutPreview] = useState({
-    workoutName: "Preview Workout",
-    exercises: [
-      {
-        _id: uid(),
-        exercise: "6877cdddc31ed272ee80b837",
-      },
-      {
-        _id: "68839ef223b65538b78a9d83",
-        exercise: "6877cdddc31ed272ee80b83a",
-      },
-    ],
+    workoutName: "New Workout",
+    exercises: [{ _id: uid(), exercise: "" }],
   });
 
   const [workoutSubmitted, setWorkoutSubmitted] = useState(workoutPreview);
