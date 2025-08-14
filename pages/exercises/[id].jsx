@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -8,15 +9,15 @@ export default function ExerciseDetailsPage() {
   const { data: exercise, isLoading, error } = useSWR(`/api/exercises/${id}`);
   if (isLoading || error) {
     return (
-      <main>
+      <Layout>
         <h1>{error ? `error` : `loading`}</h1>
-      </main>
+      </Layout>
     );
   }
   const { name, instructions, muscleGroups, _id } = exercise;
 
   return (
-    <main>
+    <Layout>
       <h1>Exercise Details</h1>
       <h2>{name}</h2>
       <h3>Instructions</h3>
@@ -38,6 +39,6 @@ export default function ExerciseDetailsPage() {
       <Link href={`/`}>home</Link>
       <Link href={`/exercises`}>exercises</Link>
       <Link href={`/workouts`}>workouts</Link>
-    </main>
+    </Layout>
   );
 }

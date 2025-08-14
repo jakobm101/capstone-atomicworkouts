@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import WorkoutForm from "@/components/WorkoutForm";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -22,10 +23,10 @@ export default function WorkoutCreate() {
   };
 
   return (
-    <main>
+    <Layout>
       <h1>Creating Workout</h1>
       <WorkoutForm onSubmit={handleCreateWorkout} />
       <Link href={`/`}>home</Link>
-    </main>
+    </Layout>
   );
 }

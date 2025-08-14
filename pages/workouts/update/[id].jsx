@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import WorkoutForm from "@/components/WorkoutForm";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,10 +11,10 @@ export default function WorkoutUpdatePage() {
 
   const { data: workout, isLoading, error, mutate } = useSWR(apiUrl);
   if (isLoading) {
-    return <main>loading</main>;
+    return <Layout>loading</Layout>;
   }
   if (error) {
-    return <main>error</main>;
+    return <Layout>error</Layout>;
   }
 
   const handleUpdate = async (workoutInSubmit) => {
@@ -31,10 +32,10 @@ export default function WorkoutUpdatePage() {
   };
 
   return (
-    <main>
-      <h1>Update Workout</h1>
+    <Layout>
+     <h1>Update Workout</h1>
       <WorkoutForm onSubmit={handleUpdate} workoutProp={workout} />
       <Link href={`/`}>home</Link>
-    </main>
+    </Layout>
   );
 }

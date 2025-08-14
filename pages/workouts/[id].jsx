@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import useSWR from "swr";
 import { collectMuscleGroups } from "@/lib/utils";
+import Layout from "@/components/Layout";
 export default function WorkoutDetailsPage() {
   const router = useRouter();
   const id = router.query.id;
@@ -10,13 +11,13 @@ export default function WorkoutDetailsPage() {
 
   const { data: workout, isLoading, error } = useSWR(apiUrl);
   if (isLoading) {
-    <main>loading</main>;
+    <Layout>loading</Layout>;
   }
   if (error) {
-    <main>error</main>;
+    <Layout>error</Layout>;
   }
   if (!workout) {
-    return <main>loading workout</main>;
+    return <Layout>loading workout</Layout>;
   }
   const { name, exercises } = workout;
   const muscleGroupsInWorkout = collectMuscleGroups(exercises);
@@ -31,7 +32,7 @@ export default function WorkoutDetailsPage() {
   };
 
   return (
-    <main>
+    <Layout>
       <h2>Workout Details</h2>
       <h3>{name}</h3>
       <h4>Exercises</h4>
@@ -66,7 +67,7 @@ export default function WorkoutDetailsPage() {
         <Link href={`/`}>home</Link>
         <Link href={`/workouts`}>Workouts</Link>
       </div>
-    </main>
+    </Layout>
   );
 }
 
