@@ -113,6 +113,7 @@ export default function WorkoutCreate() {
                 required
                 required
               >
+                <option value="">Select exercise</option>
                 {exercises.map(({ _id, name: exerciseName }) => {
                   return (
                     <option value={_id} key={_id}>
