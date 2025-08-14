@@ -111,6 +111,7 @@ export default function WorkoutCreate() {
                   handleSelect(exerciseInWorkout._id, event.target.value)
                 }
                 required
+                required
               >
                 {exercises.map(({ _id, name: exerciseName }) => {
                   return (
