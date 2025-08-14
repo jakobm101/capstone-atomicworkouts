@@ -89,7 +89,9 @@ export default function WorkoutForm({ onSubmit, workoutProp }) {
           <div key={index}>
             <select
               name={`exercise-${index}`}
-              value={exerciseInWorkout.exercise}
+              value={
+                exerciseInWorkout.exercise?._id || exerciseInWorkout.exercise
+              }
               onChange={(event) =>
                 handleSelect(exerciseInWorkout._id, event.target.value)
               }
