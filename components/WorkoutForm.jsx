@@ -48,8 +48,6 @@ export default function WorkoutForm({ onSubmit, workoutProp }) {
       ...workoutPreview,
       exercises: newExercises,
     });
-    console.log(`old exercises`, workoutPreview.exercises);
-    console.log(`new exercises`, newExercises);
   };
 
   const handleDeleteExercise = ({ _id }) => {
@@ -73,7 +71,6 @@ export default function WorkoutForm({ onSubmit, workoutProp }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* NAME */}
       <label for="workoutName">Name</label>
       <input
         type="text"
@@ -83,7 +80,6 @@ export default function WorkoutForm({ onSubmit, workoutProp }) {
         onChange={(event) => handleNameChange(event)}
       />
 
-      {/* EXERCISES */}
       {workoutPreview.exercises.map((exerciseInWorkout, index) => {
         return (
           <div key={index}>
@@ -119,7 +115,6 @@ export default function WorkoutForm({ onSubmit, workoutProp }) {
         add exercise
       </button>
 
-      {/* FORM BUTTONS */}
       <div>
         <p>————————</p>
         <button type="submit" disabled={isSubmitting}>
