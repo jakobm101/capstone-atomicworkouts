@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import useSWR from "swr";
-
+import { collectMuscleGroups } from "@/lib/utils";
 export default function WorkoutDetailsPage() {
   const router = useRouter();
   const id = router.query.id;
@@ -18,7 +18,7 @@ export default function WorkoutDetailsPage() {
     return <main>loading workout</main>;
   }
   const { name, exercises } = workout;
-  const muscleGroupsInWorkout = new Set();
+  const muscleGroupsInWorkout = collectMuscleGroups(exercises);
 
   const handleDelete = async () => {
     const response = await fetch(apiUrl, {
@@ -35,11 +35,7 @@ export default function WorkoutDetailsPage() {
       <h3>{name}</h3>
       <h4>Exercises</h4>
       <ul>
-        {exercises.map((exerciseInWorkout) => {
-          const { reps, sets, exercise } = exerciseInWorkout;
-          exercise.muscleGroups.map((muscleGroup) =>
-            muscleGroupsInWorkout.add(muscleGroup)
-          );
+        {exercises.map(({ reps, sets, exercise }) => {
           return (
             <li key={exercises.name}>
               <StyledSpan>{exercise.name} </StyledSpan>
