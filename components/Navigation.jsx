@@ -1,11 +1,16 @@
 import Link from "next/link";
+import styled from "styled-components";
 
 export default function Navigation() {
   return (
-    <div>
+    <StyledDiv>
       <Link href={`/`}>Home</Link>
       <Link href={`/exercises`}>Exercises</Link>
       <Link href={`/workouts`}>Workouts</Link>
-    </div>
+    </StyledDiv>
   );
 }
+
+const StyledDiv = styled.div`
+  border-top: 1px solid var(--color-orange-5);
+`;
