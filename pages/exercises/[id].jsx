@@ -36,9 +36,6 @@ export default function ExerciseDetailsPage() {
         })}
       </ul>
       <p>————————</p>
-      <Link href={`/`}>home</Link>
-      <Link href={`/exercises`}>exercises</Link>
-      <Link href={`/workouts`}>workouts</Link>
     </Layout>
   );
 }

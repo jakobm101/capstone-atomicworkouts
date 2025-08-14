@@ -63,10 +63,6 @@ export default function WorkoutDetailsPage() {
       <button type="button" onClick={handleDelete}>
         Delete
       </button>
-      <div>
-        <Link href={`/`}>home</Link>
-        <Link href={`/workouts`}>Workouts</Link>
-      </div>
     </Layout>
   );
 }

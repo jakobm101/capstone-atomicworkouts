@@ -49,7 +49,6 @@ export default function WorkoutsPage() {
           </div>
         );
       })}
-      <Link href={`/`}>home</Link>
       <Link href={`/workouts/create`}>add new workout</Link>
     </Layout>
   );

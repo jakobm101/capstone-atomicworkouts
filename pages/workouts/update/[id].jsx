@@ -35,7 +35,7 @@ export default function WorkoutUpdatePage() {
     <Layout>
      <h1>Update Workout</h1>
       <WorkoutForm onSubmit={handleUpdate} workoutProp={workout} />
-      <Link href={`/`}>home</Link>
+
     </Layout>
   );
 }

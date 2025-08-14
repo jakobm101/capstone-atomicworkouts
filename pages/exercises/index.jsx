@@ -34,8 +34,6 @@ export default function ExercisesPage() {
           );
         })}
       </ul>
-      <Link href={`/`}>home</Link>
-      <Link href={`workouts`}>workouts</Link>
     </Layout>
   );
 }
