@@ -2,11 +2,13 @@ import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
 
-export default function WorkoutForm({ onSubmit }) {
+export default function WorkoutForm({ onSubmit, workoutProp }) {
+  console.log(`Form Prop exercises`, workoutProp);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [workoutPreview, setWorkoutPreview] = useState({
-    workoutName: "New Workout",
-    exercises: [{ _id: uid(), exercise: "" }],
+    workoutName: workoutProp?.name ?? "New Workout",
+    exercises: workoutProp?.exercises ?? [{ _id: uid(), exercise: "" }],
   });
 
   // useSWR Handling
@@ -71,6 +73,7 @@ export default function WorkoutForm({ onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* NAME */}
       <label for="workoutName">Name</label>
       <input
         type="text"
@@ -79,12 +82,16 @@ export default function WorkoutForm({ onSubmit }) {
         value={workoutPreview.workoutName}
         onChange={(event) => handleNameChange(event)}
       />
+
+      {/* EXERCISES */}
       {workoutPreview.exercises.map((exerciseInWorkout, index) => {
+        console.log(`mapping`, exerciseInWorkout);
+
         return (
           <div key={index}>
             <select
               name={`exercise-${index}`}
-              value={exerciseInWorkout.exercise}
+              value={exerciseInWorkout.exercise._id}
               onChange={(event) =>
                 handleSelect(exerciseInWorkout._id, event.target.value)
               }
@@ -111,6 +118,8 @@ export default function WorkoutForm({ onSubmit }) {
       <button type="button" onClick={handleAddExercise}>
         add exercise
       </button>
+
+      {/* FORM BUTTONS */}
       <div>
         <p>————————</p>
         <button type="submit" disabled={isSubmitting}>

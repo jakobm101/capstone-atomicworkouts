@@ -54,6 +54,14 @@ export default function WorkoutDetailsPage() {
           return <li key={muscle}>{muscle}</li>;
         })}
       </ul>
+      <button
+        type="button"
+        onClick={() => {
+          router.push(`/workouts/update/${id}`);
+        }}
+      >
+        update
+      </button>
       <button type="button" onClick={handleDelete}>
         Delete
       </button>
