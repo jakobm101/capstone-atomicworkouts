@@ -1,8 +1,10 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
 
 export default function WorkoutCreate() {
+  const router = useRouter();
   const [workoutPreview, setWorkoutPreview] = useState({
     workoutName: "New Workout",
     exercises: [{ _id: uid(), exercise: "" }],
@@ -19,7 +21,7 @@ export default function WorkoutCreate() {
   //// Submit Handling
   const handleSubmit = async (e) => {
     e.preventDefault();
-  if (isSubmitting) return;
+    if (isSubmitting) return;
 
     try {
       setIsSubmitting(true);
@@ -87,7 +89,6 @@ export default function WorkoutCreate() {
     setWorkoutPreview({ ...workoutPreview, workoutName: event.target.value });
   };
 
-
   // JSX Main
   return (
     <main>
@@ -122,13 +123,18 @@ export default function WorkoutCreate() {
                   );
                 })}
               </select>
-              <button type="button" onClick={() => handleDeleteExercise(exerciseInWorkout)}>
+              <button
+                type="button"
+                onClick={() => handleDeleteExercise(exerciseInWorkout)}
+              >
                 delete
               </button>
             </div>
           );
         })}
-        <button type="button" onClick={handleAddExercise}>add exercise</button>
+        <button type="button" onClick={handleAddExercise}>
+          add exercise
+        </button>
         <div>
           <p>————————</p>
           <button type="submit" disabled={isSubmitting}>
@@ -137,7 +143,6 @@ export default function WorkoutCreate() {
           <button type="reset">reset</button>
         </div>
       </form>
-
     </main>
   );
 }
