@@ -122,7 +122,7 @@ export default function WorkoutCreate() {
                   );
                 })}
               </select>
-              <button onClick={() => handleDeleteExercise(exerciseInWorkout)}>
+              <button type="button" onClick={() => handleDeleteExercise(exerciseInWorkout)}>
                 delete
               </button>
             </div>
