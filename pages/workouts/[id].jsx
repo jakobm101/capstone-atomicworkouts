@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import useSWR from "swr";
@@ -65,6 +66,10 @@ export default function WorkoutDetailsPage() {
       <button type="button" onClick={handleDelete}>
         Delete
       </button>
+      <div>
+        <Link href={`/`}>home</Link>
+        <Link href={`workouts`}>Workouts</Link>
+      </div>
     </main>
   );
 }
