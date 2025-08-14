@@ -1,3 +1,4 @@
+import { collectMuscleGroups } from "@/lib/utils";
 import Link from "next/link";
 import useSWR from "swr";
 
@@ -23,7 +24,7 @@ export default function WorkoutsPage() {
     <main>
       <h2>Workouts</h2>
       {workouts.map((workout) => {
-        const muscleGroupsInWorkout = new Set();
+        const muscleGroupsInWorkout = collectMuscleGroups(workout.exercises);
 
         return (
           <div key={workout._id}>
@@ -32,9 +33,6 @@ export default function WorkoutsPage() {
             <h4>Exercises</h4>
             <ul>
               {workout.exercises.map(({ exercise }) => {
-                exercise.muscleGroups.map((muscleGroup) =>
-                  muscleGroupsInWorkout.add(muscleGroup)
-                );
                 return <li key={exercise._id}>{exercise.name}</li>;
               })}
             </ul>
