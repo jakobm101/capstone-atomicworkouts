@@ -20,7 +20,6 @@ export default function WorkoutCreate() {
     }
   };
 
-  // JSX Main
   return (
     <main>
       <h1>Creating Workout</h1>

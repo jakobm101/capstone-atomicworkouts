@@ -2,17 +2,6 @@ import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
 
-/**
- * 
- * 
- * Do this:
-
-- State (workoutPreview, isSubmitting)
-
-In your WorkoutForm.jsx just call the onSubmit prop with the prepared data await onSubmit(workoutInSubmit);
-
- */
-
 export default function WorkoutForm({
   onSubmit,
 }) {
@@ -21,13 +10,6 @@ export default function WorkoutForm({
     workoutName: "New Workout",
     exercises: [{ _id: uid(), exercise: "" }],
   });
-  // useSWR Handling
-  const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
-  if (isLoading || error) {
-    return <main>{error ? "error" : "loading"}</main>;
-  }
-
-  //// Submit Handling
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
@@ -78,7 +60,6 @@ export default function WorkoutForm({
     setWorkoutPreview({ ...workoutPreview, workoutName: event.target.value });
   };
 
-  // JSX
   return (
     <form onSubmit={handleSubmit}>
       <label for="workoutName">Name</label>
