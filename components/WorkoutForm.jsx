@@ -48,6 +48,8 @@ export default function WorkoutForm({ onSubmit, workoutProp }) {
       ...workoutPreview,
       exercises: newExercises,
     });
+    console.log(`old exercises`, workoutPreview.exercises);
+    console.log(`new exercises`, newExercises);
   };
 
   const handleDeleteExercise = ({ _id }) => {
