@@ -1,5 +1,3 @@
-import { WifiPen } from "lucide-react";
-import { handleClientScriptLoad } from "next/script";
 import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
