@@ -5,8 +5,8 @@ export default function Navigation() {
   return (
     <StyledDiv>
       <Link href={`/`}>Home</Link>
-      <Link href={`/exercises`}>Exercises</Link>
       <Link href={`/workouts`}>Workouts</Link>
+      <Link href={`/exercises`}>Exercises</Link>
     </StyledDiv>
   );
 }
