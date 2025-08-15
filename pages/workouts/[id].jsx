@@ -82,10 +82,6 @@ export default function WorkoutDetailsPage() {
           </button>
         </div>
       )}
-      <div>
-        <Link href={`/`}>home</Link>
-        <Link href={`/workouts`}>Workouts</Link>
-      </div>
     </Layout>
   );
 }

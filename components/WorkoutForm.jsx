@@ -1,8 +1,10 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
 
 export default function WorkoutForm({ onSubmit, defaultValue }) {
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [workoutPreview, setWorkoutPreview] = useState({
     workoutName: defaultValue?.name ?? "New Workout",
@@ -121,6 +123,9 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
           {isSubmitting ? "Creating..." : "Submit"}
         </button>
         <button type="reset">reset</button>
+        <button type="button" onClick={router.back}>
+          Cancel
+        </button>
       </div>
     </form>
   );

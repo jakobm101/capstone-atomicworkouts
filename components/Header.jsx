@@ -7,4 +7,6 @@ export default function Header() {
 
 const StyledLink = styled(Link)`
   font-size: xx-small;
+  position: sticky;
+  top: 0;
 `;

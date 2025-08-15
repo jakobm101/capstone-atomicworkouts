@@ -26,7 +26,6 @@ export default function WorkoutCreate() {
     <Layout>
       <h1>Creating Workout</h1>
       <WorkoutForm onSubmit={handleCreateWorkout} />
-      <Link href={`/`}>home</Link>
     </Layout>
   );
 }
