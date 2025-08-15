@@ -47,7 +47,7 @@ export default function WorkoutDetailsPage() {
       </ul>
       <h4>Muscle Groups</h4>
       <ul>
-        {[...muscleGroupsInWorkout].map((muscle) => {
+        {muscleGroupsInWorkout.map((muscle) => {
           return <li key={muscle}>{muscle}</li>;
         })}
       </ul>
