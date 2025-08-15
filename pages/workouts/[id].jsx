@@ -4,6 +4,7 @@ import styled from "styled-components";
 import useSWR from "swr";
 import { collectMuscleGroups } from "@/lib/utils";
 import { useState } from "react";
+import { useState } from "react";
 import Layout from "@/components/Layout";
 export default function WorkoutDetailsPage() {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -82,10 +83,6 @@ export default function WorkoutDetailsPage() {
           </button>
         </div>
       )}
-      <div>
-        <Link href={`/`}>home</Link>
-        <Link href={`/workouts`}>Workouts</Link>
-      </div>
     </Layout>
   );
 }
