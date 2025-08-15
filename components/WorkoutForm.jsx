@@ -2,11 +2,11 @@ import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
 
-export default function WorkoutForm({ onSubmit }) {
+export default function WorkoutForm({ onSubmit, defaultValue }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [workoutPreview, setWorkoutPreview] = useState({
-    workoutName: "New Workout",
-    exercises: [{ _id: uid(), exercise: "" }],
+    workoutName: defaultValue?.name ?? "New Workout",
+    exercises: defaultValue?.exercises ?? [{ _id: uid(), exercise: "" }],
   });
 
   // useSWR Handling
@@ -37,10 +37,10 @@ export default function WorkoutForm({ onSubmit }) {
     onSubmit(workoutInSubmit);
   };
 
-  const handleSelect = (id, selectedExercise) => {
+  const handleSelect = (id, selectedExerciseId) => {
     let newExercises = workoutPreview.exercises.map((exercise) =>
       exercise._id === id
-        ? { ...exercise, exercise: selectedExercise }
+        ? { ...exercise, exercise: selectedExerciseId }
         : exercise
     );
 
@@ -79,12 +79,15 @@ export default function WorkoutForm({ onSubmit }) {
         value={workoutPreview.workoutName}
         onChange={(event) => handleNameChange(event)}
       />
+
       {workoutPreview.exercises.map((exerciseInWorkout, index) => {
         return (
           <div key={index}>
             <select
               name={`exercise-${index}`}
-              value={exerciseInWorkout.exercise}
+              value={
+                exerciseInWorkout.exercise?._id || exerciseInWorkout.exercise
+              }
               onChange={(event) =>
                 handleSelect(exerciseInWorkout._id, event.target.value)
               }
@@ -111,6 +114,7 @@ export default function WorkoutForm({ onSubmit }) {
       <button type="button" onClick={handleAddExercise}>
         add exercise
       </button>
+
       <div>
         <p>————————</p>
         <button type="submit" disabled={isSubmitting}>
