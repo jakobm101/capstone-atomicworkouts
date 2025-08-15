@@ -24,15 +24,16 @@ export default function ExercisesPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push(`/exercises/filter/${e.target.muscle.value}`);
+    const muscle = e.target.muscle.value;
+    muscle && router.push(`/exercises/filter/${muscle}`);
   };
 
   return (
     <Layout>
       <h2>Filter</h2>
       <form onSubmit={handleSubmit}>
-        <select name="muscle" id="muscle">
-          <option value={null}>Sort by muscle group</option>
+        <select name="muscle" id="muscle" required>
+          <option>Sort by muscle group</option>
           {libMusclegroups.map((muscle) => {
             return (
               <option key={muscle} value={muscle}>

@@ -33,15 +33,15 @@ export default function FilteredExercisesPage() {
   return (
     <Layout>
       <h2>Filtered by {muscle}</h2>
-      <p>{exercises.length ?? "no"} exercises found </p>
-      {exercises.length ? (
+      <p>{exercises?.length ?? "no"} exercises found </p>
+      {exercises?.length ? (
         <h3>Exercises</h3>
       ) : (
         <Card>
           <StyledLink href={`/exercises`}>Check out all Exercises</StyledLink>
         </Card>
       )}
-      {exercises.map((exercise) => {
+      {exercises?.map((exercise) => {
         return (
           <Card key={exercise._id}>
             <h3>{exercise.name}</h3>
