@@ -26,7 +26,8 @@ export default function WorkoutDetailsPage() {
 
   const handleDelete = async () => {
     if (!isDeleting) {
-      return setIsDeleting(true);
+      setIsDeleting(true);
+      return;
     }
     const response = await fetch(apiUrl, {
       method: "DELETE",
@@ -44,7 +45,7 @@ export default function WorkoutDetailsPage() {
       <ul>
         {exercises.map(({ reps, sets, exercise }) => {
           return (
-            <li key={exercises.name}>
+            <li key={exercise.name}>
               <StyledSpan>{exercise.name} </StyledSpan>
               _Reps: {reps} - Sets: {sets}
             </li>
