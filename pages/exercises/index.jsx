@@ -33,7 +33,7 @@ export default function ExercisesPage() {
       <h2>Filter</h2>
       <form onSubmit={handleSubmit}>
         <select name="muscle" id="muscle" required>
-          <option>Sort by muscle group</option>
+          <option value="">Sort by muscle group</option>
           {libMusclegroups.map((muscle) => {
             return (
               <option key={muscle} value={muscle}>
