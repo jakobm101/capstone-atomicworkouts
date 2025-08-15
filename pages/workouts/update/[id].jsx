@@ -1,4 +1,3 @@
-import Layout from "@/components/Layout";
 import WorkoutForm from "@/components/WorkoutForm";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -26,7 +25,6 @@ export default function WorkoutUpdatePage() {
       body: JSON.stringify(workoutInSubmit),
     });
     if (response.ok) {
-      mutate();
       router.push(`/workouts`);
     }
   };
@@ -34,7 +32,7 @@ export default function WorkoutUpdatePage() {
   return (
     <Layout>
      <h1>Update Workout</h1>
-      <WorkoutForm onSubmit={handleUpdate} workoutProp={workout} />
+      <WorkoutForm onSubmit={handleUpdate} defaultValue={workout} />
       <Link href={`/`}>home</Link>
     </Layout>
   );
