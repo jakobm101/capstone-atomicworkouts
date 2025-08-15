@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import WorkoutForm from "@/components/WorkoutForm";
 import Link from "next/link";
 import { useRouter } from "next/router";
