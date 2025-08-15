@@ -6,6 +6,7 @@ import { useState } from "react";
 import useSWR from "swr";
 
 export default function ExercisesPage() {
+  const [filter, setFilter] = useState();
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
   if (isLoading) {
     return (
@@ -19,8 +20,6 @@ export default function ExercisesPage() {
       <h2>error</h2>
     </Layout>;
   }
-
-  const [filter, setFilter] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
