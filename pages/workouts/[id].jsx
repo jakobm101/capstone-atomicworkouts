@@ -3,8 +3,10 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import useSWR from "swr";
 import { collectMuscleGroups } from "@/lib/utils";
+import { useState } from "react";
 import Layout from "@/components/Layout";
 export default function WorkoutDetailsPage() {
+  const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   const id = router.query.id;
   const apiUrl = `/api/workouts/${id}`;
@@ -23,11 +25,14 @@ export default function WorkoutDetailsPage() {
   const muscleGroupsInWorkout = collectMuscleGroups(exercises);
 
   const handleDelete = async () => {
+    if (!isDeleting) {
+      return setIsDeleting(true);
+    }
     const response = await fetch(apiUrl, {
       method: "DELETE",
     });
     if (response.ok) {
-      router.push(`/`);
+      router.push(`/workouts`);
     }
   };
 
@@ -60,10 +65,27 @@ export default function WorkoutDetailsPage() {
       >
         update
       </button>
-      <button type="button" onClick={handleDelete}>
-        Delete
-      </button>
-    </Layout>
+      {isDeleting ? (
+        <div>
+          <button type="button" onClick={() => setIsDeleting(false)}>
+            Cancel Delete
+          </button>
+          <button type="button" onClick={handleDelete}>
+            Confirm Deletion
+          </button>
+        </div>
+      ) : (
+        <div>
+          <button type="button" onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
+      )}
+      <div>
+        <Link href={`/`}>home</Link>
+        <Link href={`/workouts`}>Workouts</Link>
+      </div>
+    </main>
   );
 }
 
