@@ -31,7 +31,7 @@ export default function WorkoutDetailsPage() {
       method: "DELETE",
     });
     if (response.ok) {
-      router.push(`/`);
+      router.push(`/workouts`);
     }
   };
 
