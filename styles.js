@@ -68,8 +68,8 @@ main {
   -ms-overflow-style: none;
 }
 
-h3 {
-  margin: 8px 0;
+h2, h3, h4, p  {
+  margin: 8px 8px 8px 0;
 }
 
 button, select, input {
