@@ -8,7 +8,7 @@ export default function WorkoutUpdatePage() {
   const id = router.query.id;
   const apiUrl = `/api/workouts/${id}`;
 
-  const { data: workout, isLoading, error, mutate } = useSWR(apiUrl);
+  const { data: workout, isLoading, error } = useSWR(apiUrl);
   if (isLoading) {
     return <Layout>loading</Layout>;
   }
