@@ -2,6 +2,7 @@ import Card from "@/components/Card";
 import Layout from "@/components/Layout";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styled from "styled-components";
 import useSWR from "swr";
 
 export default function FilteredExercisesPage() {
@@ -31,8 +32,15 @@ export default function FilteredExercisesPage() {
 
   return (
     <Layout>
-      <h2>Exercises</h2>
-      <h3>Filtered by {muscle}</h3>
+      <h2>Filtered by {muscle}</h2>
+      <p>{exercises.length ?? "no"} exercises found </p>
+      {exercises.length ? (
+        <h3>Exercises</h3>
+      ) : (
+        <Card>
+          <StyledLink href={`/exercises`}>Check out all Exercises</StyledLink>
+        </Card>
+      )}
       {exercises.map((exercise) => {
         return (
           <Card key={exercise._id}>
@@ -47,3 +55,10 @@ export default function FilteredExercisesPage() {
     </Layout>
   );
 }
+
+const StyledLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 30vh;
+`;
