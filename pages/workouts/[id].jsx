@@ -3,18 +3,20 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import useSWR from "swr";
 import { collectMuscleGroups } from "@/lib/utils";
+import { useState } from "react";
 import Layout from "@/components/Layout";
 export default function WorkoutDetailsPage() {
+  const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   const id = router.query.id;
   const apiUrl = `/api/workouts/${id}`;
 
   const { data: workout, isLoading, error } = useSWR(apiUrl);
   if (isLoading) {
-    <Layout>loading</Layout>;
+    return <Layout>loading</Layout>;
   }
   if (error) {
-    <Layout>error</Layout>;
+    return <Layout>error</Layout>;
   }
   if (!workout) {
     return <Layout>loading workout</Layout>;
@@ -23,11 +25,15 @@ export default function WorkoutDetailsPage() {
   const muscleGroupsInWorkout = collectMuscleGroups(exercises);
 
   const handleDelete = async () => {
+    if (!isDeleting) {
+      setIsDeleting(true);
+      return;
+    }
     const response = await fetch(apiUrl, {
       method: "DELETE",
     });
     if (response.ok) {
-      router.push(`/`);
+      router.push(`/workouts`);
     }
   };
 
@@ -39,7 +45,7 @@ export default function WorkoutDetailsPage() {
       <ul>
         {exercises.map(({ reps, sets, exercise }) => {
           return (
-            <li key={exercises.name}>
+            <li key={exercise.name}>
               <StyledSpan>{exercise.name} </StyledSpan>
               _Reps: {reps} - Sets: {sets}
             </li>
@@ -60,9 +66,22 @@ export default function WorkoutDetailsPage() {
       >
         update
       </button>
-      <button type="button" onClick={handleDelete}>
-        Delete
-      </button>
+      {isDeleting ? (
+        <div>
+          <button type="button" onClick={() => setIsDeleting(false)}>
+            Cancel Delete
+          </button>
+          <button type="button" onClick={handleDelete}>
+            Confirm Deletion
+          </button>
+        </div>
+      ) : (
+        <div>
+          <button type="button" onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
+      )}
       <div>
         <Link href={`/`}>home</Link>
         <Link href={`/workouts`}>Workouts</Link>
