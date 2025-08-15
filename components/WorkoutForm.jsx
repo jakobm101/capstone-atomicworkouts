@@ -2,11 +2,11 @@ import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
 
-export default function WorkoutForm({ onSubmit, workoutProp }) {
+export default function WorkoutForm({ onSubmit, defaultValue }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [workoutPreview, setWorkoutPreview] = useState({
-    workoutName: workoutProp?.name ?? "New Workout",
-    exercises: workoutProp?.exercises ?? [{ _id: uid(), exercise: "" }],
+    workoutName: defaultValue?.name ?? "New Workout",
+    exercises: defaultValue?.exercises ?? [{ _id: uid(), exercise: "" }],
   });
 
   // useSWR Handling

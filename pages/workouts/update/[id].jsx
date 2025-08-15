@@ -32,7 +32,7 @@ export default function WorkoutUpdatePage() {
   return (
     <main>
       <h1>Update Workout</h1>
-      <WorkoutForm onSubmit={handleUpdate} workoutProp={workout} />
+      <WorkoutForm onSubmit={handleUpdate} defaultValue={workout} />
       <Link href={`/`}>home</Link>
     </main>
   );
