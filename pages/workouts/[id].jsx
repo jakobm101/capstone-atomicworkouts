@@ -1,9 +1,7 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import useSWR from "swr";
 import { collectMuscleGroups } from "@/lib/utils";
-import { useState } from "react";
 import { useState } from "react";
 import Layout from "@/components/Layout";
 export default function WorkoutDetailsPage() {
