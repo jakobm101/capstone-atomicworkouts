@@ -25,7 +25,6 @@ export default function WorkoutUpdatePage() {
       body: JSON.stringify(workoutInSubmit),
     });
     if (response.ok) {
-      mutate();
       router.push(`/workouts`);
     }
   };
