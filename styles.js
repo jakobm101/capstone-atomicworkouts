@@ -68,6 +68,9 @@ main {
   -ms-overflow-style: none;
 }
 
+h3 {
+  margin: 8px 0;
+}
 
 button, select, input {
   margin: 4px;
@@ -89,6 +92,10 @@ button, select, input {
   box-shadow: 
     0 0 .1rem .1rem var(--color-orange-0), 
     inset 0 1rem 1rem var(--color-orange-0);
+}
+
+select {
+  margin:  4px 0 ;
 }
 
 button {

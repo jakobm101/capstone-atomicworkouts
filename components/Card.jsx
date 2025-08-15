@@ -7,6 +7,6 @@ export default function Card({ children }) {
 const StyledDiv = styled.div`
   border: 1px solid var(--color-orange-5);
   border-radius: 4px;
-  padding: 0 0 10px 10px;
+  padding: 0 0 18px 8px;
   margin-bottom: 10px;
 `;
