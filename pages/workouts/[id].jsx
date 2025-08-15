@@ -25,7 +25,8 @@ export default function WorkoutDetailsPage() {
 
   const handleDelete = async () => {
     if (!isDeleting) {
-      return setIsDeleting(true);
+      setIsDeleting(true);
+      return;
     }
     const response = await fetch(apiUrl, {
       method: "DELETE",
