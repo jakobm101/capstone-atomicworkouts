@@ -5,8 +5,9 @@ import { collectMuscleGroups } from "@/lib/utils";
 export default function WorkoutDetailsPage() {
   const router = useRouter();
   const id = router.query.id;
+  const apiUrl = `/api/workouts/${id}`;
 
-  const { data: workout, isLoading, error } = useSWR(`/api/workouts/${id}`);
+  const { data: workout, isLoading, error } = useSWR(apiUrl);
   if (isLoading) {
     <main>loading</main>;
   }
@@ -18,6 +19,15 @@ export default function WorkoutDetailsPage() {
   }
   const { name, exercises } = workout;
   const muscleGroupsInWorkout = collectMuscleGroups(exercises);
+
+  const handleDelete = async () => {
+    const response = await fetch(apiUrl, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      router.push(`/`);
+    }
+  };
 
   return (
     <main>
@@ -40,11 +50,14 @@ export default function WorkoutDetailsPage() {
           return <li key={muscle}>{muscle}</li>;
         })}
       </ul>
+      <button type="button" onClick={handleDelete}>
+        Delete
+      </button>
     </main>
   );
 }
 
 const StyledSpan = styled.span`
   display: inline-block;
-  width: 110px;
+  width: 120px;
 `;
