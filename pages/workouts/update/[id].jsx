@@ -1,6 +1,4 @@
-import Layout from "@/components/Layout";
 import WorkoutForm from "@/components/WorkoutForm";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
@@ -9,7 +7,7 @@ export default function WorkoutUpdatePage() {
   const id = router.query.id;
   const apiUrl = `/api/workouts/${id}`;
 
-  const { data: workout, isLoading, error, mutate } = useSWR(apiUrl);
+  const { data: workout, isLoading, error } = useSWR(apiUrl);
   if (isLoading) {
     return <Layout>loading</Layout>;
   }
@@ -26,7 +24,6 @@ export default function WorkoutUpdatePage() {
       body: JSON.stringify(workoutInSubmit),
     });
     if (response.ok) {
-      mutate();
       router.push(`/workouts`);
     }
   };
@@ -34,8 +31,8 @@ export default function WorkoutUpdatePage() {
   return (
     <Layout>
      <h1>Update Workout</h1>
-      <WorkoutForm onSubmit={handleUpdate} workoutProp={workout} />
-
+      <WorkoutForm onSubmit={handleUpdate} defaultValue={workout} />
+      <Link href={`/`}>home</Link>
     </Layout>
   );
 }
