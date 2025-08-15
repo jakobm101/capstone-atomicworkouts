@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import Link from "next/link";
 import useSWR from "swr";
 
@@ -6,19 +7,19 @@ export default function ExercisesPage() {
 
   if (isLoading) {
     return (
-      <main>
+      <Layout>
         <h2>isLoading</h2>
-      </main>
+      </Layout>
     );
   }
   if (error) {
-    <main>
+    <Layout>
       <h2>error</h2>
-    </main>;
+    </Layout>;
   }
 
   return (
-    <main>
+    <Layout>
       <h2>Exercises</h2>
       <ul>
         {exercises.map((exercise) => {
@@ -35,6 +36,6 @@ export default function ExercisesPage() {
       </ul>
       <Link href={`/`}>home</Link>
       <Link href={`workouts`}>workouts</Link>
-    </main>
+    </Layout>
   );
 }

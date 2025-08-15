@@ -4,6 +4,7 @@ import styled from "styled-components";
 import useSWR from "swr";
 import { collectMuscleGroups } from "@/lib/utils";
 import { useState } from "react";
+import Layout from "@/components/Layout";
 export default function WorkoutDetailsPage() {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
@@ -12,13 +13,13 @@ export default function WorkoutDetailsPage() {
 
   const { data: workout, isLoading, error } = useSWR(apiUrl);
   if (isLoading) {
-    return <main>loading</main>;
+    return <Layout>loading</Layout>;
   }
   if (error) {
-    return <main>error</main>;
+    return <Layout>error</Layout>;
   }
   if (!workout) {
-    return <main>loading workout</main>;
+    return <Layout>loading workout</Layout>;
   }
   const { name, exercises } = workout;
   const muscleGroupsInWorkout = collectMuscleGroups(exercises);
@@ -37,7 +38,7 @@ export default function WorkoutDetailsPage() {
   };
 
   return (
-    <main>
+    <Layout>
       <h2>Workout Details</h2>
       <h3>{name}</h3>
       <h4>Exercises</h4>
@@ -85,7 +86,7 @@ export default function WorkoutDetailsPage() {
         <Link href={`/`}>home</Link>
         <Link href={`/workouts`}>Workouts</Link>
       </div>
-    </main>
+    </Layout>
   );
 }
 

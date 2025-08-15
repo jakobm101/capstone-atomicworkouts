@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import { collectMuscleGroups } from "@/lib/utils";
 import Link from "next/link";
 import useSWR from "swr";
@@ -7,21 +8,21 @@ export default function WorkoutsPage() {
 
   if (isLoading) {
     return (
-      <main>
+      <Layout>
         <h2>isLoading</h2>
-      </main>
+      </Layout>
     );
   }
   if (error) {
     return (
-      <main>
+      <Layout>
         <h2>error</h2>
-      </main>
+      </Layout>
     );
   }
 
   return (
-    <main>
+    <Layout>
       <h2>Workouts</h2>
       {workouts.map((workout) => {
         const muscleGroupsInWorkout = collectMuscleGroups(workout.exercises);
@@ -50,6 +51,6 @@ export default function WorkoutsPage() {
       })}
       <Link href={`/`}>home</Link>
       <Link href={`/workouts/create`}>add new workout</Link>
-    </main>
+    </Layout>
   );
 }
