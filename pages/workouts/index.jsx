@@ -1,3 +1,4 @@
+import Card from "@/components/Card";
 import Layout from "@/components/Layout";
 import { collectMuscleGroups } from "@/lib/utils";
 import { Plus } from "lucide-react";
@@ -34,7 +35,7 @@ export default function WorkoutsPage() {
         const muscleGroupsInWorkout = collectMuscleGroups(workout.exercises);
 
         return (
-          <StyledDiv key={workout._id}>
+          <Card key={workout._id}>
             <h3>{workout.name}</h3>
 
             <h4>Exercises</h4>
@@ -51,7 +52,7 @@ export default function WorkoutsPage() {
               ))}
             </ul>
             <Link href={`/workouts/${workout._id}`}>Details</Link>
-          </StyledDiv>
+          </Card>
         );
       })}
       <StyledLink href={`/workouts/create`}>
@@ -61,13 +62,6 @@ export default function WorkoutsPage() {
     </Layout>
   );
 }
-
-const StyledDiv = styled.div`
-  border: 1px solid var(--color-orange-5);
-  border-radius: 4px;
-  padding: 0 0 10px 10px;
-  margin-bottom: 10px;
-`;
 
 const StyledLink = styled(Link)`
   display: flex;
