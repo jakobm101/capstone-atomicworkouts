@@ -13,10 +13,10 @@ export default function WorkoutDetailsPage() {
 
   const { data: workout, isLoading, error } = useSWR(apiUrl);
   if (isLoading) {
-    <Layout>loading</Layout>;
+    return <Layout>loading</Layout>;
   }
   if (error) {
-    <Layout>error</Layout>;
+    return <Layout>error</Layout>;
   }
   if (!workout) {
     return <Layout>loading workout</Layout>;
