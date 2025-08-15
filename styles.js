@@ -48,6 +48,9 @@ main::-webkit-scrollbar {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
+  
   position: relative;
   width: 400px;
   height: 90vh;

@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import Header from "./Header";
 import Navigation from "./Navigation";
 
@@ -5,8 +6,12 @@ export default function Layout({ children }) {
   return (
     <main>
       <Header />
-      {children}
+      <StyledDiv>{children}</StyledDiv>
       <Navigation />
     </main>
   );
 }
+
+const StyledDiv = styled.div`
+  flex: 1;
+`;
