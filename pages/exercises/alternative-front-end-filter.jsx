@@ -21,41 +21,48 @@ export default function ExercisesPage() {
     </Layout>;
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setFilter(e.target.muscle.value);
+const handleFilterChange = (e) => {
+    setFilter(e.target.value);
   };
+
+  const filteredExercises = exercises?.filter(
+    (exercise) => !filter || exercise.muscleGroups.includes(filter)
+  );
 
   return (
     <Layout>
       <h2>Filter</h2>
-      <form onSubmit={handleSubmit}>
-        <select name="muscle" id="muscle">
-          <option value={null}>Sort by muscle group</option>
-          {libMusclegroups.map((muscle) => {
-            return (
-              <option key={muscle} value={muscle}>
-                {muscle}
-              </option>
-            );
-          })}
-        </select>
-        <button type="submit">submit</button>
-      </form>
-      <h2>Exercises</h2>
-      {exercises.map((exercise) => {
-        if (!filter || exercise.muscleGroups.includes(filter)) {
+      <select onChange={handleFilterChange} value={filter || ""}>
+        <option value="">Show all exercises</option>
+        {libMusclegroups.map((muscle) => {
           return (
+            <option key={muscle} value={muscle}>
+              {muscle}
+            </option>
+          );
+        })}
+      </select>
+
+      <p>{filteredExercises?.length ?? "no"} exercises found</p>
+
+      {filteredExercises?.length ? (
+        <>
+          <h2>Exercises</h2>
+          {filteredExercises.map((exercise) => (
             <Card key={exercise._id}>
               <h3>{exercise.name}</h3>
-              {exercise.muscleGroups.map((muscle) => {
-                return <span key={muscle}>{`_${muscle} `}</span>;
-              })}
+              {exercise.muscleGroups.map((muscle) => (
+                <span key={muscle}>{`_${muscle} `}</span>
+              ))}
               <Link href={`/exercises/${exercise._id}`}>details</Link>
             </Card>
-          );
-        }
-      })}
+          ))}
+        </>
+      ) : (
+        <Card>
+          <p>No exercises found for this muscle group</p>
+        </Card>
+      )}
     </Layout>
   );
 }
