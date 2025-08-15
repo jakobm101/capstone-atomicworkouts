@@ -2,6 +2,7 @@ import Card from "@/components/Card";
 import Layout from "@/components/Layout";
 import libMusclegroups from "@/lib/musclegroups";
 import Link from "next/link";
+import { useState } from "react";
 import useSWR from "swr";
 
 export default function ExercisesPage() {
@@ -19,9 +20,11 @@ export default function ExercisesPage() {
     </Layout>;
   }
 
+  const [filter, setFilter] = useState();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`SUBMIT`);
+    setFilter(e.target.muscle.value);
   };
 
   return (
@@ -42,15 +45,17 @@ export default function ExercisesPage() {
       </form>
       <h2>Exercises</h2>
       {exercises.map((exercise) => {
-        return (
-          <Card key={exercise._id}>
-            <h3>{exercise.name}</h3>
-            {exercise.muscleGroups.map((muscle) => {
-              return <span key={muscle}>{`_${muscle} `}</span>;
-            })}
-            <Link href={`/exercises/${exercise._id}`}>details</Link>
-          </Card>
-        );
+        if (!filter || exercise.muscleGroups.includes(filter)) {
+          return (
+            <Card key={exercise._id}>
+              <h3>{exercise.name}</h3>
+              {exercise.muscleGroups.map((muscle) => {
+                return <span key={muscle}>{`_${muscle} `}</span>;
+              })}
+              <Link href={`/exercises/${exercise._id}`}>details</Link>
+            </Card>
+          );
+        }
       })}
     </Layout>
   );
