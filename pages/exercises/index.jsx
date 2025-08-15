@@ -53,13 +53,17 @@ export default function ExercisesPage() {
           {filteredExercises.map((exercise) => (
             <Card key={exercise._id}>
               <h3>{exercise.name}</h3>
-              <MuscleWrapper>
-                <h4>Muscle Groups</h4>
-                {exercise.muscleGroups.map((muscle) => (
-                  <Muscle key={muscle}>{muscle}</Muscle>
-                ))}
-              </MuscleWrapper>
-              <Link href={`/exercises/${exercise._id}`}>details</Link>
+              <MuscleArticle>
+                <StyledH5>Muscle Groups</StyledH5>
+                <MuscleWrapper>
+                  {exercise.muscleGroups.map((muscle) => (
+                    <Muscle key={muscle}>{muscle}</Muscle>
+                  ))}
+                </MuscleWrapper>
+              </MuscleArticle>
+              <StyledLink href={`/exercises/${exercise._id}`}>
+                details
+              </StyledLink>
             </Card>
           ))}
         </>
@@ -75,23 +79,41 @@ export default function ExercisesPage() {
 const Muscle = styled.div`
   display: inline-block;
   font-size: small;
-  border: 1px solid var(--color-orange-5);
+  border: 1px solid var(--color-orange-0);
+  border-radius: 2px;
   padding: 4px 8px;
   margin: 0 4px 4px 0;
 `;
 
+const MuscleArticle = styled.article`
+  display: flex;
+  flex-flow: row;
+`;
+
 const MuscleWrapper = styled.div`
+  display: flex;
+  flex-flow: row wrap;
   margin-bottom: 10px;
 `;
 
 const FilterWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
-  border-bottom: 1px solid var(--color-orange-5);
-  margin-bottom: 8px;
+  border-left: 1px solid var(--color-orange-10);
+  margin-bottom: 32px;
+  padding-left: 8px;
 `;
 
 const StyledH2 = styled.h2`
   position: sticky;
   top: 8px;
+`;
+
+const StyledH5 = styled.h5`
+  min-width: max-content;
+`;
+const StyledLink = styled(Link)`
+  border: 1px solid var(--color-orange-5);
+  border-radius: 4px;
+  padding: 4px 8px 8px 8px;
 `;

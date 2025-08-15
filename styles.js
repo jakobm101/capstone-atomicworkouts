@@ -6,7 +6,7 @@ export default createGlobalStyle`
     --color-orange-10: rgba(99%, 55%, 25%, 1);
     --color-orange-9: rgba(99%, 55%, 25%, 0.9);
     --color-orange-5: rgba(99%, 55%, 25%, 0.5);
-    --color-orange-0: rgba(99%, 55%, 25%, 0.1);
+    --color-orange-0: rgba(99%, 55%, 25%, 0.3);
     --rgb-orange: 99%, 55%, 25%;
     --color-background: black;
     --color-contrast: white;
@@ -68,8 +68,14 @@ main {
   -ms-overflow-style: none;
 }
 
-h2, h3, h4, p  {
+h2, h3, h4, h5, p  {
   margin: 8px 8px 8px 0;
+}
+
+h5 {
+  font-size: 0.64rem;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
 }
 
 button, select, input {
