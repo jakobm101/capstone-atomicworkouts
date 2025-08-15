@@ -65,18 +65,20 @@ export default function WorkoutDetailsPage() {
         update
       </button>
       {isDeleting ? (
-        <>
+        <div>
           <button type="button" onClick={() => setIsDeleting(false)}>
             Cancel Delete
           </button>
           <button type="button" onClick={handleDelete}>
             Confirm Deletion
           </button>
-        </>
+        </div>
       ) : (
-        <button type="button" onClick={handleDelete}>
-          Delete
-        </button>
+        <div>
+          <button type="button" onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
       )}
       <div>
         <Link href={`/`}>home</Link>
