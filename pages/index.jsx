@@ -41,7 +41,9 @@ export default function TimerPage() {
           value={pauseDuration}
           onChange={(e) => setPauseDuration(e.target.value)}
         />
-        <StyledButton onClick={() => setPauseDuration((prev) => prev + 1)}>
+        <StyledButton
+          onClick={() => setPauseDuration((prev) => Number(prev) + 1)}
+        >
           <SquareChevronUp size={buttonSize} />
         </StyledButton>
         <StyledButton onClick={() => setPauseDuration((prev) => prev - 1)}>
@@ -55,7 +57,7 @@ export default function TimerPage() {
           <h3>Instructions</h3>
           <ol>
             {instructions?.map((step) => (
-              <li key={step}>{step}</li> 
+              <li key={step}>{step}</li>
             ))}
           </ol>
         </>
