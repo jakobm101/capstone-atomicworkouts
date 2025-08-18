@@ -1,21 +1,41 @@
 import Layout from "@/components/Layout";
+import MuscleGroups from "@/components/MuscleGroups";
 import Timer from "@/components/Timer";
-import { RefreshCcw } from "lucide-react";
-import { useState } from "react";
+import libExercises from "@/lib/exercises";
+import { RefreshCcw, SquareChevronDown, SquareChevronUp } from "lucide-react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 export default function TimerPage() {
   const [sets, setSets] = useState(0);
   const [pauseDuration, setPauseDuration] = useState(3);
+  const [exercise, setExercise] = useState("Pull-Up"); // default safe SSR value
+  const buttonSize = 64;
+
+  useEffect(() => {
+    const exercises = libExercises;
+    const random = exercises[Math.floor(Math.random() * exercises.length)];
+    setExercise(random);
+  }, []);
+
+  console.log(exercise);
+  const { instructions, name, muscleGroups } = exercise;
+
+  console.log(`instruction and such`, instructions, name, muscleGroups);
 
   return (
     <Layout>
+      <h5>Random Exercise Suggestion:</h5>
+      <h1>{name}</h1>
+      <h3>Pause Between Sets:</h3>
       <Timer setCount={setSets} pauseDuration={pauseDuration} />
-      <StyledH2>Sets: {sets}</StyledH2>
-      <StyledButton onClick={() => setSets(0)}>
-        <RefreshCcw />
-      </StyledButton>
-      <div>
+      <StyledMenuRow>
+        <StyledH2>Sets: {sets}</StyledH2>
+        <StyledButton onClick={() => setSets(0)}>
+          <RefreshCcw />
+        </StyledButton>
+      </StyledMenuRow>
+      <StyledMenuRow>
         <label>Pause Duration</label>
         <StyledInput
           type="number"
@@ -24,13 +44,32 @@ export default function TimerPage() {
           value={pauseDuration}
           onChange={(e) => setPauseDuration(e.target.value)}
         />
-      </div>
+        <StyledButton onClick={() => setPauseDuration((prev) => prev + 1)}>
+          <SquareChevronUp size={buttonSize} />
+        </StyledButton>
+        <StyledButton onClick={() => setPauseDuration((prev) => prev - 1)}>
+          <SquareChevronDown size={buttonSize} />
+        </StyledButton>
+      </StyledMenuRow>
+      <hr />
+      {exercise?.muscleGroups && (
+        <>
+          <MuscleGroups muscleGroups={muscleGroups} />
+          <h3>Instructions</h3>
+          <ol>
+            {instructions?.map((step) => (
+              <li key={step}>{step}</li> //
+            ))}
+          </ol>
+        </>
+      )}
     </Layout>
   );
 }
 
 const StyledH2 = styled.h2`
   display: inline;
+  font-size: xxx-large;
 `;
 
 const StyledButton = styled.button`
@@ -59,4 +98,10 @@ const StyledInput = styled.input`
   box-shadow: none;
   width: 40px;
   text-align: right;
+`;
+
+const StyledMenuRow = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
 `;
