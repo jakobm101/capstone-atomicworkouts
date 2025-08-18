@@ -76,10 +76,10 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     setWorkoutPreview({ ...workoutPreview, workoutName: event.target.value });
   };
 
-  const handleSetChange = (event, exerciseInWorkout) => {
+  const handleSetChange = (event, id) => {
     const newWorkoutPreviewExercises = workoutPreview.exercises.map(
       (exercise) =>
-        exercise._id === exerciseInWorkout._id
+        exercise._id === id
           ? { ...exercise, sets: event.target.value }
           : exercise
     );
@@ -89,10 +89,10 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     });
   };
 
-  const handleRepsChange = (event, exerciseInWorkout) => {
+  const handleRepsChange = (event, id) => {
     const newWorkoutPreviewExercises = workoutPreview.exercises.map(
       (exercise) =>
-        exercise._id === exerciseInWorkout._id
+        exercise._id === id
           ? { ...exercise, reps: event.target.value }
           : exercise
     );
@@ -153,7 +153,9 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
                 min="1"
                 max="9"
                 value={exerciseInWorkout.sets}
-                onChange={(event) => handleSetChange(event, exerciseInWorkout)}
+                onChange={(event) =>
+                  handleSetChange(event, exerciseInWorkout._id)
+                }
               />
 
               {/* Reps */}
@@ -167,7 +169,9 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
                 min="1"
                 max="32"
                 value={exerciseInWorkout.reps}
-                onChange={(event) => handleRepsChange(event, exerciseInWorkout)}
+                onChange={(event) =>
+                  handleRepsChange(event, exerciseInWorkout._id)
+                }
               />
 
               {/* delete exercise */}
