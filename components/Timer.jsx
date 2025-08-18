@@ -7,15 +7,17 @@ export default function Timer({ pauseTime = 5, setCount }) {
   const [isRunning, setIsRunning] = useState(true);
 
   useEffect(() => {
+    //if paused or timer done then stop and reset timer
     if (timer <= 0 && !isRunning) {
       setTimer(pauseTime);
       setIsRunning(!isRunning);
+      // count laps
     } else if (timer <= 0 || !isRunning) {
       setCount((prev) => prev + 1);
       return;
     }
 
-    const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+    const interval = setInterval(() => setTimer(timer - 1), 1000);
     return () => clearInterval(interval);
   }, [timer, isRunning]);
 
