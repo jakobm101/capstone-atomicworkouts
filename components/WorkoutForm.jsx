@@ -29,7 +29,10 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
     const newExercisesList = workoutPreview.exercises.map((_, index) => {
-      return { exercise: data[`exercise-${index}`] };
+      return {
+        exercise: data[`exercise-${index}`],
+        sets: data[`sets-exercise-${index}`],
+      };
     });
 
     const workoutInSubmit = {
@@ -108,15 +111,18 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
             </select>
 
             {/* SETS */}
+            <label htmlFor={`sets-exercise-${index}`}>Sets</label>
             <input
               type="number"
               name={`sets-exercise-${index}`}
               placeholder="4"
-              maxlength="2"
+              maxlength="1"
               minlength="1"
               min="1"
-              max="10"
+              max="9"
             />
+
+            {/* delete exercise */}
             <button
               type="button"
               onClick={() => handleDeleteExercise(exerciseInWorkout)}
