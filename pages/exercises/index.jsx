@@ -1,8 +1,10 @@
 import Card from "@/components/Card";
 import Layout from "@/components/Layout";
+import MuscleGroups from "@/components/MuscleGroups";
 import libMusclegroups from "@/lib/musclegroups";
 import Link from "next/link";
 import { useState } from "react";
+import styled from "styled-components";
 import useSWR from "swr";
 
 export default function ExercisesPage() {
@@ -21,7 +23,7 @@ export default function ExercisesPage() {
     </Layout>;
   }
 
-const handleFilterChange = (e) => {
+  const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };
 
@@ -31,30 +33,32 @@ const handleFilterChange = (e) => {
 
   return (
     <Layout>
-      <h2>Filter</h2>
-      <select onChange={handleFilterChange} value={filter || ""}>
-        <option value="">Show all exercises</option>
-        {libMusclegroups.map((muscle) => {
-          return (
-            <option key={muscle} value={muscle}>
-              {muscle}
-            </option>
-          );
-        })}
-      </select>
-
-      <p>{filteredExercises?.length ?? "no"} exercises found</p>
+      <StyledH2>Exercises{filter ? `: ${filter}` : ``}</StyledH2>
+      <FilterWrapper>
+        <h3>Filter</h3>
+        <select onChange={handleFilterChange} value={filter || ""}>
+          <option value="">Show all exercises</option>
+          {libMusclegroups.map((muscle) => {
+            return (
+              <option key={muscle} value={muscle}>
+                {muscle}
+              </option>
+            );
+          })}
+        </select>
+        <p>{filteredExercises?.length ?? "no"} exercises found</p>
+      </FilterWrapper>
 
       {filteredExercises?.length ? (
         <>
-          <h2>Exercises</h2>
           {filteredExercises.map((exercise) => (
             <Card key={exercise._id}>
               <h3>{exercise.name}</h3>
-              {exercise.muscleGroups.map((muscle) => (
-                <span key={muscle}>{`_${muscle} `}</span>
-              ))}
-              <Link href={`/exercises/${exercise._id}`}>details</Link>
+
+              <MuscleGroups muscleGroups={exercise.muscleGroups} />
+              <StyledLink href={`/exercises/${exercise._id}`}>
+                details
+              </StyledLink>
             </Card>
           ))}
         </>
@@ -66,3 +70,45 @@ const handleFilterChange = (e) => {
     </Layout>
   );
 }
+
+const Muscle = styled.div`
+  display: inline-block;
+  font-size: small;
+  border: 1px solid var(--color-orange-0);
+  border-radius: 2px;
+  padding: 4px 8px;
+  margin: 0 4px 4px 0;
+`;
+
+const MuscleArticle = styled.article`
+  display: flex;
+  flex-flow: row;
+`;
+
+const MuscleWrapper = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 10px;
+`;
+
+const FilterWrapper = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  border-left: 1px solid var(--color-orange-10);
+  margin-bottom: 32px;
+  padding-left: 8px;
+`;
+
+const StyledH2 = styled.h2`
+  position: sticky;
+  top: 8px;
+`;
+
+const StyledH5 = styled.h5`
+  min-width: max-content;
+`;
+const StyledLink = styled(Link)`
+  border: 1px solid var(--color-orange-5);
+  border-radius: 4px;
+  padding: 4px 8px 8px 8px;
+`;
