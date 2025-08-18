@@ -2,14 +2,14 @@ import { Pause, Play } from "lucide-react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-export default function Timer({ pauseTime = 5, setCount }) {
-  const [timer, setTimer] = useState(pauseTime);
+export default function Timer({ pauseDuration = 5, setCount }) {
+  const [timer, setTimer] = useState(pauseDuration);
   const [isRunning, setIsRunning] = useState(true);
 
   useEffect(() => {
     //if paused or timer done then stop and reset timer
     if (timer <= 0 && !isRunning) {
-      setTimer(pauseTime);
+      setTimer(pauseDuration);
       setIsRunning(!isRunning);
       // count laps
     } else if (timer <= 0 || !isRunning) {
