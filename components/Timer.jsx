@@ -4,7 +4,8 @@ import styled from "styled-components";
 
 export default function Timer({ pauseDuration = 5, setCount }) {
   const [timer, setTimer] = useState(pauseDuration);
-  const [isRunning, setIsRunning] = useState(true);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isDone, setIsDone] = useState(false);
   const buttonSize = 64;
 
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function Timer({ pauseDuration = 5, setCount }) {
       // count laps
     } else if (timer < 0 && isRunning) {
       setCount((prev) => prev + 1);
+      setIsDone(true);
       setTimer(pauseDuration);
       setIsRunning(false);
       return;
@@ -33,7 +35,7 @@ export default function Timer({ pauseDuration = 5, setCount }) {
   };
 
   return (
-    <TimeWrapper>
+    <TimeWrapper $done={isDone}>
       <TimeDisplay>{timer}</TimeDisplay>
       <div>
         <StyledControls type="button" onClick={() => setIsRunning(!isRunning)}>
@@ -80,6 +82,19 @@ const TimeWrapper = styled.div`
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
+  background: ${({ $done }) => ($done ? "white" : "transparent")};
+  box-shadow: ${({ $done }) => ($done ? " 0 0 150px 200px white" : "none")};
+  background-image: ${({ $done }) =>
+    $done
+      ? `repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.85) 0px,
+          rgba(255, 255, 255, 0.85) 0.3px,
+          transparent 0.7px,
+          transparent 2.9px
+        )`
+      : "none"};
+  border-radius: 999px;
 `;
 
 const TimeDisplay = styled.h2`

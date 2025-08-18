@@ -18,10 +18,7 @@ export default function TimerPage() {
     setExercise(random);
   }, []);
 
-  console.log(exercise);
   const { instructions, name, muscleGroups } = exercise;
-
-  console.log(`instruction and such`, instructions, name, muscleGroups);
 
   return (
     <Layout>
@@ -52,7 +49,7 @@ export default function TimerPage() {
         </StyledButton>
       </StyledMenuRow>
       <hr />
-      {exercise?.muscleGroups && (
+      {muscleGroups && (
         <>
           <MuscleGroups muscleGroups={muscleGroups} />
           <h3>Instructions</h3>
