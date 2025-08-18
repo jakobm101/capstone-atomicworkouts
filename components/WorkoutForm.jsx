@@ -2,6 +2,9 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
+import Card from "./Card";
+import styled from "styled-components";
+import { Trash } from "lucide-react";
 
 export default function WorkoutForm({ onSubmit, defaultValue }) {
   const router = useRouter();
@@ -11,7 +14,6 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     exercises: defaultValue?.exercises ?? [{ _id: uid(), exercise: "" }],
   });
 
-  // useSWR Handling
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
 
   if (isLoading) {
@@ -29,13 +31,18 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
     const newExercisesList = workoutPreview.exercises.map((_, index) => {
-      return { exercise: data[`exercise-${index}`] };
+      return {
+        exercise: data[`exercise-${index}`],
+        sets: data[`sets-exercise-${index}`],
+        reps: data[`reps-exercise-${index}`],
+      };
     });
 
     const workoutInSubmit = {
       name: data.workoutName,
       exercises: newExercisesList,
     };
+
     onSubmit(workoutInSubmit);
   };
 
@@ -71,9 +78,37 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     setWorkoutPreview({ ...workoutPreview, workoutName: event.target.value });
   };
 
+  const handleSetChange = (event, id) => {
+    const newWorkoutPreviewExercises = workoutPreview.exercises.map(
+      (exercise) =>
+        exercise._id === id
+          ? { ...exercise, sets: event.target.value }
+          : exercise
+    );
+    setWorkoutPreview({
+      ...workoutPreview,
+      exercises: newWorkoutPreviewExercises,
+    });
+  };
+
+  const handleRepsChange = (event, id) => {
+    const newWorkoutPreviewExercises = workoutPreview.exercises.map(
+      (exercise) =>
+        exercise._id === id
+          ? { ...exercise, reps: event.target.value }
+          : exercise
+    );
+
+    setWorkoutPreview({
+      ...workoutPreview,
+      exercises: newWorkoutPreviewExercises,
+    });
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <label for="workoutName">Name</label>
+      {/* NAME */}
+      <label htmlFor="workoutName">Name</label>
       <input
         type="text"
         name="workoutName"
@@ -81,10 +116,13 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
         value={workoutPreview.workoutName}
         onChange={(event) => handleNameChange(event)}
       />
+      <p>————————</p>
 
+      {/* EXERCISES */}
       {workoutPreview.exercises.map((exerciseInWorkout, index) => {
         return (
-          <div key={index}>
+          <Card key={index}>
+            <h5>Exercise</h5>
             <select
               name={`exercise-${index}`}
               value={
@@ -104,19 +142,59 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
                 );
               })}
             </select>
-            <button
+            <div>
+              {/* Sets */}
+              <InputWrapper>
+                <label htmlFor={`sets-exercise-${index}`}>Sets</label>
+                <input
+                  type="number"
+                  name={`sets-exercise-${index}`}
+                  placeholder="4"
+                  maxLength="1"
+                  minLength="1"
+                  min="1"
+                  max="9"
+                  value={exerciseInWorkout.sets}
+                  onChange={(event) =>
+                    handleSetChange(event, exerciseInWorkout._id)
+                  }
+                />
+              </InputWrapper>
+
+              {/* Reps */}
+              <InputWrapper>
+                <label htmlFor={`reps-exercise-${index}`}>Reps</label>
+                <input
+                  type="number"
+                  name={`reps-exercise-${index}`}
+                  placeholder="8"
+                  maxLength="2"
+                  minLength="1"
+                  min="1"
+                  max="32"
+                  value={exerciseInWorkout.reps}
+                  onChange={(event) =>
+                    handleRepsChange(event, exerciseInWorkout._id)
+                  }
+                />
+              </InputWrapper>
+            </div>
+
+            {/* delete exercise */}
+            <StyledDelete
               type="button"
               onClick={() => handleDeleteExercise(exerciseInWorkout)}
             >
-              delete
-            </button>
-          </div>
+              <Trash size={16} />
+            </StyledDelete>
+          </Card>
         );
       })}
       <button type="button" onClick={handleAddExercise}>
         add exercise
       </button>
 
+      {/* BUTTONS */}
       <div>
         <p>————————</p>
         <button type="submit" disabled={isSubmitting}>
@@ -130,3 +208,17 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     </form>
   );
 }
+
+const InputWrapper = styled.div`
+  margin-right: 5px;
+  padding-right: 5px;
+  display: inline-block;
+`;
+
+const StyledDelete = styled.button`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  border: none;
+  box-shadow: none;
+`;
