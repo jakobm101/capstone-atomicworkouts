@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
+import Card from "./Card";
 
 export default function WorkoutForm({ onSubmit, defaultValue }) {
   const router = useRouter();
@@ -113,69 +114,73 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
         value={workoutPreview.workoutName}
         onChange={(event) => handleNameChange(event)}
       />
+      <p>————————</p>
 
-      {/* EXERCISES */}
-      {workoutPreview.exercises.map((exerciseInWorkout, index) => {
-        return (
-          <div key={index}>
-            <select
-              name={`exercise-${index}`}
-              value={
-                exerciseInWorkout.exercise?._id || exerciseInWorkout.exercise
-              }
-              onChange={(event) =>
-                handleSelect(exerciseInWorkout._id, event.target.value)
-              }
-              required
-            >
-              <option value="">Select exercise</option>
-              {exercises.map(({ _id, name: exerciseName }) => {
-                return (
-                  <option value={_id} key={_id}>
-                    {exerciseName}
-                  </option>
-                );
-              })}
-            </select>
+      <Card>
+        {/* EXERCISES */}
+        {workoutPreview.exercises.map((exerciseInWorkout, index) => {
+          return (
+            <div key={index}>
+              <h5>Exercise</h5>
+              <select
+                name={`exercise-${index}`}
+                value={
+                  exerciseInWorkout.exercise?._id || exerciseInWorkout.exercise
+                }
+                onChange={(event) =>
+                  handleSelect(exerciseInWorkout._id, event.target.value)
+                }
+                required
+              >
+                <option value="">Select exercise</option>
+                {exercises.map(({ _id, name: exerciseName }) => {
+                  return (
+                    <option value={_id} key={_id}>
+                      {exerciseName}
+                    </option>
+                  );
+                })}
+              </select>
 
-            {/* Sets */}
-            <label htmlFor={`sets-exercise-${index}`}>Sets</label>
-            <input
-              type="number"
-              name={`sets-exercise-${index}`}
-              placeholder="4"
-              maxLength="1"
-              minLength="1"
-              min="1"
-              max="9"
-              value={exerciseInWorkout.sets}
-              onChange={(event) => handleSetChange(event, exerciseInWorkout)}
-            />
+              {/* Sets */}
+              <label htmlFor={`sets-exercise-${index}`}>Sets</label>
+              <input
+                type="number"
+                name={`sets-exercise-${index}`}
+                placeholder="4"
+                maxLength="1"
+                minLength="1"
+                min="1"
+                max="9"
+                value={exerciseInWorkout.sets}
+                onChange={(event) => handleSetChange(event, exerciseInWorkout)}
+              />
 
-            {/* Reps */}
-            <label htmlFor={`reps-exercise-${index}`}>Reps</label>
-            <input
-              type="number"
-              name={`reps-exercise-${index}`}
-              placeholder="8"
-              maxLength="2"
-              minLength="1"
-              min="1"
-              max="32"
-              value={exerciseInWorkout.reps}
-              onChange={(event) => handleRepsChange(event, exerciseInWorkout)}
-            />
+              {/* Reps */}
+              <label htmlFor={`reps-exercise-${index}`}>Reps</label>
+              <input
+                type="number"
+                name={`reps-exercise-${index}`}
+                placeholder="8"
+                maxLength="2"
+                minLength="1"
+                min="1"
+                max="32"
+                value={exerciseInWorkout.reps}
+                onChange={(event) => handleRepsChange(event, exerciseInWorkout)}
+              />
 
-            {/* delete exercise */}
-            <button
-              type="button"
-              onClick={() => handleDeleteExercise(exerciseInWorkout)}
-            >
-              delete
-            </button>
-          </div>
-        );
-      })}
+              {/* delete exercise */}
+              <button
+                type="button"
+                onClick={() => handleDeleteExercise(exerciseInWorkout)}
+              >
+                delete
+              </button>
+            </div>
+          );
+        })}
+      </Card>
       <button type="button" onClick={handleAddExercise}>
         add exercise
       </button>
