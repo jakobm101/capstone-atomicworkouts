@@ -221,4 +221,9 @@ const StyledDelete = styled.button`
   right: 4px;
   border: none;
   box-shadow: none;
+  cursor: pointer;
+  &:hover {
+    border: none;
+    box-shadow: none;
+  }
 `;
