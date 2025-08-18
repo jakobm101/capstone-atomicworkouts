@@ -3,6 +3,8 @@ import { useState } from "react";
 import useSWR from "swr";
 import { uid } from "uid";
 import Card from "./Card";
+import styled from "styled-components";
+import { Trash } from "lucide-react";
 
 export default function WorkoutForm({ onSubmit, defaultValue }) {
   const router = useRouter();
@@ -116,75 +118,78 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
       />
       <p>————————</p>
 
-      <Card>
-        {/* EXERCISES */}
-        {workoutPreview.exercises.map((exerciseInWorkout, index) => {
-          return (
-            <div key={index}>
-              <h5>Exercise</h5>
-              <select
-                name={`exercise-${index}`}
-                value={
-                  exerciseInWorkout.exercise?._id || exerciseInWorkout.exercise
-                }
-                onChange={(event) =>
-                  handleSelect(exerciseInWorkout._id, event.target.value)
-                }
-                required
-              >
-                <option value="">Select exercise</option>
-                {exercises.map(({ _id, name: exerciseName }) => {
-                  return (
-                    <option value={_id} key={_id}>
-                      {exerciseName}
-                    </option>
-                  );
-                })}
-              </select>
-
+      {/* EXERCISES */}
+      {workoutPreview.exercises.map((exerciseInWorkout, index) => {
+        return (
+          <Card key={index}>
+            <h5>Exercise</h5>
+            <select
+              name={`exercise-${index}`}
+              value={
+                exerciseInWorkout.exercise?._id || exerciseInWorkout.exercise
+              }
+              onChange={(event) =>
+                handleSelect(exerciseInWorkout._id, event.target.value)
+              }
+              required
+            >
+              <option value="">Select exercise</option>
+              {exercises.map(({ _id, name: exerciseName }) => {
+                return (
+                  <option value={_id} key={_id}>
+                    {exerciseName}
+                  </option>
+                );
+              })}
+            </select>
+            <div>
               {/* Sets */}
-              <label htmlFor={`sets-exercise-${index}`}>Sets</label>
-              <input
-                type="number"
-                name={`sets-exercise-${index}`}
-                placeholder="4"
-                maxLength="1"
-                minLength="1"
-                min="1"
-                max="9"
-                value={exerciseInWorkout.sets}
-                onChange={(event) =>
-                  handleSetChange(event, exerciseInWorkout._id)
-                }
-              />
+              <InputWrapper>
+                <label htmlFor={`sets-exercise-${index}`}>Sets</label>
+                <input
+                  type="number"
+                  name={`sets-exercise-${index}`}
+                  placeholder="4"
+                  maxLength="1"
+                  minLength="1"
+                  min="1"
+                  max="9"
+                  value={exerciseInWorkout.sets}
+                  onChange={(event) =>
+                    handleSetChange(event, exerciseInWorkout._id)
+                  }
+                />
+              </InputWrapper>
 
               {/* Reps */}
-              <label htmlFor={`reps-exercise-${index}`}>Reps</label>
-              <input
-                type="number"
-                name={`reps-exercise-${index}`}
-                placeholder="8"
-                maxLength="2"
-                minLength="1"
-                min="1"
-                max="32"
-                value={exerciseInWorkout.reps}
-                onChange={(event) =>
-                  handleRepsChange(event, exerciseInWorkout._id)
-                }
-              />
-
-              {/* delete exercise */}
-              <button
-                type="button"
-                onClick={() => handleDeleteExercise(exerciseInWorkout)}
-              >
-                delete
-              </button>
+              <InputWrapper>
+                <label htmlFor={`reps-exercise-${index}`}>Reps</label>
+                <input
+                  type="number"
+                  name={`reps-exercise-${index}`}
+                  placeholder="8"
+                  maxLength="2"
+                  minLength="1"
+                  min="1"
+                  max="32"
+                  value={exerciseInWorkout.reps}
+                  onChange={(event) =>
+                    handleRepsChange(event, exerciseInWorkout._id)
+                  }
+                />
+              </InputWrapper>
             </div>
-          );
-        })}
-      </Card>
+
+            {/* delete exercise */}
+            <StyledDelete
+              type="button"
+              onClick={() => handleDeleteExercise(exerciseInWorkout)}
+            >
+              <Trash />
+            </StyledDelete>
+          </Card>
+        );
+      })}
       <button type="button" onClick={handleAddExercise}>
         add exercise
       </button>
@@ -203,3 +208,17 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     </form>
   );
 }
+
+const InputWrapper = styled.div`
+  margin-right: 5px;
+  padding-right: 5px;
+  display: inline-block;
+`;
+
+const StyledDelete = styled.button`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  border: none;
+  box-shadow: none;
+`;
