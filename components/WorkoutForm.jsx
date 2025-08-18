@@ -185,7 +185,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
               type="button"
               onClick={() => handleDeleteExercise(exerciseInWorkout)}
             >
-              <Trash />
+              <Trash size={16} />
             </StyledDelete>
           </Card>
         );
