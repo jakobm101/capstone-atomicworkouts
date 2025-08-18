@@ -1,5 +1,6 @@
 import Card from "@/components/Card";
 import Layout from "@/components/Layout";
+import MuscleGroups from "@/components/MuscleGroups";
 import libMusclegroups from "@/lib/musclegroups";
 import Link from "next/link";
 import { useState } from "react";
@@ -53,14 +54,8 @@ export default function ExercisesPage() {
           {filteredExercises.map((exercise) => (
             <Card key={exercise._id}>
               <h3>{exercise.name}</h3>
-              <MuscleArticle>
-                <StyledH5>Muscle Groups</StyledH5>
-                <MuscleWrapper>
-                  {exercise.muscleGroups.map((muscle) => (
-                    <Muscle key={muscle}>{muscle}</Muscle>
-                  ))}
-                </MuscleWrapper>
-              </MuscleArticle>
+
+              <MuscleGroups muscleGroups={exercise.muscleGroups} />
               <StyledLink href={`/exercises/${exercise._id}`}>
                 details
               </StyledLink>
