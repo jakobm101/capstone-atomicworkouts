@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { collectMuscleGroups } from "@/lib/utils";
 import { useState } from "react";
 import Layout from "@/components/Layout";
+import MuscleGroups from "@/components/MuscleGroups";
 export default function WorkoutDetailsPage() {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
@@ -51,12 +52,7 @@ export default function WorkoutDetailsPage() {
           );
         })}
       </ul>
-      <h4>Muscle Groups</h4>
-      <ul>
-        {muscleGroupsInWorkout.map((muscle) => {
-          return <li key={muscle}>{muscle}</li>;
-        })}
-      </ul>
+            <MuscleGroups muscleGroups={muscleGroupsInWorkout} />
       <button
         type="button"
         onClick={() => {
