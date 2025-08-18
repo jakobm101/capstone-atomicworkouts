@@ -18,6 +18,7 @@ export default function WorkoutUpdatePage() {
   }
 
   const handleUpdate = async (workoutInSubmit) => {
+
     const response = await fetch(apiUrl, {
       method: "PUT",
       headers: {

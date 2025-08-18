@@ -11,7 +11,6 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     exercises: defaultValue?.exercises ?? [{ _id: uid(), exercise: "" }],
   });
 
-  // useSWR Handling
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
 
   if (isLoading) {
@@ -32,6 +31,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
       return {
         exercise: data[`exercise-${index}`],
         sets: data[`sets-exercise-${index}`],
+        reps: data[`reps-exercise-${index}`],
       };
     });
 
@@ -39,6 +39,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
       name: data.workoutName,
       exercises: newExercisesList,
     };
+
     onSubmit(workoutInSubmit);
   };
 
@@ -74,27 +75,37 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     setWorkoutPreview({ ...workoutPreview, workoutName: event.target.value });
   };
 
-  console.log(`preview`, workoutPreview.exercises);
-
   const handleSetChange = (event, exerciseInWorkout) => {
-    console.log(`handle set`, exerciseInWorkout);
-    console.log(
-      `exercise`,
-      workoutPreview.exercises.find(
-        (exercise) => exercise._id === exerciseInWorkout._id
-      )
+    const newWorkoutPreviewExercises = workoutPreview.exercises.map(
+      (exercise) =>
+        exercise._id === exerciseInWorkout._id
+          ? { ...exercise, sets: event.target.value }
+          : exercise
     );
-    const newExercise = workoutPreview.exercises.find(
-      (exercise) => exercise._id === exerciseInWorkout._id
+    setWorkoutPreview({
+      ...workoutPreview,
+      exercises: newWorkoutPreviewExercises,
+    });
+  };
+
+  const handleRepsChange = (event, exerciseInWorkout) => {
+    const newWorkoutPreviewExercises = workoutPreview.exercises.map(
+      (exercise) =>
+        exercise._id === exerciseInWorkout._id
+          ? { ...exercise, reps: Number(event.target.value) }
+          : exercise
     );
-    newExercise.sets = event.target.value;
-    setWorkoutPreview({ ...workoutPreview });
+
+    setWorkoutPreview({
+      ...workoutPreview,
+      exercises: newWorkoutPreviewExercises,
+    });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       {/* NAME */}
-      <label for="workoutName">Name</label>
+      <label htmlFor="workoutName">Name</label>
       <input
         type="text"
         name="workoutName"
@@ -127,18 +138,32 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
               })}
             </select>
 
-            {/* SETS */}
+            {/* Sets */}
             <label htmlFor={`sets-exercise-${index}`}>Sets</label>
             <input
               type="number"
               name={`sets-exercise-${index}`}
               placeholder="4"
-              maxlength="1"
-              minlength="1"
+              maxLength="1"
+              minLength="1"
               min="1"
               max="9"
               value={exerciseInWorkout.sets}
               onChange={(event) => handleSetChange(event, exerciseInWorkout)}
+            />
+
+            {/* Reps */}
+            <label htmlFor={`reps-exercise-${index}`}>Reps</label>
+            <input
+              type="number"
+              name={`reps-exercise-${index}`}
+              placeholder="8"
+              maxLength="2"
+              minLength="1"
+              min="1"
+              max="32"
+              value={exerciseInWorkout.reps}
+              onChange={(event) => handleRepsChange(event, exerciseInWorkout)}
             />
 
             {/* delete exercise */}
