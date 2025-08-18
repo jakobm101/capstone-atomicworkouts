@@ -23,7 +23,7 @@ export default function TimerPage() {
   return (
     <Layout>
       <h5>Random Exercise Suggestion:</h5>
-      <h1>{name}</h1>
+      <StyledH2>{name}</StyledH2>
       <h3>Pause Between Sets:</h3>
       <Timer setCount={setSets} pauseDuration={pauseDuration} />
       <StyledMenuRow>
@@ -55,7 +55,7 @@ export default function TimerPage() {
           <h3>Instructions</h3>
           <ol>
             {instructions?.map((step) => (
-              <li key={step}>{step}</li> //
+              <li key={step}>{step}</li> 
             ))}
           </ol>
         </>

@@ -168,7 +168,7 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   outline: 1px solid var(--color-orange-5); /* █ focus ring */
   border-radius: 0;
   outline-offset: 2px;
-  box-shadow: 0 0 20px 1px var(--color-orange-5);
+  box-shadow: 0 0 20px 1 var(--color-orange-5);
 }
 
 `;

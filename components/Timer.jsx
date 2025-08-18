@@ -1,7 +1,6 @@
 import { Pause, Play, Square } from "lucide-react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-
 export default function Timer({ pauseDuration = 5, setCount }) {
   const [timer, setTimer] = useState(pauseDuration);
   const [isRunning, setIsRunning] = useState(false);
@@ -9,10 +8,8 @@ export default function Timer({ pauseDuration = 5, setCount }) {
   const buttonSize = 64;
 
   useEffect(() => {
-    //if paused or timer done then stop and reset timer
     if (!isRunning) {
       return;
-      // count laps
     } else if (timer < 0 && isRunning) {
       setCount((prev) => prev + 1);
       setIsDone(true);
@@ -20,6 +17,7 @@ export default function Timer({ pauseDuration = 5, setCount }) {
       setIsRunning(false);
       return;
     }
+    setIsDone(false);
 
     const interval = setInterval(() => setTimer(timer - 1), 1000);
     return () => clearInterval(interval);
@@ -36,7 +34,7 @@ export default function Timer({ pauseDuration = 5, setCount }) {
 
   return (
     <TimeWrapper $done={isDone}>
-      <TimeDisplay>{timer}</TimeDisplay>
+      <TimeDisplay $done={isDone}>{isDone ? "DONE" : timer}</TimeDisplay>
       <div>
         <StyledControls type="button" onClick={() => setIsRunning(!isRunning)}>
           <Play
@@ -98,5 +96,6 @@ const TimeWrapper = styled.div`
 `;
 
 const TimeDisplay = styled.h2`
-  font-size: 180px;
+height: 200px;
+  font-size: ${({ $done }) => ($done ? "140px" : "180px")};
 `;
