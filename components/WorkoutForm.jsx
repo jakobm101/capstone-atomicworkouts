@@ -73,6 +73,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* NAME */}
       <label for="workoutName">Name</label>
       <input
         type="text"
@@ -82,6 +83,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
         onChange={(event) => handleNameChange(event)}
       />
 
+      {/* EXERCISES */}
       {workoutPreview.exercises.map((exerciseInWorkout, index) => {
         return (
           <div key={index}>
@@ -104,6 +106,17 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
                 );
               })}
             </select>
+
+            {/* SETS */}
+            <input
+              type="number"
+              name={`sets-exercise-${index}`}
+              placeholder="4"
+              maxlength="2"
+              minlength="1"
+              min="1"
+              max="10"
+            />
             <button
               type="button"
               onClick={() => handleDeleteExercise(exerciseInWorkout)}
@@ -117,6 +130,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
         add exercise
       </button>
 
+      {/* BUTTONS */}
       <div>
         <p>————————</p>
         <button type="submit" disabled={isSubmitting}>
