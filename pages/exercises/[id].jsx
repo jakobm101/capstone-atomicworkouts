@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import MuscleGroups from "@/components/MuscleGroups";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -20,22 +21,18 @@ export default function ExerciseDetailsPage() {
     <Layout>
       <h1>Exercise Details</h1>
       <h2>{name}</h2>
+      <MuscleGroups muscleGroups={muscleGroups} />
       <h3>Instructions</h3>
-      {instructions.map((step, index) => {
-        return (
-          <div key={step}>
-            <h4>{index + 1}</h4>
-            <p>{step}</p>
-          </div>
-        );
-      })}
-      <h3>Muscle Groups</h3>
-      <ul>
-        {muscleGroups.map((muscle) => {
-          return <li key={muscle}>{muscle}</li>;
+      <ol>
+        {instructions.map((step, index) => {
+          return (
+            <>
+              <li>{step}</li>
+              <br />
+            </>
+          );
         })}
-      </ul>
-      <p>————————</p>
+      </ol>
     </Layout>
   );
 }
