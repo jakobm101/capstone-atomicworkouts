@@ -1,5 +1,6 @@
 import Card from "@/components/Card";
 import Layout from "@/components/Layout";
+import MuscleGroups from "@/components/MuscleGroups";
 import { collectMuscleGroups } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import Link from "next/link";
@@ -45,12 +46,7 @@ export default function WorkoutsPage() {
               })}
             </ul>
 
-            <h4>Muscle Groups</h4>
-            <ul>
-              {muscleGroupsInWorkout.map((muscleGroup) => (
-                <li key={muscleGroup}>{muscleGroup}</li>
-              ))}
-            </ul>
+            <MuscleGroups muscleGroups={muscleGroupsInWorkout} />
             <Link href={`/workouts/${workout._id}`}>Details</Link>
           </Card>
         );
