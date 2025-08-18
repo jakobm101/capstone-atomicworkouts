@@ -93,7 +93,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     const newWorkoutPreviewExercises = workoutPreview.exercises.map(
       (exercise) =>
         exercise._id === exerciseInWorkout._id
-          ? { ...exercise, reps: Number(event.target.value) }
+          ? { ...exercise, reps: event.target.value }
           : exercise
     );
 
