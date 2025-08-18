@@ -1,6 +1,7 @@
 import { Pause, Play, Square } from "lucide-react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+
 export default function Timer({ pauseDuration = 5, setCount }) {
   const [timer, setTimer] = useState(pauseDuration);
   const [isRunning, setIsRunning] = useState(false);
@@ -39,27 +40,24 @@ export default function Timer({ pauseDuration = 5, setCount }) {
       <StyledControlsWrapper>
         <StyledControls type="button" onClick={() => setIsRunning(!isRunning)}>
           <Play
+            strokeWidth={1}
             size={buttonSize}
-            fill={
-              isRunning && timer > 0 ? "var(--color-orange-10)" : "transparent"
-            }
+            fill={isRunning ? "var(--color-orange-10)" : "transparent"}
           />
           <Pause
             size={buttonSize}
-            fill={
-              !isRunning || timer === 0
-                ? "var(--color-orange-10)"
-                : "transparent"
-            }
+            fill={!isRunning ? "var(--color-orange-10)" : "transparent"}
+            strokeWidth={1}
           />
         </StyledControls>
         <StyledControls onClick={Reset}>
-          <Square size={buttonSize} />
+          <Square size={buttonSize} strokeWidth={1} />
         </StyledControls>
       </StyledControlsWrapper>
     </TimeWrapper>
   );
 }
+
 const StyledControlsWrapper = styled.div`
   display: flex;
   gap: 40px;

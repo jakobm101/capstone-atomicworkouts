@@ -44,10 +44,12 @@ export default function TimerPage() {
         <StyledButton
           onClick={() => setPauseDuration((prev) => Number(prev) + 1)}
         >
-          <SquareChevronUp size={buttonSize} />
+          <SquareChevronUp size={buttonSize} strokeWidth={0.5}/>
         </StyledButton>
-        <StyledButton onClick={() => setPauseDuration((prev) => prev - 1)}>
-          <SquareChevronDown size={buttonSize} />
+        <StyledButton
+          onClick={() => setPauseDuration((prev) => Number(prev) - 1)}
+        >
+          <SquareChevronDown size={buttonSize} strokeWidth={0.5}/>
         </StyledButton>
       </StyledMenuRow>
       <hr />
@@ -103,4 +105,5 @@ const StyledMenuRow = styled.div`
   display: flex;
   align-items: center;
   padding: 16px 0;
+  border-bottom: 1px solid var(--color-orange-5);
 `;

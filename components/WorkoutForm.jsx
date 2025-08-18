@@ -146,7 +146,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
               {/* Sets */}
               <InputWrapper>
                 <label htmlFor={`sets-exercise-${index}`}>Sets</label>
-                <input
+                <StyledInput
                   type="number"
                   name={`sets-exercise-${index}`}
                   placeholder="4"
@@ -164,7 +164,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
               {/* Reps */}
               <InputWrapper>
                 <label htmlFor={`reps-exercise-${index}`}>Reps</label>
-                <input
+                <StyledInput
                   type="number"
                   name={`reps-exercise-${index}`}
                   placeholder="8"
@@ -226,4 +226,8 @@ const StyledDelete = styled.button`
     border: none;
     box-shadow: none;
   }
+`;
+
+const StyledInput = styled.input`
+  text-align: right;
 `;
