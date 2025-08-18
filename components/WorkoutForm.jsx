@@ -74,6 +74,23 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     setWorkoutPreview({ ...workoutPreview, workoutName: event.target.value });
   };
 
+  console.log(`preview`, workoutPreview.exercises);
+
+  const handleSetChange = (event, exerciseInWorkout) => {
+    console.log(`handle set`, exerciseInWorkout);
+    console.log(
+      `exercise`,
+      workoutPreview.exercises.find(
+        (exercise) => exercise._id === exerciseInWorkout._id
+      )
+    );
+    const newExercise = workoutPreview.exercises.find(
+      (exercise) => exercise._id === exerciseInWorkout._id
+    );
+    newExercise.sets = event.target.value;
+    setWorkoutPreview({ ...workoutPreview });
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       {/* NAME */}
@@ -120,6 +137,8 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
               minlength="1"
               min="1"
               max="9"
+              value={exerciseInWorkout.sets}
+              onChange={(event) => handleSetChange(event, exerciseInWorkout)}
             />
 
             {/* delete exercise */}
