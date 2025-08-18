@@ -79,6 +79,8 @@ const StyledControls = styled.button`
 `;
 
 const TimeWrapper = styled.div`
+  position: sticky;
+  top: 0;
   display: flex;
 
   flex-flow: column wrap;
@@ -93,6 +95,8 @@ const TimeWrapper = styled.div`
 `;
 
 const TimeDisplay = styled.h2`
+  position: sticky;
+  top: 0;
   text-align: center;
   margin: 0;
   padding: 0;
