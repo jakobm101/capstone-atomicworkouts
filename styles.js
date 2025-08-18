@@ -171,4 +171,14 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   box-shadow: 0 0 20px 1 var(--color-orange-5);
 }
 
+
+ol {
+  margin-block-start: 0;
+  padding-inline-start: 32px;
+  list-style-type: lower-greek;
+  li {
+  margin-bottom: 16px;
+}}
 `;
+
+

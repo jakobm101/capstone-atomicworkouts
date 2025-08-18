@@ -30,6 +30,7 @@ export default function Timer({ pauseDuration = 5, setCount }) {
   const Reset = () => {
     setTimer(pauseDuration);
     setIsRunning(false);
+    setIsDone(false);
   };
 
   return (
