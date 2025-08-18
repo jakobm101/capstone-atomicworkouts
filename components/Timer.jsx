@@ -35,7 +35,7 @@ export default function Timer({ pauseDuration = 5, setCount }) {
   return (
     <TimeWrapper $done={isDone}>
       <TimeDisplay $done={isDone}>{isDone ? "DONE" : timer}</TimeDisplay>
-      <div>
+      <StyledControlsWrapper>
         <StyledControls type="button" onClick={() => setIsRunning(!isRunning)}>
           <Play
             size={buttonSize}
@@ -55,10 +55,14 @@ export default function Timer({ pauseDuration = 5, setCount }) {
         <StyledControls onClick={Reset}>
           <Square size={buttonSize} />
         </StyledControls>
-      </div>
+      </StyledControlsWrapper>
     </TimeWrapper>
   );
 }
+const StyledControlsWrapper = styled.div`
+  display: flex;
+  gap: 40px;
+`;
 
 const StyledControls = styled.button`
   margin: 0;
@@ -77,25 +81,22 @@ const StyledControls = styled.button`
 
 const TimeWrapper = styled.div`
   display: flex;
+
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  background: ${({ $done }) => ($done ? "white" : "transparent")};
-  box-shadow: ${({ $done }) => ($done ? " 0 0 150px 200px white" : "none")};
-  background-image: ${({ $done }) =>
+  /* background: ${({ $done }) => ($done ? "white" : "transparent")}; */
+  box-shadow: ${({ $done }) =>
     $done
-      ? `repeating-linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0.85) 0px,
-          rgba(255, 255, 255, 0.85) 0.3px,
-          transparent 0.7px,
-          transparent 2.9px
-        )`
+      ? "0 0 150px 200px var(--color-orange-5),inset 0 0 79px 99px var(--color-orange-5)"
       : "none"};
   border-radius: 999px;
 `;
 
 const TimeDisplay = styled.h2`
-height: 200px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 234px;
   font-size: ${({ $done }) => ($done ? "140px" : "180px")};
 `;
