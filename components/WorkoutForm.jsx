@@ -33,8 +33,8 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     const newExercisesList = workoutPreview.exercises.map((_, index) => {
       return {
         exercise: data[`exercise-${index}`],
-        sets: data[`sets-exercise-${index}`],
-        reps: data[`reps-exercise-${index}`],
+        sets: data[`sets-exercise-${index}`] || 4,
+        reps: data[`reps-exercise-${index}`] || 8,
       };
     });
 

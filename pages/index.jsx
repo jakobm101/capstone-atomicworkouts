@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 export default function TimerPage() {
+  const pausePreset = 30;
+
   const [sets, setSets] = useState(0);
-  const [pauseDuration, setPauseDuration] = useState(3);
+  const [pauseDuration, setPauseDuration] = useState(pausePreset);
   const [exercise, setExercise] = useState("Pull-Up"); // default safe SSR value
   const buttonSize = 64;
 
