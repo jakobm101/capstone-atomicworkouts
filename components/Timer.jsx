@@ -59,8 +59,14 @@ export default function Timer({ pauseDuration = 5, setCount }) {
 }
 
 const StyledControlsWrapper = styled.div`
+  border: var(--color-orange-5) 1px solid;
+  padding: 8px;
+  padding-right: 16px;
   display: flex;
   gap: 40px;
+  justify-content: space-between;
+  width: 100%;
+  backdrop-filter: blur(8px);
 `;
 
 const StyledControls = styled.button`
@@ -83,10 +89,10 @@ const TimeWrapper = styled.div`
   top: 0;
   display: flex;
 
+  margin-top: 16px;
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  /* background: ${({ $done }) => ($done ? "white" : "transparent")}; */
   box-shadow: ${({ $done }) =>
     $done
       ? "0 0 150px 200px var(--color-orange-5),inset 0 0 79px 99px var(--color-orange-5)"
@@ -99,7 +105,11 @@ const TimeDisplay = styled.h2`
   top: 0;
   text-align: center;
   margin: 0;
+  border: 1px solid var(--color-orange-5);
+  border-bottom: none;
   padding: 0;
-  height: 234px;
+  height: 284px;
   font-size: ${({ $done }) => ($done ? "140px" : "180px")};
+  width: 100%;
+  backdrop-filter: blur(5px);
 `;

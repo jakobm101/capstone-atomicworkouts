@@ -179,6 +179,15 @@ ol {
   li {
   margin-bottom: 16px;
 }}
+
+::selection {
+  background-color:  rgb(var(--rgb-orange));
+  color: var(--color-background)
+}
+
+::-moz-selection {
+  background-color:  rgb(var(--rgb-orange));
+  color: var(--color-background)
+}
+
 `;
-
-

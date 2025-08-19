@@ -27,7 +27,8 @@ export default function TimerPage() {
       <h3>Pause Between Sets:</h3>
       <Timer setCount={setSets} pauseDuration={pauseDuration} />
       <StyledMenuRow>
-        <StyledH2>Sets: {sets}</StyledH2>
+        <StyledH2>Sets: {sets} / 4 </StyledH2>
+        <StyledSpan> </StyledSpan>
         <StyledButton onClick={() => setSets(0)}>
           <RefreshCcw />
         </StyledButton>
@@ -42,14 +43,14 @@ export default function TimerPage() {
           onChange={(e) => setPauseDuration(e.target.value)}
         />
         <StyledButton
-          onClick={() => setPauseDuration((prev) => Number(prev) + 1)}
+          onClick={() => setPauseDuration((prev) => Number(prev) + 10)}
         >
-          <SquareChevronUp size={buttonSize} strokeWidth={0.5}/>
+          <SquareChevronUp size={buttonSize} strokeWidth={0.5} />
         </StyledButton>
         <StyledButton
-          onClick={() => setPauseDuration((prev) => Number(prev) - 1)}
+          onClick={() => setPauseDuration((prev) => Number(prev) - 10)}
         >
-          <SquareChevronDown size={buttonSize} strokeWidth={0.5}/>
+          <SquareChevronDown size={buttonSize} strokeWidth={0.5} />
         </StyledButton>
       </StyledMenuRow>
       <hr />
@@ -70,10 +71,12 @@ export default function TimerPage() {
 
 const StyledH2 = styled.h2`
   display: inline;
-  font-size: xxx-large;
+  font-size: xx-large;
 `;
 
 const StyledButton = styled.button`
+  display: flex;
+  align-items: center;
   border: none;
   box-shadow: none;
   cursor: pointer;
@@ -106,4 +109,8 @@ const StyledMenuRow = styled.div`
   align-items: center;
   padding: 16px 0;
   border-bottom: 1px solid var(--color-orange-5);
+`;
+
+const StyledSpan = styled.span`
+  width: 16px;
 `;
