@@ -26,7 +26,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
-    if (!workoutPreview.exercises) { 
+    if (!workoutPreview.exercises) {
       // pop up: please add exercises
     }
 
@@ -188,6 +188,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
             <StyledDelete
               type="button"
               onClick={() => handleDeleteExercise(exerciseInWorkout)}
+              disabled={workoutPreview.exercises.length <= 1}
             >
               <Trash size={16} />
             </StyledDelete>
@@ -228,6 +229,13 @@ const StyledDelete = styled.button`
   &:hover {
     border: none;
     box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    svg {
+      stroke: var(--color-orange-5);
+    }
   }
 `;
 
