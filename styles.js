@@ -191,7 +191,7 @@ ol {
 }
 
 
-@media (max-width: 391px) {
+@media (max-width: 500px) {
   main {
   height: 100vh;
   width: 100%;
