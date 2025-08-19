@@ -10,7 +10,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [workoutPreview, setWorkoutPreview] = useState({
-    workoutName: defaultValue?.name ?? "New Workout",
+    workoutName: defaultValue?.name ?? "",
     exercises: defaultValue?.exercises ?? [{ _id: uid(), exercise: "" }],
   });
 
