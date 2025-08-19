@@ -105,6 +105,8 @@ const StyledDiv = styled.div`
     justify-content: center;
     align-items: center;
     padding: 8px 16px 9px 12px;
+    height: 40px;
+    margin-bottom: 16px;
     svg {
       stroke-width: 1px;
     }
