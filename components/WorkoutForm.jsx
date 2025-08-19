@@ -34,7 +34,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
       return {
         exercise: data[`exercise-${index}`],
         sets: data[`sets-exercise-${index}`] || 4,
-        reps: data[`reps-exercise-${index}`] || 8,
+        reps: data[`reps-exercise-${index}`] ||  8,
       };
     });
 
@@ -200,7 +200,6 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Creating..." : "Submit"}
         </button>
-        <button type="reset">reset</button>
         <button type="button" onClick={router.back}>
           Cancel
         </button>

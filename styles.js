@@ -190,4 +190,15 @@ ol {
   color: var(--color-background)
 }
 
+
+@media (max-width: 391px) {
+  main {
+  height: 100vh;
+  width: 100%;
+  box-shadow: none;
+  border: none;
+  margin-top: 0;
+  }
+
+}
 `;
