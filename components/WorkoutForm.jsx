@@ -26,6 +26,9 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
+    if (!workoutPreview.exercises) { 
+      // pop up: please add exercises
+    }
 
     setIsSubmitting(true);
     const formData = new FormData(e.currentTarget);
@@ -34,7 +37,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
       return {
         exercise: data[`exercise-${index}`],
         sets: data[`sets-exercise-${index}`] || 4,
-        reps: data[`reps-exercise-${index}`] ||  8,
+        reps: data[`reps-exercise-${index}`] || 8,
       };
     });
 
@@ -115,6 +118,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
         placeholder="enter workout name"
         value={workoutPreview.workoutName}
         onChange={(event) => handleNameChange(event)}
+        required
       />
       <p>————————</p>
 
