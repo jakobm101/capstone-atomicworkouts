@@ -25,6 +25,7 @@ const StyledButton = styled.button`
 
 const Wrap = styled.div`
   position: sticky;
+  z-index: 99;
   display: flex;
   align-items: center;
   justify-content: space-between;

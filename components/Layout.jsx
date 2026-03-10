@@ -15,4 +15,5 @@ export default function Layout({ children }) {
 const StyledDiv = styled.div`
   flex: 1;
   padding-bottom: 50px;
+
 `;

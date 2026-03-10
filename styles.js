@@ -147,4 +147,58 @@ ul {
   padding-inline-start: 0;
 
 }
+
+/* hide arrows on number inputs */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Edge */
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+hr {
+  border: none;
+  border-top: var(--color-orange-5) 1px solid;
+}
+
+button:focus-visible, input:focus-visible, a:focus-visible {
+  outline: 1px solid var(--color-orange-5); /* █ focus ring */
+  border-radius: 0;
+  outline-offset: 2px;
+  box-shadow: 0 0 20px 1 var(--color-orange-5);
+}
+
+
+ol {
+  margin-block-start: 0;
+  padding-inline-start: 32px;
+  list-style-type: lower-greek;
+  li {
+  margin-bottom: 16px;
+}}
+
+::selection {
+  background-color:  rgb(var(--rgb-orange));
+  color: var(--color-background)
+}
+
+::-moz-selection {
+  background-color:  rgb(var(--rgb-orange));
+  color: var(--color-background)
+}
+
+
+@media (max-width: 500px) {
+  main {
+  height: 100vh;
+  width: 100vw;
+  box-shadow: none;
+  border: none;
+  margin-top: 0;
+  }
+
+}
 `;
