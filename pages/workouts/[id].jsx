@@ -6,11 +6,14 @@ import { useState } from "react";
 import Layout from "@/components/Layout";
 import MuscleGroups from "@/components/MuscleGroups";
 import { Pencil, Trash } from "lucide-react";
+import { useSession } from 'next-auth/react';
+
 export default function WorkoutDetailsPage() {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   const id = router.query.id;
   const apiUrl = `/api/workouts/${id}`;
+  const { data: session } = useSession();
 
   const { data: workout, isLoading, error } = useSWR(apiUrl);
   if (isLoading) {
@@ -56,7 +59,8 @@ export default function WorkoutDetailsPage() {
         </ul>
       </StyledExercisesWrapper>
       <MuscleGroups muscleGroups={muscleGroupsInWorkout} />
-      <StyledDiv>
+	{session && (	
+      <ButtonField>
         <button
           type="button"
           onClick={() => {
@@ -82,7 +86,7 @@ export default function WorkoutDetailsPage() {
             </button>
           </div>
         )}
-      </StyledDiv>
+      </ButtonField>)}
     </Layout>
   );
 }
@@ -92,7 +96,7 @@ const StyledSpan = styled.span`
   width: 160px;
 `;
 
-const StyledDiv = styled.div`
+const ButtonField = styled.div`
   border-top: 1px solid var(--color-orange-5);
   padding-top: 8px;
   margin-top: 16px;

@@ -6,6 +6,7 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 import styled from "styled-components";
 import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
 export default function WorkoutsPage() {
   const { data: workouts, isLoading, error } = useSWR(`/api/workouts`);
