@@ -1,12 +1,17 @@
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 import styled from "styled-components";
 
 export default function Navigation() {
+  const { data: session } = useSession();
   return (
     <StyledDiv>
       <Link href={`/`}>Home</Link>
       <Link href={`/workouts`}>Workouts</Link>
       <Link href={`/exercises`}>Exercises</Link>
+      <StyledButton onClick={() => (session ? signOut() : signIn())}>
+        Sign {session ? "Out" : "In"}
+      </StyledButton>{" "}
     </StyledDiv>
   );
 }
@@ -24,4 +29,9 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+`;
+
+const StyledButton = styled.button`
+  font-size: xx-small;
+  width: 100px;
 `;
