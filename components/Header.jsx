@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <Wrap>
       <StyledLink href={`/`}>Atomic Workouts</StyledLink>
-      <StyledButton onClick={() => (session ? signOut : signIn)}>
+      <StyledButton onClick={() => (session ? signOut() : signIn())}>
         Sign {session ? "Out" : "In"}
       </StyledButton>
     </Wrap>
