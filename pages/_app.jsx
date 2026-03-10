@@ -1,9 +1,11 @@
 import GlobalStyle from "../styles";
 import { spaceMono } from "@/lib/fonts";
 import { SWRConfig } from "swr";
+import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps }}) {
   return (
+  <SessionProvider session={session}>
     <div className={spaceMono.className}>
       <SWRConfig
         value={{
@@ -25,5 +27,6 @@ export default function App({ Component, pageProps }) {
         <Component {...pageProps} />
       </SWRConfig>
     </div>
+  </SessionProvider>
   );
 }
