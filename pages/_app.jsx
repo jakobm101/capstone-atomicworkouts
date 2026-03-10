@@ -3,30 +3,33 @@ import { spaceMono } from "@/lib/fonts";
 import { SWRConfig } from "swr";
 import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps: { session, ...pageProps }}) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
-  <SessionProvider session={session}>
-    <div className={spaceMono.className}>
-      <SWRConfig
-        value={{
-          fetcher: async (...args) => {
-            const response = await fetch(...args);
-            if (!response.ok) {
-              const errorData = await response.json();
-              const error = new Error(
-                errorData.error || "An unknown error occurred"
-              );
-              error.status = response.status;
-              throw error;
-            }
-            return await response.json();
-          },
-        }}
-      >
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </SWRConfig>
-    </div>
-  </SessionProvider>
+    <SessionProvider session={session}>
+      <div className={spaceMono.className}>
+        <SWRConfig
+          value={{
+            fetcher: async (...args) => {
+              const response = await fetch(...args);
+              if (!response.ok) {
+                const errorData = await response.json();
+                const error = new Error(
+                  errorData.error || "An unknown error occurred"
+                );
+                error.status = response.status;
+                throw error;
+              }
+              return await response.json();
+            },
+          }}
+        >
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </SWRConfig>
+      </div>
+    </SessionProvider>
   );
 }
