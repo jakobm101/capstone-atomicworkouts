@@ -10,7 +10,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [workoutPreview, setWorkoutPreview] = useState({
-    workoutName: defaultValue?.name ?? "New Workout",
+    workoutName: defaultValue?.name ?? "",
     exercises: defaultValue?.exercises ?? [{ _id: uid(), exercise: "" }],
   });
 
@@ -26,6 +26,9 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
+    if (!workoutPreview.exercises) {
+      // pop up: please add exercises
+    }
 
     setIsSubmitting(true);
     const formData = new FormData(e.currentTarget);
@@ -33,8 +36,8 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     const newExercisesList = workoutPreview.exercises.map((_, index) => {
       return {
         exercise: data[`exercise-${index}`],
-        sets: data[`sets-exercise-${index}`],
-        reps: data[`reps-exercise-${index}`],
+        sets: data[`sets-exercise-${index}`] || 4,
+        reps: data[`reps-exercise-${index}`] || 8,
       };
     });
 
@@ -115,6 +118,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
         placeholder="enter workout name"
         value={workoutPreview.workoutName}
         onChange={(event) => handleNameChange(event)}
+        required
       />
       <p>————————</p>
 
@@ -146,7 +150,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
               {/* Sets */}
               <InputWrapper>
                 <label htmlFor={`sets-exercise-${index}`}>Sets</label>
-                <input
+                <StyledInput
                   type="number"
                   name={`sets-exercise-${index}`}
                   placeholder="4"
@@ -164,7 +168,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
               {/* Reps */}
               <InputWrapper>
                 <label htmlFor={`reps-exercise-${index}`}>Reps</label>
-                <input
+                <StyledInput
                   type="number"
                   name={`reps-exercise-${index}`}
                   placeholder="8"
@@ -184,6 +188,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
             <StyledDelete
               type="button"
               onClick={() => handleDeleteExercise(exerciseInWorkout)}
+              disabled={workoutPreview.exercises.length <= 1}
             >
               <Trash size={16} />
             </StyledDelete>
@@ -200,7 +205,6 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Creating..." : "Submit"}
         </button>
-        <button type="reset">reset</button>
         <button type="button" onClick={router.back}>
           Cancel
         </button>
@@ -221,4 +225,20 @@ const StyledDelete = styled.button`
   right: 4px;
   border: none;
   box-shadow: none;
+  cursor: pointer;
+  &:hover {
+    border: none;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    svg {
+      stroke: var(--color-orange-5);
+    }
+  }
+`;
+
+const StyledInput = styled.input`
+  text-align: right;
 `;

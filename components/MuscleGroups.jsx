@@ -28,6 +28,10 @@ const MuscleArticle = styled.article`
 `;
 
 const MuscleWrapper = styled.div`
+  border-top: 1px solid var(--color-orange-5);
+  padding-top: 8px;
+  margin-top: 16px;
+
   display: flex;
   flex-flow: row wrap;
   margin-bottom: 10px;

@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import MuscleGroups from "@/components/MuscleGroups";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
@@ -15,7 +14,7 @@ export default function ExerciseDetailsPage() {
       </Layout>
     );
   }
-  const { name, instructions, muscleGroups, _id } = exercise;
+  const { name, instructions, muscleGroups } = exercise;
 
   return (
     <Layout>
@@ -24,13 +23,8 @@ export default function ExerciseDetailsPage() {
       <MuscleGroups muscleGroups={muscleGroups} />
       <h3>Instructions</h3>
       <ol>
-        {instructions.map((step, index) => {
-          return (
-            <>
-              <li>{step}</li>
-              <br />
-            </>
-          );
+        {instructions.map((step) => {
+          return <li key={step}>{step}</li>;
         })}
       </ol>
     </Layout>
