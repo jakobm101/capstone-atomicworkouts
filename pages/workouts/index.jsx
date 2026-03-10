@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 
 export default function WorkoutsPage() {
   const { data: workouts, isLoading, error } = useSWR(`/api/workouts`);
+  const { data: session } = useSession();
 
   if (isLoading) {
     return (
@@ -29,10 +30,10 @@ export default function WorkoutsPage() {
   return (
     <Layout>
       <h2>Workouts</h2>
-      <StyledLink href={`/workouts/create`}>
-        <Plus />
-        Add New Workout
-      </StyledLink>
+	  {session && (<StyledLink href={`/workouts/create`}>
+			<Plus />
+			Add New Workout
+		  </StyledLink> )}
       {workouts.map((workout) => {
         const muscleGroupsInWorkout = collectMuscleGroups(workout.exercises);
 
@@ -52,11 +53,11 @@ export default function WorkoutsPage() {
           </Card>
         );
       })}
-      <StyledLink href={`/workouts/create`}>
-        <Plus />
-        Add New Workout
-      </StyledLink>
-    </Layout>
+      {session && (<StyledLink href={`/workouts/create`}>
+			<Plus />
+			Add New Workout
+		  </StyledLink> )}    
+	</Layout>
   );
 }
 
