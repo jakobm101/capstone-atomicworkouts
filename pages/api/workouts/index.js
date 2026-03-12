@@ -11,9 +11,9 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
       await dbConnect();
-      const workouts = await Workout.find({ owner: userId }).populate(
-        "exercises.exercise"
-      );
+      const workouts = await Workout.find({
+        $or: [{ owner: userId }, { isPublic: true }],
+      }).populate("exercises.exercise");
 
       return res.status(200).json(workouts);
     } catch (error) {
