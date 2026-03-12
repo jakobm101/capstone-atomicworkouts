@@ -30,10 +30,12 @@ export default function WorkoutsPage() {
   return (
     <Layout>
       <h2>Workouts</h2>
-	  {session && (<StyledLink href={`/workouts/create`}>
-			<Plus />
-			Add New Workout
-		  </StyledLink> )}
+      {session && (
+        <StyledLink href={`/workouts/create`}>
+          <Plus />
+          Add New Workout
+        </StyledLink>
+      )}
       {workouts.map((workout) => {
         const muscleGroupsInWorkout = collectMuscleGroups(workout.exercises);
 
@@ -53,11 +55,13 @@ export default function WorkoutsPage() {
           </Card>
         );
       })}
-      {session && (<StyledLink href={`/workouts/create`}>
-			<Plus />
-			Add New Workout
-		  </StyledLink> )}    
-	</Layout>
+      {session && (
+        <StyledLink href={`/workouts/create`}>
+          <Plus />
+          Add New Workout
+        </StyledLink>
+      )}
+    </Layout>
   );
 }
 
