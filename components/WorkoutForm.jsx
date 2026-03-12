@@ -46,6 +46,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
     const workoutInSubmit = {
       name: data.workoutName,
       exercises: newExercisesList,
+      ...(workoutPreview.owner && { owner: workoutPreview.owner }),
     };
 
     onSubmit(workoutInSubmit);
