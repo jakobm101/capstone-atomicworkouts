@@ -46,7 +46,11 @@ export default function WorkoutsPage() {
             <h4>Exercises</h4>
             <ul>
               {workout.exercises.map(({ exercise }) => {
-                return <li key={exercise._id}>{exercise.name}</li>;
+                return (
+                  <li key={exercise._id + " " + workout._id}>
+                    {exercise.name}
+                  </li>
+                );
               })}
             </ul>
 

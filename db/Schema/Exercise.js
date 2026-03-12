@@ -4,6 +4,8 @@ const { Schema } = mongoose;
 
 const ExerciseSchema = new Schema(
   {
+    owner: { type: String }, // user specific
+    isPublic: { type: Boolean }, // public and private workouts
     name: { type: String, required: true }, // exercise name (e.g. Push-Up)
     muscleGroups: [{ type: String }], // array of targeted muscles
     imageUrl: { type: String }, // (optional) image link

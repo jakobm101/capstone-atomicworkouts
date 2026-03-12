@@ -11,7 +11,9 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [workoutPreview, setWorkoutPreview] = useState({
     workoutName: defaultValue?.name ?? "",
-    exercises: defaultValue?.exercises ?? [{ _id: uid(), exercise: "" }],
+    exercises: defaultValue?.exercises ?? [
+      { _id: uid(), exercise: "", sets: 4, reps: 8 },
+    ],
   });
 
   const { data: exercises, isLoading, error } = useSWR(`/api/exercises`);
@@ -125,7 +127,7 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
       {/* EXERCISES */}
       {workoutPreview.exercises.map((exerciseInWorkout, index) => {
         return (
-          <Card key={index}>
+          <Card key={exerciseInWorkout._id}>
             <h5>Exercise</h5>
             <select
               name={`exercise-${index}`}
@@ -154,11 +156,9 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
                   type="number"
                   name={`sets-exercise-${index}`}
                   placeholder="4"
-                  maxLength="1"
-                  minLength="1"
                   min="1"
                   max="9"
-                  value={exerciseInWorkout.sets}
+                  value={exerciseInWorkout.sets ?? 3}
                   onChange={(event) =>
                     handleSetChange(event, exerciseInWorkout._id)
                   }
@@ -172,11 +172,9 @@ export default function WorkoutForm({ onSubmit, defaultValue }) {
                   type="number"
                   name={`reps-exercise-${index}`}
                   placeholder="8"
-                  maxLength="2"
-                  minLength="1"
                   min="1"
                   max="32"
-                  value={exerciseInWorkout.reps}
+                  value={exerciseInWorkout.reps ?? 8}
                   onChange={(event) =>
                     handleRepsChange(event, exerciseInWorkout._id)
                   }

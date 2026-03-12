@@ -4,7 +4,8 @@ const { Schema } = mongoose;
 
 const WorkoutSchema = new Schema({
   name: { type: String, required: true },
-  owner: {type: String},
+  owner: { type: String },
+  isPublic: { type: Boolean }, // public and private workouts
   exercises: [
     {
       exercise: {

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { uid } from "uid";
 
 export default function MuscleGroups({ muscleGroups }) {
   return (
@@ -6,7 +7,7 @@ export default function MuscleGroups({ muscleGroups }) {
       <StyledH5>Muscle Groups</StyledH5>
       <MuscleWrapper>
         {muscleGroups.map((muscle) => (
-          <Muscle key={muscle}>{muscle}</Muscle>
+          <Muscle key={uid()}>{muscle}</Muscle>
         ))}
       </MuscleWrapper>
     </MuscleArticle>
