@@ -35,12 +35,20 @@ export default async function handler(req, res) {
   if (req.method === "PUT") {
     try {
       await dbConnect();
-      await Workout.findByIdAndUpdate(req.query.id, {
-        $set: {
+      const workout = await Workout.findById(req.query.id);
+      if (!workout.owner) {
+        //copy
+        const newWorkout = await Workout.create({
           ...req.body,
           owner: userId,
           isPublic: false,
-        },
+        });
+        res.status(201).json(newWorkout);
+        return;
+      }
+
+      await Workout.findByIdAndUpdate(req.query.id, {
+        ...req.body,
       });
       res.status(200).json({
         status: `⭐️ Workout ${req.query.id} updated: ${req.body}`,
