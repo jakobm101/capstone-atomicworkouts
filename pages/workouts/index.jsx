@@ -1,6 +1,7 @@
 import Card from "@/components/Card";
 import Layout from "@/components/Layout";
 import MuscleGroups from "@/components/MuscleGroups";
+import WhenLoggedIn from "@/components/WhenLoggedIn";
 import { collectMuscleGroups } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import Link from "next/link";
@@ -28,10 +29,12 @@ export default function WorkoutsPage() {
   return (
     <Layout>
       <h2>Workouts</h2>
-      <StyledLink href={`/workouts/create`}>
-        <Plus />
-        Add New Workout
-      </StyledLink>
+      <WhenLoggedIn>
+        <StyledLink href={`/workouts/create`}>
+          <Plus />
+          Add New Workout
+        </StyledLink>
+      </WhenLoggedIn>
       {workouts.map((workout) => {
         const muscleGroupsInWorkout = collectMuscleGroups(workout.exercises);
 
