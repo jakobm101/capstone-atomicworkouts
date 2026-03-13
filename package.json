@@ -10,10 +10,12 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
+    "@better-auth/mongo-adapter": "^1.5.5",
     "@next/font": "^14.2.15",
     "better-auth": "^1.5.5",
     "eslint": "8.44.0",
     "lucide-react": "^0.525.0",
+    "mongodb": "^7.1.0",
     "mongoose": "^8.16.3",
     "next": "^15.4.1",
     "react": "18.2.0",

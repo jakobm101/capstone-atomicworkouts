@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const WorkoutSchema = new Schema({
+  // owner: "20402329",
+  //  isPublic: {}
   name: { type: String, required: true },
   exercises: [
     {
